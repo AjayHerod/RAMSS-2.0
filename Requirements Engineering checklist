@@ -1,0 +1,31 @@
+University Account Management 
+
+A webapp that is designed in (technologies) that will be an account management system like RAMSS,
+but the design and functionality will be completely reengineered to make it more usable and which 
+requires minimal number of clicks to perform the same task as compared to other account management systems. 
+
+Requirements Document
+
+1
+Students need to be able to view account summary 
+  Task
+  Make account summary page as a hyperlink on the main page
+    Days 1
+  Task
+  Design the Account Summary Page with information like remaining balance, tax information, financial aid, payment summary, etc.
+    Days 2
+
+2
+Students need to be able to see their academic records and graduation requirements, while being able to enroll in required future courses
+
+3
+Enrolling/Swapping/Dropping courses
+
+4
+View/Change Personal Information
+
+5
+View Schedule
+
+6
+Request a Letter
