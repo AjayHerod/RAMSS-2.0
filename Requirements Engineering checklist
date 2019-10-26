@@ -1,31 +1,324 @@
-University Account Management 
+ 
+Ajay Herod
+Ali Mantaev
+Maitreya Meshram
+Sean Riddel
+Tony Shao
+ 
+ 
+ 
+ 
+ 
+Requirements Engineering Document
+Group 9
+ University Account Management Service System
+CPS 731 - Software Engineering 1
+2019-10-26
+GitHub: https://github.com/AjayHerod/RAMSS-2.0
 
-A webapp that is designed in (technologies) that will be an account management system like RAMSS,
-but the design and functionality will be completely reengineered to make it more usable and which 
-requires minimal number of clicks to perform the same task as compared to other account management systems. 
 
-Requirements Document
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Table Of Contents
+
+User Stories……………………………………………………….3
+Prioritized Requirements……………………………...………..6
+Use Case Model…………………………………………………..7
+Functional Requirements……………………………………….7
+Non Functional Requirements…………………………………10
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+I. User Stories
+
+ID
 1
-Students need to be able to view account summary 
-  Task
-  Make account summary page as a hyperlink on the main page
-    Days 1
-  Task
-  Design the Account Summary Page with information like remaining balance, tax information, financial aid, payment summary, etc.
-    Days 2
+NAME
+Enrolled courses and schedule
+DESCRIPTION
+As a user, I want to be able to see my courses and schedule for the current semester so I know what classes I have and when and where they are scheduled.
 
+Acceptance Criteria : 
+A list of Enrolled Courses displayed
+Weekly Schedule displayed in the form of a Table (Hour & Day)
+
+ID
 2
-Students need to be able to see their academic records and graduation requirements, while being able to enroll in required future courses
+NAME
+Manage courses (Enroll / Drop / Swap)
+DESCRIPTION
+As a user, I want to be able to enroll, drop, swap courses for the current or upcoming semester according to the enrollment period and the required courses to graduate so I can graduate.
 
+Acceptance Criteria : 
+Enroll in a course for the Current Semester 
+Swap in a course with another for the Current Semester
+Drop a course for the Current Semester
+Enroll in a course for the Upcoming Semester
+Swap in a course with another for the Upcoming Semester
+Drop a course for the Upcoming Semester
+
+ID
 3
-Enrolling/Swapping/Dropping courses
+NAME
+Account information 
+DESCRIPTION
+As a user, I want to see my Account information including Balances, breakdown, Due Dates, Financial Aid, Tax information so that I will not pay late fees and can do my taxes.
 
+Acceptance Criteria : 
+Display Balances, breakdown, total, and due dates
+Display Payments, payment guide, and confirmation
+Display Financial Aid information
+Display Tax information
+
+ID
 4
-View/Change Personal Information
+NAME
+Personal information 
+DESCRIPTION
+As a user, I want to be able to see and edit (if any changes) in my records like my Address, Phone Number, Email, Emergency Contact, Questionnaires, Demographics, Holds, Notices so Ryerson has my correct information.
 
+Acceptance Criteria : 
+Be able to view and update
+Address
+Phone Number
+Email
+Emergency Contact
+Be able to participate in
+Questionnaires if any
+Demographics if any
+Be able to view
+Holds if any
+Notices if any
+
+ID
 5
-View Schedule
+NAME
+Past semester grades
+DESCRIPTION
+As a user, I want to be able to view my grades for the previous semesters and see my GPA so that I know how well I am performing at Ryerson and in my courses.
 
+Acceptance Criteria : 
+Display past grades according by semester
+Be able to see Term GPA
+Be able to see Cumulative GPA
+
+
+ID
 6
-Request a Letter
+NAME
+Academics (Advisement Report/Transcript/Graduation)(Required/Taken Courses & Options)
+DESCRIPTION
+As a user, I want to be able to see my academic information including Advisement Report, Transcripts, and apply / view status for graduation so that I know what I need to graduate and how close I am.
+
+Acceptance Criteria : 
+View Advisement Report
+Download Unofficial Transcript 
+Request Official Transcript 
+Apply/View status for Graduation
+
+ID
+7
+NAME
+Requesting letters / transfer credits
+DESCRIPTION
+As a user, I want to be able to request different kinds of letters from the school like Proof of Enrollment, Confirmation of Graduation Status, Eligibility to Graduate, Jury Duty, and view Transfer Credit Report so I can use that information.
+
+Acceptance Criteria 
+Be able to request
+Proof of Enrollment
+Confirmation of Graduation Status
+Eligibility to Graduate
+Jury Duty
+View Transfer Credit Report
+
+ID
+8
+NAME
+Application responsive design
+DESCRIPTION
+As a user, I want to use the application conveniently on any technological device and web browser so that I do not spend time and energy resizing the page or be required to use a different device.
+
+Acceptance Criteria
+Ensure that the application can be viewed without errors and clearly on different devices
+ 
+ID
+9
+NAME
+Inclusion of exam dates
+DESCRIPTION
+As a user, I want the corresponding exam dates for each of my courses included automatically once available so that I can use my time more efficiently by studying rather than searching.
+
+Acceptance Criteria
+Exam date integrated in schedule for each enrolled course
+Displays the course code, time and location of the examination
+
+ID
+10
+NAME
+Account authentication
+DESCRIPTION
+As a user, I want to login and log out of my account securely so that I can access my information and rest assured knowing that no one else can.
+
+Acceptance Criteria
+Capable of Logging in with username and password.
+Can sign out of account
+ 
+II. Prioritized requirements
+ 
+High Priority
+Tabbed pane for the navigation between different functions of the System
+Current Courses (Enrolled Courses and Schedule)
+Switch Courses
+Account Information
+Academics
+Account Authentication
+Database Implementation
+Medium Priority
+Personal Information
+Grades
+Responsive Design
+
+Low Priority
+Requests
+ 
+III. Use case model 
+
+ 
+IV. System functional requirements 
+ 
+The system will show a tabbed pane (top or left of the screen) at all times to navigate throughout the application for options such as:
+Current Courses
+Switch Courses
+Account Information
+Personal Information
+Grades
+Academic
+Requests
+Database implementation for 
+Students (Number, Name, enrolled courses, account balance, personal info, etc)
+Courses 
+Current Courses
+The system will show this tab as the default after the user logs in.
+The system will display a list of enrolled courses and information in the current semester.
+The system will display the weekly schedule in a calendar format of the current courses beside the list of courses.
+The user can see their exam dates, times, and locations for each course, either with the information for each course or on the calendar.
+Switch Courses
+The system shows the user their enrolled courses (with an option to drop) in the current semester and an option to enroll in a new course. 
+When the user selects the enroll option, the system displays a list of courses which are offered in the semester and allows them to enroll or swap if it fits in their schedule.
+If the user selects the drop option beside a specific course, the system enables them to do so with a confirmation.
+The user can change semesters to switch courses in an upcoming semester(s) according to their scheduled enrollment period 
+After the user chooses their specified semester, the system gives them a list of enrolled courses and add an option for them to enroll (intention) in a course or swap with an enrolled course if offered that semester with a confirmation.
+Account Information
+The system should display the user’s account balance after switching to the account information tab.
+The system should list a full breakdown of the fees as well as total, financial aid, tax information and payments listed in the bottom and the breakdown for that semester should be displayed together. 
+The system checks if the user can drop out of services by confirming that the last day for paying fees has not yet passed.
+The user is able to drop out from an optional service offered by the university by clicking a drop option.
+The user can view a pop up about the information of that service.
+The system should display a hyperlink to Ryerson’s information page on how to pay your fees.
+The system should provide a list of tax documents that can be downloaded by the user.
+Personal Information
+The system should display the personal information of the user such as:
+Address
+Phone Number
+Email
+Emergency Contact
+Questionnaires (if any)
+Demographics (if any)
+Holds (if any)
+Notices (if any)
+The user should also be able to edit i to iv with having an option to do so as well as save with confirmation.
+Grades
+The system should display the users grades for a semester in a card container. 
+The user should be able to switch between past semesters taken.
+The system should display an option to download a specific semesters grades or download a full unofficial transcript to the user. 
+Academics
+The system should display information such as 
+Career Path (majors / minors)
+Concentration (if any)
+Transfer credits info (if any)
+The user should be allowed to edit the information if they are allowed, which the system determines based on their academic information.
+The system should be able to generate and display an advisement report for the user which will contain:
+Courses remaining to graduate and courses taken toward degree completion
+Courses available to satisfy the requirements in i.
+Current GPA against required GPA to graduate
+A section for any specific degree requirements
+Concentration requirements
+A summary Clear/Warning/Failed from results of report
+Requests
+The system displays and allows the user to request different types of letters such as
+Transfer Credit Evaluation
+Official Transcript
+Proof of Enrollment
+Confirmation of Graduation Status
+Eligibility to Graduate
+Jury Duty
+The System verifies that the user has set an address to allow them to request.
+ Account Authentication
+The user can login to their account from an initial login screen using their personal username and password.
+The system will respond to the user depending on whether the information provided was right or wrong.
+The user will be sent back to the login page once they click the sign out button that is available on any page at the top.
+ Responsive Design
+The system should be able to detect the user’s device width and change the screen’s contents accordingly to make it fit for them.
+	
+IV. Non­functional requirements
+ 
+Performance 
+Fast response times from the client side and server side
+Little resources required to function 
+Reliability 
+Application should be trustworthy and perform consistently up to standards 
+Scalability
+Software should be easy to add new content and expand features over years
+Software should be fluid and scalable to other institutions  
+Availability 
+Application should be available to users throughout the day 
+Application should be available through any web browser on any platform
+Maintainability
+Maintenance is low and requires few resources to keep application running 
+Security
+All user information will be private and only viewable to the user
+Regulatory
+Application is easily controllable and consistently up to standards
+Application is simple for users to control 
+Interoperability 
+Application works in partnership with the institution to improve user experience
+Usability
+Usability should reflect the high standards of the institution
+Usability should keep visually impaired users in mind
