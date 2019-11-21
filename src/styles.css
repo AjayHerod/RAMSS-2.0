@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+	font-family: Calibri;
+}
+
+.bg-blue{
+	background-color:rgb(0, 76, 155);
+}
+
+.mb-1{
+	margin-bottom:1px;
+}
+
+.mu-1{
+	margin-top:1px;
+}
+
+.mu-5{
+	margin-top:5px;
+}
