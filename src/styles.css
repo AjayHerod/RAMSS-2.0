@@ -18,3 +18,32 @@ body{
 .mu-5{
 	margin-top:5px;
 }
+
+.mu-25{
+	margin-top:25px;
+}
+
+.mb-25{
+	margin-bottom:25px;
+}
+
+
+.mu-50{
+	margin-top:50px;
+}
+
+.mb-50{
+	margin-bottom:50px;
+}
+
+.mu-100{
+	margin-top:100px;
+}
+
+.mb-100{
+	margin-bottom:100px;
+}
+
+h1, h2, h3, h4, h5{
+	margin:0px;
+}
