@@ -1,10 +1,26 @@
 <div class="container-fluid rm-margin">
 	<div class="row">
 		<div class="col-2">
-		<app-navbar></app-navbar>
+		<div class="nav-width bg-blue">
+			<div class="bg-dark">
+				<img class="w-90 ryerson-logo " src="../../assets/images/Ryerson-rgb.png"/>
+			</div>
+			<h3 class="text-light card-header text-center bg-blue">Account</h3>
+			<button class="btn btn-dark w-100" (click)="toggleAcc()">Account Information</button>
+			<button class="btn btn-dark w-100">Personal Information</button>
+			
+			<h3 class="text-light card-header text-center bg-blue">Courses</h3>
+			<button class="btn btn-dark w-100">Course Summary</button>
+			<button class="btn btn-dark w-100">Manage Courses</button>
+
+			<h3 class="text-light card-header text-center bg-blue">Academic</h3>
+			<button class="btn btn-dark w-100">Grades</button>	
+			<button class="btn btn-dark w-100">Academic</button>	
+			<button class="btn btn-dark w-100">Requests</button>	
+		</div>
 		</div>
 		<div class="col-10">
-		<app-acc-info></app-acc-info>
+		<app-acc-info *ngIf="accManage"></app-acc-info>
 		</div>
 	</div>
 </div>
