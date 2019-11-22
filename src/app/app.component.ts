@@ -8,18 +8,24 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public accManage: any = true;
+  public perManage: any = false;
   title = 'RAMSS2';
   
-  toggleAcc():any{
-	if (this.accManage == true){
-		this.accManage = false;
+  toggleView(buttonName):any{
+	this.hideAll();
+	if (buttonName == "accManage"){
+		this.accManage = "true";
 	}
-	else{
-		this.accManage = true;
+	else if(buttonName == "perManage"){
+		this.perManage = "true";
 	}
   }
   
   
+  hideAll(){
+	  this.accManage = false;
+	  this.perManage = false;
+  }
   
   
 }

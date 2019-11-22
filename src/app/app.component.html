@@ -6,8 +6,8 @@
 				<img class="w-90 ryerson-logo " src="../../assets/images/Ryerson-rgb.png"/>
 			</div>
 			<h3 class="text-light card-header text-center bg-blue">Account</h3>
-			<button class="btn btn-dark w-100" (click)="toggleAcc()">Account Information</button>
-			<button class="btn btn-dark w-100">Personal Information</button>
+			<button class="btn btn-dark w-100" (click)="toggleView('accManage')">Account Information</button>
+			<button class="btn btn-dark w-100" (click)="toggleView('perManage')">Personal Information</button>
 			
 			<h3 class="text-light card-header text-center bg-blue">Courses</h3>
 			<button class="btn btn-dark w-100">Course Summary</button>
@@ -21,6 +21,7 @@
 		</div>
 		<div class="col-10">
 		<app-acc-info *ngIf="accManage"></app-acc-info>
+		<app-per-info *ngIf="perManage"></app-per-info>
 		</div>
 	</div>
 </div>
