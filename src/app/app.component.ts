@@ -9,7 +9,12 @@ import { Component } from '@angular/core';
 export class AppComponent {
   public accManage: any = true;
   public perManage: any = false;
-  title = 'RAMSS2';
+  public courseSum: any = false;
+  public manageCourses: any = false;
+  public grades: any = false;
+  public academic: any = false;
+  public requests: any = false;
+  title = 'RAMSS2.0';
   
   toggleView(buttonName):any{
 	this.hideAll();
@@ -19,12 +24,32 @@ export class AppComponent {
 	else if(buttonName == "perManage"){
 		this.perManage = "true";
 	}
+	else if(buttonName == "courseSum"){
+		this.courseSum = "true";
+	}
+	else if(buttonName == "manageCourses"){
+		this.manageCourses = "true";
+	}
+	else if(buttonName == "grades"){
+		this.grades = "true";
+	}
+	else if(buttonName == "academic"){
+		this.academic = "true";
+	}
+	else if(buttonName == "requests"){
+		this.requests = "true";
+	}
   }
   
   
   hideAll(){
 	  this.accManage = false;
 	  this.perManage = false;
+	  this.courseSum = false;
+	  this.manageCourses = false;
+	  this.grades = false;
+	  this.academic = false;
+	  this.requests = false;
   }
   
   

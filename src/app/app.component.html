@@ -1,27 +1,44 @@
 <div class="container-fluid rm-margin">
 	<div class="row">
 		<div class="col-2">
-		<div class="nav-width bg-blue">
+		<div class="nav-width bg-dark">
 			<div class="bg-dark">
 				<img class="w-90 ryerson-logo " src="../../assets/images/Ryerson-rgb.png"/>
 			</div>
-			<h3 class="text-light card-header text-center bg-blue">Account</h3>
+			<h4 class="text-light card-header text-center bg-blue">Account</h4>
 			<button class="btn btn-dark w-100" (click)="toggleView('accManage')">Account Information</button>
 			<button class="btn btn-dark w-100" (click)="toggleView('perManage')">Personal Information</button>
 			
-			<h3 class="text-light card-header text-center bg-blue">Courses</h3>
-			<button class="btn btn-dark w-100">Course Summary</button>
-			<button class="btn btn-dark w-100">Manage Courses</button>
+			<h4 class="text-light card-header text-center bg-blue">Courses</h4>
+			<button class="btn btn-dark w-100" (click)="toggleView('courseSum')">Course Summary</button>
+			<button class="btn btn-dark w-100" (click)="toggleView('manageCourses')">Manage Courses</button>
 
-			<h3 class="text-light card-header text-center bg-blue">Academic</h3>
-			<button class="btn btn-dark w-100">Grades</button>	
-			<button class="btn btn-dark w-100">Academic</button>	
-			<button class="btn btn-dark w-100">Requests</button>	
+			<h4 class="text-light card-header text-center bg-blue">Academic</h4>
+			<button class="btn btn-dark w-100" (click)="toggleView('grades')">Grades</button>	
+			<button class="btn btn-dark w-100" (click)="toggleView('academic')">Academic</button>	
+			<button class="btn btn-dark w-100" (click)="toggleView('requests')">Requests</button>	
 		</div>
 		</div>
 		<div class="col-10">
+		<nav class="navbar navbar-dark bg-dark">
+		  <h4 class="text-light">
+			Welcome, Name!
+		  </h4>
+		
+		  <div class="justify-content-end">
+			<button class="btn btn-primary">
+				Logout
+			</button>
+		  </div>
+		</nav>
+		<!-- Dont add anything but components after this line !-->
 		<app-acc-info *ngIf="accManage"></app-acc-info>
 		<app-per-info *ngIf="perManage"></app-per-info>
+		<app-course-sum *ngIf="courseSum"></app-course-sum>
+		<app-manage-courses *ngIf="manageCourses"></app-manage-courses>
+		<app-grades *ngIf="grades"></app-grades>
+		<app-academic *ngIf="academic"></app-academic>
+		<app-requests *ngIf="requests"></app-requests>
 		</div>
 	</div>
 </div>
