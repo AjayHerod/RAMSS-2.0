@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class AccInfoComponent implements OnInit {
 	
   public accBalance: string = "";
+  public schoolFees: string = "";
+  public balanceOwing: string = "";
   constructor() { }
 
   ngOnInit() {
@@ -16,10 +18,12 @@ export class AccInfoComponent implements OnInit {
 			url: '/loadAccount',
 			contentType: 'application/json',
 			success: (data) => {
-				this.accBalance = "$"+ data.toString();
+				this.accBalance = "$"+ data[0].toString();
+				this.schoolFees = "$"+ data[1].toString();
+				this.balanceOwing = "$"+ data[2].toString();
 			},
 			error: function() {
-				console.log("Failed to Retrieve");
+				console.log("Failed to Retrieve data");
 			}
 		})
 

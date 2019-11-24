@@ -49,14 +49,18 @@ res.sendFile(path.join(__dirname+'/dist/RAMSS2/index.html'));
 
 app.post('/loadAccount', function (headers, res){
 	console.log("balance found");
-	var getAccQuery = "SELECT Balance FROM Users WHERE StudentNo = '5001112222'";
+	var getAccQuery = "SELECT Balance, Fees FROM Users WHERE StudentNo = '5001112222'";
 	con.query(getAccQuery, function(err, result){
 		if (err){
 			console.log(err);
 		}
 		else{
-			console.log(result[0]);
-			res.send((result[0].Balance).toString());
+			var balance = result[0].Balance;
+			var fees = result[0].Fees;
+			var owing = parseInt(balance) - parseInt(fees);
+			
+			console.log(owing);
+			res.send([balance.toString(), fees.toString(), owing.toString()]);
 		}
 	});
 });
