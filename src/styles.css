@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 body{
 	font-family: Calibri;
+	height:100%;
 }
 
 .bg-blue{
@@ -46,4 +47,16 @@ body{
 
 h1, h2, h3, h4, h5{
 	margin:0px;
+}
+
+.card-text{
+	font-size:18px;
+}
+
+.w-90{
+	width:90%;
+}
+
+.w-100{
+	width:100%;
 }

@@ -1,22 +1,56 @@
 <div class="mu-25">
 <div class="card">
 	<div class="card-header bg-blue text-light">
-		<h3>Account Summary</h3>
+		<h4>Account Summary</h4>
 	</div>
 	<div class="card-body">
-		<h5>Account Balance: {{accBalance}} </h5><br/>
-		<h5>School Fees: {{schoolFees}} </h5>
+		<div class="font-weight-bold card-text">Account Balance: {{accBalance}} </div><br/>
+		<div class="font-weight-bold card-text">School Fees: {{schoolFees}} </div>
 		<hr/>
-		<h4>Total Balance: {{balanceOwing}}</h4>
+		<h5 class="font-weight-bold">Total Balance: {{balanceOwing}}</h5><br/>
+		<a href="https://www.ryerson.ca/registrar/fees/payonline/" target="_blank">How to pay fees?</a>
 	</div>
 </div>
-<div class="card mu-25">
+
+
+<div class="row">
+<div class="col-md-6 mu-25">
+<div class="card">
 	<div class="card-header bg-blue text-light">
-		<h3>Fees Breakdown</h3>
+		<h4>Fees Breakdown</h4>
 	</div>
 	<div class="card-body">
-	
+		<div class="font-weight-bold card-text"> Tuition: </div>
+		<div class="font-weight-bold card-text"> Grants: </div>
+		<div class="font-weight-bold card-text"> Ancillary Fees:</div>
+		<div class="font-weight-bold card-text"> Total School Fees: </div>
 	</div>
+</div>
+</div>
+
+<div class="col-md-6 mu-25">
+<div class="card">
+	<div class="card-header bg-blue text-light">
+		<h4>Documents</h4>
+	</div>
+	<div class="card-body">
+	<div class="text-center"> 
+		<div class="row">
+		<div class="col-sm-6 mb-25">
+		<h5 class="font-weight-bold">Inquiry Downloads</h5><br/>
+		<button class="btn btn-warning w-100">Account Inquiry</button><br/><br/>
+		<button class="btn btn-warning w-100">T2202A Inquiry</button><br/><br/>
+		<button class="btn btn-warning w-100">T4A Inquiry</button>
+		</div>
+		<div class="col-sm-6">
+		<h5 class="font-weight-bold">Statement Downloads </h5><br/>
+		<button class="btn btn-warning w-100">Account Statement</button><br/><br/>
+		<button class="btn btn-warning w-100">Net Tuition Statement</button>
+		</div>
+		</div>
+	</div>
+	</div>
+</div>
 </div>
 
 </div>
