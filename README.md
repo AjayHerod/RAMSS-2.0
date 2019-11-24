@@ -16,11 +16,8 @@ Pre-Requirements:<br/>
 2. Install angular by running in cmd: 'npm install --save-dev angular'<br/>
 
 To run:<br/>
-1. Download the Github Repo.<br/>
-<br/>
+1. Download the Github Repo.
 In the directory:<br/>
-2. If you want to develop without server: <br/>
-Run 'ng serve' in cmd.<br/>
-3. If you want to develop with server: <br/>
-Run 'ng build' then run 'node server.js' in cmd.
+2. If you want to develop without server: Run 'ng serve' in cmd. <br/>
+3. If you want to develop with server: Run 'ng build' then run 'node server.js' in cmd. <br/>
 
