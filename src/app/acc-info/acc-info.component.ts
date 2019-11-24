@@ -16,8 +16,7 @@ export class AccInfoComponent implements OnInit {
 			url: '/loadAccount',
 			contentType: 'application/json',
 			success: (data) => {
-				this.accBalance = data;
-				//console.log(data);
+				this.accBalance = "$"+ data.toString();
 			},
 			error: function() {
 				console.log("Failed to Retrieve");
