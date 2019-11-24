@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AccInfoComponent } from './acc-info/acc-info.component';
@@ -10,6 +10,7 @@ import { ManageCoursesComponent } from './manage-courses/manage-courses.componen
 import { GradesComponent } from './grades/grades.component';
 import { AcademicComponent } from './academic/academic.component';
 import { RequestsComponent } from './requests/requests.component';
+import * as $ from 'jquery';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { RequestsComponent } from './requests/requests.component';
   ],
   imports: [
     BrowserModule,
+	HttpClientModule,
     AppRoutingModule
   ],
   providers: [],

@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import * as $ from "jquery";
 import { AccInfoComponent } from './acc-info.component';
 
 describe('AccInfoComponent', () => {

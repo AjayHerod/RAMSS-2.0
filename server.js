@@ -12,5 +12,14 @@ app.get('/*', function(req,res) {
 res.sendFile(path.join(__dirname+'/dist/RAMSS2/index.html'));
 });
 
+
+app.post('/loadAccount', function (headers, res){
+	console.log("balance found");
+	res.send("1000");
+});
+
+
 // Start the app by listening on the default Heroku port
-app.listen(process.env.PORT || 8080);
+var server = app.listen(process.env.PORT || 8080, function () {
+    console.log('Node server is running..');
+});
