@@ -48,19 +48,35 @@ res.sendFile(path.join(__dirname+'/dist/RAMSS2/index.html'));
 
 
 app.post('/loadAccount', function (headers, res){
-	console.log("balance found");
-	var getAccQuery = "SELECT Balance, Fees FROM Users WHERE StudentNo = '5001112222'";
-	con.query(getAccQuery, function(err, result){
+	var query = "SELECT Balance, Fees FROM Users WHERE StudentNo = '5001112222'";
+	con.query(query, function(err, result){
 		if (err){
 			console.log(err);
 		}
 		else{
+			console.log(result);
 			var balance = result[0].Balance;
 			var fees = result[0].Fees;
 			var owing = parseInt(balance) - parseInt(fees);
-			
-			console.log(owing);
-			res.send([balance.toString(), fees.toString(), owing.toString()]);
+			res.send([result, owing]);
+		}
+	});
+});
+
+app.post('/loadTuition', function (headers, res){
+	var query = "Select Grants, RSU, RAC, Printing, Health from Tuition WHERE StudentNo = '5001112222'";
+	con.query(query, function(err, result){
+		if (err){
+			console.log(err);
+		}
+		else{
+			console.log(result);
+			var rsu = result[0].RSU;
+			var rac = result[0].RAC;
+			var printing = result[0].Printing;
+			var health = result[0].Health;
+			var comFees = rsu + rac + printing + health;
+			res.send([result, comFees]);
 		}
 	});
 });

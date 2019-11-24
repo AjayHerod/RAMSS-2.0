@@ -5,25 +5,33 @@
 	</div>
 	<div class="card-body">
 		<div class="font-weight-bold card-text">Account Balance: {{accBalance}} </div><br/>
-		<div class="font-weight-bold card-text">School Fees: {{schoolFees}} </div>
+		<div class="font-weight-bold card-text">Total Fees: {{schoolFees}} </div>
 		<hr/>
 		<h5 class="font-weight-bold">Total Balance: {{balanceOwing}}</h5><br/>
-		<a href="https://www.ryerson.ca/registrar/fees/payonline/" target="_blank">How to pay fees?</a>
+		<a href="https://www.ryerson.ca/registrar/fees/payonline/" target="_blank">How to pay fees?</a><br/>
+		<a href="https://www.ryerson.ca/calendar/2019-2020/dates/" target="_blank">When is payment due?</a>
 	</div>
 </div>
 
 
-<div class="row">
+<div class="row mb-25">
 <div class="col-md-6 mu-25">
 <div class="card">
 	<div class="card-header bg-blue text-light">
-		<h4>Fees Breakdown</h4>
+		<h4>Tuition Breakdown</h4>
 	</div>
 	<div class="card-body">
-		<div class="font-weight-bold card-text"> Tuition: </div>
-		<div class="font-weight-bold card-text"> Grants: </div>
-		<div class="font-weight-bold card-text"> Ancillary Fees:</div>
-		<div class="font-weight-bold card-text"> Total School Fees: </div>
+		<div class="font-weight-bold card-text"> Courses: {{courseFees}}</div>
+		<div class="font-weight-bold card-text"> Grants: {{grants}}</div>
+		<div class="font-weight-bold card-text"> Compulsory Fees: {{comFees}}</div>
+		<ul class="no-bullet">
+			<li>RSU: {{RSU}}</li>
+			<li>RAC: {{RAC}}</li>
+			<li>Printing: {{Printing}}</li>
+			<li>Health: {{Health}}</li>
+		</ul>
+		<div class="font-weight-bold card-text"> Ancillary Fees: {{ancFees}}</div>
+		<div class="font-weight-bold card-text"> Total Fees: {{schoolFees}}</div>
 	</div>
 </div>
 </div>
