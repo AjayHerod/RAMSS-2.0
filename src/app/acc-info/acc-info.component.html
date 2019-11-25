@@ -25,15 +25,14 @@
 		<div class="font-weight-bold card-text"> Grants: {{grants}}</div>
 		<div class="font-weight-bold card-text"> Compulsory Fees: {{comFees}}</div>
 		<ul class="no-bullet">
-			<li>RSU: {{RSU}}</li>
-			<li>RAC: {{RAC}}</li>
-			<li>Printing: {{Printing}}</li>
-			<li>Health: {{Health}}</li>
+			<li *ngFor="let manObject of manObjects;">
+				{{manObject.name}}: ${{manObject.cost}}
+			</li>
 		</ul>
 		<div class="font-weight-bold card-text"> Ancillary Fees: {{ancFees}}</div>
 		<ul class="no-bullet">
 			<li *ngFor="let ancObject of ancObjects; let i = index">
-				{{ancObject.name}}: $ {{ancObject.cost}}
+				{{ancObject.name}}: ${{ancObject.cost}}
 			</li>
 		</ul>
 		<div class="font-weight-bold card-text"> Total Fees: {{schoolFees}}</div>

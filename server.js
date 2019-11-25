@@ -89,13 +89,13 @@ app.post('/loadAncFees', function (headers, res){
 			console.log(err);
 		}
 		else{
-			console.log(result);
+			//console.log(result);
 			con.query(query2, function(err, result2){
 				if (err){
 					console.log(err);
 				}
 				else{
-					console.log(result2);
+					//console.log(result2);
 					res.send([result, result2]);
 				}
 			});
@@ -108,5 +108,5 @@ app.post('/loadAncFees', function (headers, res){
 
 // Start the app by listening on the default Heroku port
 var server = app.listen(process.env.PORT || 8080, function () {
-    console.log('Node server is running at localhost:8080');
+    console.log('Node server is running at localhost:8080 (THIS IS NOT MYSQL, KEEP WAITING)');
 });
