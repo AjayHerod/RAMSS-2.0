@@ -8,8 +8,8 @@
 		<div class="font-weight-bold card-text">Total Fees: {{schoolFees}} </div>
 		<hr/>
 		<h5 class="font-weight-bold">Total Balance: {{balanceOwing}}</h5><br/>
-		<a href="https://www.ryerson.ca/registrar/fees/payonline/" target="_blank">How to pay fees?</a><br/>
-		<a href="https://www.ryerson.ca/calendar/2019-2020/dates/" target="_blank">When is payment due?</a>
+		<a href="https://www.ryerson.ca/registrar/fees/payonline/" target="_blank">How to pay my fees?</a><br/>
+		<a href="https://www.ryerson.ca/calendar/2019-2020/dates/" target="_blank">When is my payment due?</a>
 	</div>
 </div>
 
@@ -31,6 +31,11 @@
 			<li>Health: {{Health}}</li>
 		</ul>
 		<div class="font-weight-bold card-text"> Ancillary Fees: {{ancFees}}</div>
+		<ul class="no-bullet">
+			<li *ngFor="let ancObject of ancObjects; let i = index">
+				{{ancObject.name}}: $ {{ancObject.cost}}
+			</li>
+		</ul>
 		<div class="font-weight-bold card-text"> Total Fees: {{schoolFees}}</div>
 	</div>
 </div>
