@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PerInfoComponent implements OnInit {
 
+  info = ["First name", "Last name", "Address", "Phone number", "Email", "Emergency contact"];
+
   constructor() { }
 
   ngOnInit() {

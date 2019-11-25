@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import * as $ from "jquery";
-import { AccInfoComponent } from './acc-info.component';
 
-describe('AccInfoComponent', () => {
-  let component: AccInfoComponent;
-  let fixture: ComponentFixture<AccInfoComponent>;
+import { GradesComponent } from './grades.component';
+
+describe('GradesComponent', () => {
+  let component: GradesComponent;
+  let fixture: ComponentFixture<GradesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AccInfoComponent ]
+      declarations: [ GradesComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AccInfoComponent);
+    fixture = TestBed.createComponent(GradesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

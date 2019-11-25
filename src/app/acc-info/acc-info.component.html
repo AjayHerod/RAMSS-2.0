@@ -1,22 +1,69 @@
 <div class="mu-25">
 <div class="card">
 	<div class="card-header bg-blue text-light">
-		<h3>Account Summary</h3>
+		<h4>Account Summary</h4>
 	</div>
 	<div class="card-body">
-		<h5>Account Balance: $0 </h5><br/>
-		<h5>School Fees: $0 </h5>
+		<div class="font-weight-bold card-text">Account Balance: {{accBalance}} </div><br/>
+		<div class="font-weight-bold card-text">Total Fees: {{schoolFees}} </div>
 		<hr/>
-		<h4>Balance Owing: $0</h4>
+		<h5 class="font-weight-bold">Total Balance: {{balanceOwing}}</h5><br/>
+		<a href="https://www.ryerson.ca/registrar/fees/payonline/" target="_blank">How to pay my fees?</a><br/>
+		<a href="https://www.ryerson.ca/calendar/2019-2020/dates/" target="_blank">When is my payment due?</a>
 	</div>
 </div>
-<div class="card mu-25">
+
+
+<div class="row mb-25">
+<div class="col-md-6 mu-25">
+<div class="card">
 	<div class="card-header bg-blue text-light">
-		<h3>Fees Breakdown</h3>
+		<h4>Tuition Breakdown</h4>
 	</div>
 	<div class="card-body">
-	
+		<div class="font-weight-bold card-text"> Courses: {{courseFees}}</div>
+		<div class="font-weight-bold card-text"> Grants: {{grants}}</div>
+		<div class="font-weight-bold card-text"> Compulsory Fees: {{comFees}}</div>
+		<ul class="no-bullet">
+			<li>RSU: {{RSU}}</li>
+			<li>RAC: {{RAC}}</li>
+			<li>Printing: {{Printing}}</li>
+			<li>Health: {{Health}}</li>
+		</ul>
+		<div class="font-weight-bold card-text"> Ancillary Fees: {{ancFees}}</div>
+		<ul class="no-bullet">
+			<li *ngFor="let ancObject of ancObjects; let i = index">
+				{{ancObject.name}}: $ {{ancObject.cost}}
+			</li>
+		</ul>
+		<div class="font-weight-bold card-text"> Total Fees: {{schoolFees}}</div>
 	</div>
+</div>
+</div>
+
+<div class="col-md-6 mu-25">
+<div class="card">
+	<div class="card-header bg-blue text-light">
+		<h4>Documents</h4>
+	</div>
+	<div class="card-body">
+	<div class="text-center"> 
+		<div class="row">
+		<div class="col-sm-6 mb-25">
+		<h5 class="font-weight-bold">Inquiry Downloads</h5><br/>
+		<button class="btn btn-warning w-100">Account Inquiry</button><br/><br/>
+		<button class="btn btn-warning w-100">T2202A Inquiry</button><br/><br/>
+		<button class="btn btn-warning w-100">T4A Inquiry</button>
+		</div>
+		<div class="col-sm-6">
+		<h5 class="font-weight-bold">Statement Downloads </h5><br/>
+		<button class="btn btn-warning w-100">Account Statement</button><br/><br/>
+		<button class="btn btn-warning w-100">Net Tuition Statement</button>
+		</div>
+		</div>
+	</div>
+	</div>
+</div>
 </div>
 
 </div>
