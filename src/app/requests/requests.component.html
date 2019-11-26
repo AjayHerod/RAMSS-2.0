@@ -1,1 +1,82 @@
-<p>requests works!</p>
+<div class = "container-fluid mu-25">
+	<h3>Do you want to request a..</h3>
+	<div class = "mu-25 row">
+		<div class = "col-md-4">
+			<div class="card">
+				<h5 class="card-header bg-blue text-light">Official Transcript <br/>
+				(1-2 business days)</h5>
+				<div class="card-body">
+					<button class="btn btn-warning w-100" (click) = "setInfo1()">Request</button>
+				</div>
+			</div>
+		</div>
+		<div class = "col-md-4">
+			<div class="card">
+				<h5 class="card-header bg-blue text-light">Proof of Enrollment <br/> 	
+				(1-2 business days)</h5>
+				<div class="card-body">
+					<button class="btn btn-warning w-100" (click) = "setInfo2()">Request</button>
+				</div>
+			</div>
+		</div>
+		<div class = "col-md-4">
+			<div class="card">
+				<h5 class="card-header bg-blue text-light">Confirmation of Graduation Status<br/>
+				(1-2 business days)
+				</h5>
+				<div class="card-body">
+					<button class="btn btn-warning w-100">Request</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class = "row mu-25">
+		<div class = "col-md-4">
+			<div class="card">
+				<h5 class="card-header bg-blue text-light">Eligibility to Graduate<br/>
+				(10 business days)
+				</h5>
+				<div class="card-body">
+					<button class="btn btn-warning w-100" (click) = "setInfo4()">Request</button>
+				</div>
+			</div>
+		</div>
+		<div class = "col-md-4">
+			<div class="card">
+				<h5 class="card-header bg-blue text-light">Jury Duty<br/>
+				(1 business day)
+				</h5>
+				<div class="card-body">
+					<button class="btn btn-warning w-100" (click) = "setInfo5()">Request</button>
+				</div>
+			</div>
+		</div>
+		<div class = "col-md-4">
+			<div class="card">
+				<h5 class="card-header bg-blue text-light">Transfer Credit Evaluation<br/>
+				(10 business days)</h5>
+				<div class="card-body">
+					<button class="btn btn-warning w-100" (click) = "setInfo6()">Request</button>
+				</div>
+			</div>
+		</div>
+		
+		
+</div>
+<div class="card mu-25">
+	<div class="card-header text-light bg-dark">
+		{{infoHeader}}
+	</div>
+	<div class="card-body">
+		{{infoBody}}
+	</div>
+	<div class="card-footer text-light bg-dark">
+		{{infoFooter}}
+	</div>
+</div>
+
+<div class="mu-50 mb-50">
+	During peak periods, e.g. the end and start of each term, normal processing time for letters may be delayed. 
+	All letters requested to be mailed are mailed via Canada Post. 
+	Courier service is not available.
+</div>
