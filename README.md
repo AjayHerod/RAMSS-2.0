@@ -20,4 +20,3 @@ To run:<br/>
 In the directory:<br/>
 2. If you want to develop without server: Run 'ng serve' in cmd. <br/>
 3. If you want to develop with server: Run 'ng build' then run 'node server.js' in cmd. <br/>
-
