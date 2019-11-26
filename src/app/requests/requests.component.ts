@@ -16,6 +16,10 @@ export class RequestsComponent implements OnInit {
   public rLog : requestLog;
   public rObjects = [];
   public test = "test";
+  public failureMsg = "Failed";
+  public successMsg = "Request Completed. You can track its completion in View Requests.";
+  public showSuccess: boolean = false;
+  public showFailure: boolean = false;
   
   constructor() { }
   
@@ -75,20 +79,42 @@ export class RequestsComponent implements OnInit {
 
   
   sendRequest(){
+	this.showFailure=false;
+	this.showSuccess=false;
 	$.ajax({
 		method: 'POST',
-		url: '/Request',
-		data: JSON.stringify({type: this.cRequest}),
+		url: '/loadUser',
 		contentType: 'application/json',
-		success: function(data) {
-			if (data == "failure"){
-				alert("Request Failed. You have already requested this document.");
+		success: (data) => {
+			if (data[0].Address != ""){
+				$.ajax({
+					method: 'POST',
+					url: '/Request',
+					data: JSON.stringify({type: this.cRequest}),
+					contentType: 'application/json',
+					success: (data) => {
+						if (data == "failure"){
+							this.failureMsg = "You have a request pending for this document.";
+							this.showFailure=true;
+							window.scrollBy(0,-1000);
+						}
+						else if(data == "succeed"){
+							this.showSuccess=true;
+							window.scrollBy(0,-1000);
+						}
+					}
+				})
 			}
-			else if(data == "succeed"){
-				alert("Request Completed. You can view its completion in 'View Requests'");
+			else{
+				this.failureMsg = "You do not have an address attached to your account.";
+				this.showFailure=true;
+				window.scrollBy(0,-1000);
 			}
 		}
 	})
+	  
+	  
+	
   }
   
   openRequestModal(){
@@ -101,8 +127,8 @@ export class RequestsComponent implements OnInit {
 			for (var i in data){
 				var rLog = new requestLog(data[i].Type, data[i].Date, data[i].Status);
 				this.rObjects.push(rLog);
-				$('#reqModal').modal('show');
 			}
+			$('#reqModal').modal('show');
 		},
 		error: function() {
 			console.log("Failed to Retrieve data");

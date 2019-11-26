@@ -28,6 +28,14 @@
   </div>
 </div>
 
+<div class="alert alert-success mu-10" *ngIf = "showSuccess" role="alert">
+  {{successMsg}}
+</div>
+<div class="alert alert-danger mu-10" *ngIf = "showFailure" role="alert">
+  {{failureMsg}}
+</div>
+
+
 <div class = "container-fluid mu-25">
 	<h3 class="inline">Do you want to request a..</h3><button class="float-right btn btn-success" (click) = "openRequestModal()">View Requests</button>
 	<div class = "mu-25 row">
@@ -94,7 +102,7 @@
 		
 </div>
 <div class="card mu-25">
-	<div class="card-header text-light bg-dark">
+	<div class="card-header text-light bg-blue">
 		{{infoHeader}}
 	</div>
 	<div class="card-body">
@@ -109,6 +117,7 @@
 </div>
 
 <div class="mu-25 mb-50">
+	You are required to have an address attached to your account.
 	During peak periods, e.g. the end and start of each term, normal processing time for letters may be delayed. 
 	All letters requested to be mailed are mailed via Canada Post. 
 	Courier service is not available.

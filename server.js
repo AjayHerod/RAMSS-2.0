@@ -69,6 +69,20 @@ app.post('/loadCourses', function (headers, res){
 	});
 });
 
+/*GET USER INFO*/
+app.post('/loadUser', function (headers, res){
+	var query = "SELECT * FROM Users WHERE StudentNo = '5001112222'";
+	con.query(query, function(err, result){
+		if (err){
+			console.log(err);
+		}
+		else{
+			res.send(result);
+		}
+	});
+});
+
+
 /*GET ACCOUNT INFO*/
 app.post('/loadAccount', function (headers, res){
 	var query = "SELECT Balance, Fees FROM Users WHERE StudentNo = '5001112222'";
@@ -163,7 +177,7 @@ app.post('/loadRequests', function (headers, res){
 			console.log(err);
 		}
 		else{
-			console.log(result);
+			//console.log(result);
 			res.send(result);
 		}
 	});
@@ -216,16 +230,16 @@ app.post('/OptOut', function (req, res){
 
 /*Requests*/
 app.post('/Request', function (req, res){
-	//console.log(req.body.type);
 	dateString = date.getFullYear() +"/"+(parseInt(date.getMonth())+1).toString()+"/"+date.getDate();
 	var query = "INSERT INTO Requests (StudentNo, Type, Date, Status) VALUES('5001112222', '"+req.body.type+"','"+dateString+"','Pending')";
 	con.query(query, function(err, result){
 		if (err){
-			console.log(err);
+			//console.log(err);
 			res.send("failure");
 		}
 		else{
-			console.log(result);
+			//console.log(result);
+			res.send("succeed");
 		}
 	});
 });
