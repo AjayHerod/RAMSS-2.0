@@ -1,12 +1,11 @@
-<div class="row">
-    <div class="col-md-12" *ngFor="let personalInfo of info">
-        <label for={{personalInfo}}>{{personalInfo}}</label>
-            <input type="text" class="form-control" id={{personaInfo}} value="" placeholder="" required />
+
+<form id="personalForm">
+    <div class="form-group" *ngFor="let personalInfo of info">
+        <label for="personalInfo.fieldName">{{personalInfo.fieldName}}</label>
+            <input *ngIf=personalInfo.modifiable type="text" class="form-control" id=personaInfo.fieldName value="" placeholder="" required />
+            <input *ngIf=!personalInfo.modifiable type="text" class="form-control" id=personaInfo.fieldName value="Name of user here" placeholder="" required readonly />
     </div>
-</div>
 
-
-<p>
-    <br>
-    Not yet finished!
-</p>
+    <button type="submit" class="btn btn-primary">Save changes</button>
+    <button type="button" class="btn btn-light">Cancel</button>
+</form>
