@@ -7,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RequestsComponent implements OnInit {
 
-  public infoBody = "Select a request to learn more.";
+  public infoHeader: string = "";
+  public infoBody:string = "Select a request to learn more.";
+  public infoFooter: string = "";
   constructor() { }
   ngOnInit() {
   }
