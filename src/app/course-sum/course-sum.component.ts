@@ -21,17 +21,31 @@ export class CourseSumComponent implements OnInit {
     //drop course code
   //}
   
-  loadGrades(){
-	$.ajax({
-		method: 'post',
-		url: '/loadGrades',
-		contentType: 'application/json',
-		success: (data) => {
-			console.log(data);
-		},
-		error: function() {
-			console.log("Failed to Retrieve data");
-		}
-    })
-  }
+	loadCourses(){
+      $.ajax({
+			method: 'post',
+			url: '/loadCourses',
+			contentType: 'application/json',
+			success: (data) => {
+				console.log(data);
+			},
+			error: function() {
+				console.log("Failed to Retrieve data");
+			}
+		})
+	}
+	
+	loadGrades(){
+		$.ajax({
+			method: 'post',
+			url: '/loadGrades',
+			contentType: 'application/json',
+			success: (data) => {
+				console.log(data);
+			},
+			error: function() {
+				console.log("Failed to Retrieve data");
+			}
+		})
+    }
 }
