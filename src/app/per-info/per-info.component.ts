@@ -7,7 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PerInfoComponent implements OnInit {
 
-  info = ["First name", "Last name", "Address", "Phone number", "Email", "Emergency contact"];
+  info = [
+    {fieldName: "First name", modifiable: false},
+    {fieldName: "Last name", modifiable: false},
+    {fieldName: "Address", modifiable: true},
+    {fieldName: "Phone number", modifiable: true},
+    {fieldName: "Email", modifiable: true},
+    {fieldName: "Emergency contact", modifiable: true}
+  ];
 
   constructor() { }
 
