@@ -55,6 +55,19 @@ app.get('/*', function(req,res) {
 	res.sendFile(path.join(__dirname+'/dist/RAMSS2/index.html'));
 });
 
+/*GET LOGIN*/
+app.post('/loadLogin', function (req, res){
+	var query = "SELECT StudentNo from Logins where Username = '"+req.body.username +"' AND Password = '"+req.body.password+"'";
+	con.query(query, function(err, result){
+		if (err){
+			console.log(err);
+		}
+		else{
+			res.send(result)
+		}
+	});
+});
+
 /*GET COURSE DATA*/
 app.post('/loadCourses', function (headers, res){
 	var query = "SELECT * FROM Courses, Enrolled WHERE (Courses.CourseCode = Enrolled.CourseCode AND StudentNo = '5001112222')";

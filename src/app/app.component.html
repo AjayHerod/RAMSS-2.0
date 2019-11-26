@@ -1,4 +1,36 @@
-<div class="container-fluid">
+<div class = "container-fluid" *ngIf = "loggedIn == true">
+ <div class="row justify-content-center">
+ 
+
+    <div class="col-md-4 loginScreen bg-light pad-50 mobile-mu-25">
+		<div class="text-center mu-20">
+		  <img class="ryerson-logo mw-80" src="../../assets/images/Ryerson-rgb.png"/>
+		</div>
+		<div class="card mu-25">
+			<div class="card-body">
+			  <div class="form-group">
+				<label for = "username">Username</label>
+				<input type="text" class="form-control" id="username" [(ngModel)]="username" placeholder="my.ryerson username">
+			  </div>
+			  <div class="form-group">
+				<label for = "password">Password</label>
+				<input type="password" class="form-control" id="password" [(ngModel)]="password" placeholder="Password">
+			  </div>
+			  <button class="btn btn-lg btn-outline-primary float-right" (click) = "login()" >Login</button>
+			</div>
+		</div>
+		<br/>
+		<div class="float-right">
+			<a href = "https://db4free.net/phpMyAdmin/" class="mu-10"> System Admin?</a>
+		</div>
+    </div>
+	
+
+  </div>
+</div>
+
+
+<div class="container-fluid" *ngIf = "loggedIn == false">
 	<div class="row">
 		<div class="col-md-2 rm-margin">
 		<div class="nav-width bg-dark d-none d-lg-block">
@@ -22,10 +54,10 @@
 		<div class="col-lg-10 rm-margin ">
 		<nav class="navbar navbar-dark bg-dark">
 		  <h4 class="text-light nav-head">
-			Name
+			Student #: {{studentNo}}
 		  </h4>
 		  <div class="justify-content-end">
-			<button class="btn btn-warning">
+			<button class="btn btn-warning" (click)="logout()">
 			Logout
 			</button>
 		  </div>
