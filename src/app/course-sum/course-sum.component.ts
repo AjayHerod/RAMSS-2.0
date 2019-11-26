@@ -9,7 +9,15 @@ export class CourseSumComponent implements OnInit {
 
   constructor() { }
 
+  public currentYear = 2019; //default
+  public currentSemester = "Fall"; //default
+
+  public currentCourses = ['CPS888','CPS889','CPS990'];
+
   ngOnInit() {
   }
 
+  //dropCourse() {
+    //drop course code
+  //}
 }

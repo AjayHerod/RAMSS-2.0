@@ -1,1 +1,33 @@
-<p>course-sum works!</p>
+<div class = "mu-25">
+    <div class = "row">
+        <div class="col-md-3">
+            <div class="card">
+                <div class = "card-header bg-blue text-light">
+                    <h5>Enrolled Courses: <span class="font-weight-bold">{{currentYear}} {{currentSemester}}</span></h5>
+                </div>
+                    <div class = "card-body">
+                        <table style="width:100%">
+                            <tr>
+                              <th>Course</th>
+                              <th>Drop</th>
+                            </tr>
+                            <tr *ngFor = "let course of currentCourses">
+                                <td width="90%">{{course}}</td>
+                                <td width="10%"><button (click)="dropCourse()" class="btn btn-danger mu-25 w-100">Drop</button></td>
+                              </tr>
+                        </table>
+                    </div>
+            </div> 
+        </div>
+        <div class = "col-md-9">
+            <div class = "card">
+                <div class = "card-header bg-blue text-light">
+                    <h5>Weekly Schedule</h5>
+                </div>
+                <div class = "card-body">
+                    <div> In the Making</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
