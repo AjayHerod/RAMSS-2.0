@@ -1,18 +1,32 @@
 <div class = "container-fluid mu-25">
 <div class = "row">
-	<div class="col-md-2">
-	<div class="form-group">
-		<label for="sel1">Select Year:</label>
-		<select class="form-control">
-			<option *ngFor="let year of years;">{{year}}</option>
-		</select>
-	</div> 
-	</div> 
-
+	<div class="col-md-3">
+		<div class="form-group">
+			<label for="sel1">Select Year:</label>
+			<select [(ngModel)]="selectedOption" class="form-control">
+				<option *ngFor="let year of years;">{{year}}</option>
+			</select>
+			<button (click)="getGrades()" class="btn btn-warning mu-25 w-100">View</button>
+		</div> 
+	</div>
+	<div class = "col-md-9">
+		<div class = "card">
+			<div class = "card-header bg-blue text-light">
+				<h5>Summary for your <span class="font-weight-bold">{{cYear}}</span> school year</h5>
+			</div>
+			<div class = "card-body">
+				<div class="font-weight-bold">Your Cumulative GPA (All Years) is {{cGPA}}</div>
+				<div class="font-weight-bold">Your Fall Term GPA is {{fGPA}}</div>
+				<div class="font-weight-bold">Your Winter Term GPA is {{wGPA}}</div>
+				<div class="font-weight-bold">Your Summer Term GPA is {{sGPA}}</div>
+			</div>
+		</div>
+	</div>
+	
 </div>
 
-<div class = "row">
-	<div class = "col-md-6">
+<div class = "row mu-25">
+	<div class = "col-md-4">
 		<div class = "card">
 		<div class = "card-header bg-blue text-light"><h4>Fall Semester</h4></div>
 		<div class = "card-body">
@@ -21,20 +35,16 @@
 			<th>Course</th>
 			<th>Grade</th>
 		  </tr>
-		  <tr>
-			<td>Jill</td>
-			<td>50</td>
-		  </tr>
-		  <tr>
-			<td>Eve</td>
-			<td>94</td>
+		  <tr *ngFor = "let fGrade of fGrades">
+			<td>{{fGrade.Course}}</td>
+			<td>{{fGrade.Grade}}</td>
 		  </tr>
 		</table> 
 		</div>
 		</div>
 	</div>
 	
-	<div class = "col-md-6">
+	<div class = "col-md-4">
 		<div class = "card">
 		<div class = "card-header bg-blue text-light"><h4>Winter Semester</h4></div>
 		<div class = "card-body">
@@ -43,13 +53,27 @@
 			<th>Course</th>
 			<th>Grade</th>
 		  </tr>
-		  <tr>
-			<td>Jill</td>
-			<td>50</td>
+		  <tr *ngFor = "let wGrade of wGrades">
+			<td>{{wGrade.Course}}</td>
+			<td>{{wGrade.Grade}}</td>
 		  </tr>
+		</table> 
+		</div>
+		</div>
+	</div>
+	
+	<div class = "col-md-4">
+		<div class = "card">
+		<div class = "card-header bg-blue text-light"><h4>Summer Semester</h4></div>
+		<div class = "card-body">
+		<table style="width:100%">
 		  <tr>
-			<td>Eve</td>
-			<td>94</td>
+			<th>Course</th>
+			<th>Grade</th>
+		  </tr>
+		  <tr *ngFor = "let sGrade of sGrades">
+			<td>{{sGrade.Course}}</td>
+			<td>{{sGrade.Grade}}</td>
 		  </tr>
 		</table> 
 		</div>

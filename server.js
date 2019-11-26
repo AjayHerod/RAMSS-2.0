@@ -75,7 +75,7 @@ app.post('/loadAccount', function (headers, res){
 			console.log(err);
 		}
 		else{
-			console.log(result);
+			//console.log(result);
 			var balance = result[0].Balance;
 			var fees = result[0].Fees;
 			var owing = parseInt(balance) - parseInt(fees);

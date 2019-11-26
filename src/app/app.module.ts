@@ -13,6 +13,7 @@ import { RequestsComponent } from './requests/requests.component';
 import * as $ from 'jquery';
 import * as bootstrap from 'bootstrap';
 import { LoginComponent } from './login/login.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { LoginComponent } from './login/login.component';
   imports: [
     BrowserModule,
 	HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+	FormsModule  
   ],
   providers: [],
   bootstrap: [AppComponent]
