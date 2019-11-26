@@ -38,11 +38,7 @@ export class AccInfoComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-	this.loadAccount();
-
-	  
-	  
+  ngOnInit() {	  
     $.ajax({
 		method: 'post',
 		url: '/loadCourses',
@@ -111,7 +107,6 @@ export class AccInfoComponent implements OnInit {
 			}
         })
 		this.loadAncFees();
-		this.loadAccount();
 	}
 	
 
@@ -126,10 +121,13 @@ export class AccInfoComponent implements OnInit {
 			}
         })
 		this.loadAncFees();
-		this.loadAccount();
+		
 	}
 	
 	loadAccount(){
+		this.accBalance = "";
+		this.schoolFees = "";
+		this.balanceOwing = "";
 	  $.ajax({
 		method: 'post',
 		url: '/loadAccount',
@@ -178,6 +176,8 @@ export class AccInfoComponent implements OnInit {
 				for (var i in this.ancObjects){
 					this.ancFees = this.ancFees + this.ancObjects[i].cost;
 				}
+				
+				this.loadAccount();
 		
 			},
 			error: function() {

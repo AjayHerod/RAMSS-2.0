@@ -4,8 +4,8 @@ const path = require('path');
 const mysql = require('mysql');
 const app = express();
 var bodyParser = require('body-parser');
-
-
+var date = new Date();
+var lastYear = date.getFullYear() - 1;
 
 //Database Connections
 var con = mysql.createConnection({
@@ -75,7 +75,7 @@ app.post('/loadAccount', function (headers, res){
 			console.log(err);
 		}
 		else{
-			//console.log(result);
+			console.log(result);
 			var balance = result[0].Balance;
 			var fees = result[0].Fees;
 			var owing = parseInt(balance) - parseInt(fees);
@@ -140,6 +140,19 @@ app.post('/loadPaymentsMade', function (headers, res){
 	});
 });
 
+//Get Grades
+app.post('/loadGrades', function (headers, res){
+	var query = "SELECT * FROM Grades WHERE StudentNo = '5001112222' ORDER BY Year DESC";
+	con.query(query, function(err, result){
+		if (err){
+			console.log(err);
+		}
+		else{
+			res.send(result);
+		}
+	});
+});
+
 
 
 
@@ -192,4 +205,5 @@ app.post('/OptOut', function (req, res){
 // Start the app by listening on the default Heroku port
 var server = app.listen(process.env.PORT || 8080, function () {
     console.log('Node server is running at localhost:8080 (THIS IS NOT MYSQL, KEEP WAITING)');
+	//console.log(lastYear);
 });

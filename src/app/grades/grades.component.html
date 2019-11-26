@@ -1,1 +1,62 @@
-<p>grades works!</p>
+<div class = "container-fluid mu-25">
+<div class = "row">
+	<div class="col-md-2">
+	<div class="form-group">
+		<label for="sel1">Select Year:</label>
+		<select class="form-control">
+			<option *ngFor="let year of years;">{{year}}</option>
+		</select>
+	</div> 
+	</div> 
+
+</div>
+
+<div class = "row">
+	<div class = "col-md-6">
+		<div class = "card">
+		<div class = "card-header bg-blue text-light"><h4>Fall Semester</h4></div>
+		<div class = "card-body">
+		<table style="width:100%">
+		  <tr>
+			<th>Course</th>
+			<th>Grade</th>
+		  </tr>
+		  <tr>
+			<td>Jill</td>
+			<td>50</td>
+		  </tr>
+		  <tr>
+			<td>Eve</td>
+			<td>94</td>
+		  </tr>
+		</table> 
+		</div>
+		</div>
+	</div>
+	
+	<div class = "col-md-6">
+		<div class = "card">
+		<div class = "card-header bg-blue text-light"><h4>Winter Semester</h4></div>
+		<div class = "card-body">
+		<table style="width:100%">
+		  <tr>
+			<th>Course</th>
+			<th>Grade</th>
+		  </tr>
+		  <tr>
+			<td>Jill</td>
+			<td>50</td>
+		  </tr>
+		  <tr>
+			<td>Eve</td>
+			<td>94</td>
+		  </tr>
+		</table> 
+		</div>
+		</div>
+	</div>
+</div>
+
+
+
+</div>
