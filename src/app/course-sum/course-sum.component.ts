@@ -20,4 +20,18 @@ export class CourseSumComponent implements OnInit {
   //dropCourse() {
     //drop course code
   //}
+  
+  loadGrades(){
+	$.ajax({
+		method: 'post',
+		url: '/loadGrades',
+		contentType: 'application/json',
+		success: (data) => {
+			console.log(data);
+		},
+		error: function() {
+			console.log("Failed to Retrieve data");
+		}
+    })
+  }
 }

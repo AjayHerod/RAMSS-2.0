@@ -134,6 +134,6 @@ export class RequestsComponent implements OnInit {
 			console.log("Failed to Retrieve data");
 		}
 	})
+	
   }
-
 }

@@ -14,4 +14,21 @@ export class PerInfoComponent implements OnInit {
   ngOnInit() {
   }
 
+
+
+  //Function gets personal information.
+  loadUserInfo(){
+	$.ajax({
+		method: 'post',
+		url: '/loadUser',
+		contentType: 'application/json',
+		success: (data) =>{
+			console.log(data);
+		},
+		error: function() {
+			console.log("Failed to Retrieve data");
+		}
+	})
+  }
+
 }
