@@ -1,5 +1,5 @@
 
-<div class="row">
+<div class="row mt-4">
 
     <form id="personalForm" class="col-sm-9">
         <div class="form-group" *ngFor="let personalInfo of info">
@@ -12,23 +12,19 @@
         <button type="button" class="btn btn-light">Cancel</button>
     </form>
 
-    <div class="col-sm-3">
+    <div class="questionnaire col-sm-3">
+
         <div class="card">
             <div class="card-header bg-blue text-white">
                 <h5>Available Questionnaires</h5>
             </div>
             <ul class="list-group">
-                <button class="list-group-item bg-success text-white">Student Diversity Self-ID</button>
-                <button class="list-group-item bg-success text-white">Student Self-Assessment</button>
-                <button class="list-group-item bg-success text-white">Faculty/Course Survey</button>
+                <button class="list-group-item bg-danger text-white">Student Diversity Self-ID</button>
+                <button class="list-group-item bg-danger text-white">Student Self-Assessment</button>
+                <button class="list-group-item bg-danger text-white">Faculty/Course Survey</button>
             </ul>
         </div>
 
-        <div class="card mt-4">
-            <div class="card-header bg-blue text-white">
-                <h5>Demographics</h5>
-            </div>
-        </div>
     </div>
 
 </div>
