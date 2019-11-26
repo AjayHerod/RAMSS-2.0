@@ -1,12 +1,31 @@
+<div class="modal" id="reqModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-blue ">
+        <h5 class="modal-title text-light">Requests</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ss
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class = "container-fluid mu-25">
-	<h3>Do you want to request a..</h3>
+	<h3 class="inline">Do you want to request a..</h3><button class="float-right btn btn-success" (click) = "openRequestModal()">View Requests</button>
 	<div class = "mu-25 row">
 		<div class = "col-md-4">
 			<div class="card">
 				<h5 class="card-header bg-blue text-light">Official Transcript <br/>
 				(1-2 business days)</h5>
 				<div class="card-body">
-					<button class="btn btn-warning w-100" (click) = "setInfo1()">Request</button>
+					<button class="btn btn-warning w-100" (click) = "setInfo1(); revealButton()">View</button>
 				</div>
 			</div>
 		</div>
@@ -15,7 +34,7 @@
 				<h5 class="card-header bg-blue text-light">Proof of Enrollment <br/> 	
 				(1-2 business days)</h5>
 				<div class="card-body">
-					<button class="btn btn-warning w-100" (click) = "setInfo2()">Request</button>
+					<button class="btn btn-warning w-100" (click) = "setInfo2(); revealButton()">View</button>
 				</div>
 			</div>
 		</div>
@@ -25,7 +44,7 @@
 				(5 business days)
 				</h5>
 				<div class="card-body">
-					<button class="btn btn-warning w-100" (click) = "setInfo3()">Request</button>
+					<button class="btn btn-warning w-100" (click) = "setInfo3(); revealButton()">View</button>
 				</div>
 			</div>
 		</div>
@@ -37,7 +56,7 @@
 				(10 business days)
 				</h5>
 				<div class="card-body">
-					<button class="btn btn-warning w-100" (click) = "setInfo4()">Request</button>
+					<button class="btn btn-warning w-100" (click) = "setInfo4(); revealButton()">View</button>
 				</div>
 			</div>
 		</div>
@@ -47,7 +66,7 @@
 				(1 business day)
 				</h5>
 				<div class="card-body">
-					<button class="btn btn-warning w-100" (click) = "setInfo5()">Request</button>
+					<button class="btn btn-warning w-100" (click) = "setInfo5(); revealButton()">View</button>
 				</div>
 			</div>
 		</div>
@@ -56,7 +75,7 @@
 				<h5 class="card-header bg-blue text-light">Transfer Credit Evaluation<br/>
 				(10 business days)</h5>
 				<div class="card-body">
-					<button class="btn btn-warning w-100" (click) = "setInfo6()">Request</button>
+					<button class="btn btn-warning w-100" (click) = "setInfo6(); revealButton()">View</button>
 				</div>
 			</div>
 		</div>
@@ -68,14 +87,17 @@
 		{{infoHeader}}
 	</div>
 	<div class="card-body">
-		{{infoBody}}
+		{{infoBody}} 
+	<div>
+		<button *ngIf = "showButton" class="mu-10 btn btn-success" (click) = "sendRequest()" >Begin Request</button>
+	</div>
 	</div>
 	<div class="card-footer text-light bg-dark">
 		{{infoFooter}} 
 	</div>
 </div>
 
-<div class="mu-50 mb-50">
+<div class="mu-25 mb-50">
 	During peak periods, e.g. the end and start of each term, normal processing time for letters may be delayed. 
 	All letters requested to be mailed are mailed via Canada Post. 
 	Courier service is not available.

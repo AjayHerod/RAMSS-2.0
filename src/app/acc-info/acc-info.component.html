@@ -61,8 +61,8 @@
 	
 	</div>
 	
-	<div class="col-md-6">
-	<div class="card mb-50">
+	<div class="col-md-6 mb-50">
+	<div class="card">
 	<div class="card-header bg-blue text-light">
 		<h4>Tuition Breakdown</h4>
 	</div>
@@ -88,12 +88,22 @@
 		<div class="font-weight-bold card-text"> Grants: (${{grants}})</div>
 		<h4 class="font-weight-bold"> Total Fees: {{schoolFees}}</h4>
 		<br/>
-		<h5 class="font-weight-bold mb-20">Past Semester Payments</h5>
-		<div class="no-bullet">
-			<li *ngFor="let pay of payments; let i = index">
-				{{pay}}
-			</li>
-		</div>
+	</div>
+	</div>
+	
+	<div class="card mu-10">
+	<h5 class="font-weight-bold text-center mu-10 mb-20">Past Payments</h5>
+	<div class="text-center">
+		<table style="width:100%">
+		  <tr>
+			<th>Term</th>
+			<th>Payment</th>
+		  </tr>
+		  <tr *ngFor="let pay of paymentObjects">
+			<td>{{pay.term}}</td>
+			<td>${{pay.payment}}</td>
+		  </tr>
+		</table>
 	</div>
 	</div>
 	</div>

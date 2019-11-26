@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ancillaryFee} from './ancFee';
 import {mandatoryFee} from './manFee';
 import {courseFee} from './courseFee';
+import {termPayment} from './termPayment';
 
 @Component({
   selector: 'app-acc-info',
@@ -23,18 +24,19 @@ export class AccInfoComponent implements OnInit {
   public manObjects = [];
   public ancObjects = [];
   public courseObjects = [];
+  public paymentObjects = [];
   public payments= [];
   
   public courseFee : courseFee; 
   public ancFee : ancillaryFee; 
   public manFee : mandatoryFee; 
+  public termPay : termPayment; 
 
   public modalHeader: string = "";
   public modalBody: string="";
 
   public OIButton: boolean = false;
   public OOButton: boolean = false;
-
 
   constructor() { }
 
@@ -193,10 +195,10 @@ export class AccInfoComponent implements OnInit {
 			url: '/loadPaymentsMade',
 			contentType: 'application/json',
 			success: (data) => {
-				console.log(data);
 				for (var key in data[0]){
 					if (key != "StudentNo"){
-						this.payments.push(key+": $"+data[0][key]);
+						this.termPay = new termPayment(key, data[0][key]);
+						this.paymentObjects.push(this.termPay);
 					}
 				}
 				

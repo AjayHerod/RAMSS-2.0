@@ -4,8 +4,10 @@ const path = require('path');
 const mysql = require('mysql');
 const app = express();
 var bodyParser = require('body-parser');
+
 var date = new Date();
 var lastYear = date.getFullYear() - 1;
+
 
 //Database Connections
 var con = mysql.createConnection({
@@ -153,6 +155,19 @@ app.post('/loadGrades', function (headers, res){
 	});
 });
 
+//Get Requests
+app.post('/loadRequests', function (headers, res){
+	var query = "SELECT * FROM Requests WHERE StudentNo = '5001112222' ORDER BY Date DESC";
+	con.query(query, function(err, result){
+		if (err){
+			console.log(err);
+		}
+		else{
+			res.send(result);
+		}
+	});
+});
+
 
 
 
@@ -196,6 +211,21 @@ app.post('/OptOut', function (req, res){
 				}
 			});
 
+		}
+	});
+});
+
+/*Requests*/
+app.post('/Request', function (req, res){
+	//console.log(req.body.type);
+	dateString = date.getFullYear() +"/"+date.getMonth()+1+"/"+date.getDate();
+	var query = "INSERT INTO Requests (StudentNo, Type, Date, Status) VALUES('5001112222', '"+req.body.type+"','"+dateString+"','Pending')";
+	con.query(query, function(err, result){
+		if (err){
+			console.log(err);
+		}
+		else{
+			console.log(result);
 		}
 	});
 });
