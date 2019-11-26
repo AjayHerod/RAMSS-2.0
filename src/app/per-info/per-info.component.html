@@ -1,11 +1,34 @@
 
-<form id="personalForm">
-    <div class="form-group" *ngFor="let personalInfo of info">
-        <label for="personalInfo.fieldName">{{personalInfo.fieldName}}</label>
-            <input *ngIf=personalInfo.modifiable type="text" class="form-control" id=personaInfo.fieldName value="" placeholder="" required />
-            <input *ngIf=!personalInfo.modifiable type="text" class="form-control" id=personaInfo.fieldName value="Name of user here" placeholder="" required readonly />
+<div class="row">
+
+    <form id="personalForm" class="col-sm-9">
+        <div class="form-group" *ngFor="let personalInfo of info">
+            <label for="personalInfo.fieldName">{{personalInfo.fieldName}}</label>
+                <input *ngIf=personalInfo.modifiable type="text" class="form-control" id=personaInfo.fieldName value="" placeholder="" required />
+                <input *ngIf=!personalInfo.modifiable type="text" class="form-control" id=personaInfo.fieldName value="Name of user here" placeholder="" required readonly />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-light">Cancel</button>
+    </form>
+
+    <div class="col-sm-3">
+        <div class="card">
+            <div class="card-header bg-blue text-white">
+                <h5>Available Questionnaires</h5>
+            </div>
+            <ul class="list-group">
+                <button class="list-group-item bg-success text-white">Student Diversity Self-ID</button>
+                <button class="list-group-item bg-success text-white">Student Self-Assessment</button>
+                <button class="list-group-item bg-success text-white">Faculty/Course Survey</button>
+            </ul>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-header bg-blue text-white">
+                <h5>Demographics</h5>
+            </div>
+        </div>
     </div>
 
-    <button type="submit" class="btn btn-primary">Save changes</button>
-    <button type="button" class="btn btn-light">Cancel</button>
-</form>
+</div>
