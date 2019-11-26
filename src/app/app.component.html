@@ -1,7 +1,7 @@
-<div class="container-fluid rm-margin">
+<div class="container-fluid">
 	<div class="row">
-		<div class="col-2">
-		<div class="nav-width bg-dark">
+		<div class="col-md-2 rm-margin">
+		<div class="nav-width bg-dark d-none d-lg-block">
 			<div class="bg-dark">
 				<img class="w-90 ryerson-logo " src="../../assets/images/Ryerson-rgb.png"/>
 			</div>
@@ -19,18 +19,47 @@
 			<button class="btn btn-dark w-100" (click)="toggleView('requests')">Requests</button>	
 		</div>
 		</div>
-		<div class="col-10">
+		<div class="col-lg-10 rm-margin ">
 		<nav class="navbar navbar-dark bg-dark">
-		  <h4 class="text-light">
-			Welcome, Name!
+		  <h4 class="text-light nav-head">
+			Name
 		  </h4>
-		
 		  <div class="justify-content-end">
 			<button class="btn btn-warning">
-				Logout
+			Logout
 			</button>
 		  </div>
 		</nav>
+		
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark d-lg-none d-xl-none">
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+			  <div class="nav-item">
+				<div class="nav-link" (click)="toggleView('accManage')">Account Information</div>
+			  </div>
+			  <div class="nav-item">
+				<div class="nav-link" (click)="toggleView('perManage')">Personal Information</div>
+			  </div>
+			  <div class="nav-item">
+				<div class="nav-link" (click)="toggleView('courseSum')">Course Summary</div>
+			  </div>
+			  <div class="nav-item">
+				<div class="nav-link" (click)="toggleView('manageCourses')">Manage Courses</div>
+			  </div>
+			  <div class="nav-item">
+				<div class="nav-link" (click)="toggleView('grades')">Grades</div>
+			  </div>
+			  <div class="nav-item">
+				<div class="nav-link" (click)="toggleView('academic')">Academics</div>
+			  </div>
+			  <div class="nav-item">
+				<div class="nav-link" (click)="toggleView('requests')">Requests</div>
+			  </div>
+		  </div>
+		</nav>
+	
 		<!-- Dont add anything but components after this line !-->
 		<!-- <app-login></app-login> !-->
 		<app-acc-info *ngIf="accManage"></app-acc-info>

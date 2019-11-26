@@ -86,14 +86,14 @@
 				</li>
 			</ul>
 		<div class="font-weight-bold card-text"> Grants: (${{grants}})</div>
-		<div class="font-weight-bold card-text"> Total Fees: {{schoolFees}}</div>
+		<h4 class="font-weight-bold"> Total Fees: {{schoolFees}}</h4>
 		<br/>
-		<h5 class="font-weight-bold">Past Semester Payments</h5>
-		<ul class="no-bullet">
+		<h5 class="font-weight-bold mb-20">Past Semester Payments</h5>
+		<div class="no-bullet">
 			<li *ngFor="let pay of payments; let i = index">
 				{{pay}}
 			</li>
-		</ul>
+		</div>
 	</div>
 	</div>
 	</div>

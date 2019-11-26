@@ -112,7 +112,7 @@ app.post('/loadAncFees', function (headers, res){
 			console.log(err);
 		}
 		else{
-			console.log(result);
+			//console.log(result);
 			con.query(query2, function(err, result2){
 				if (err){
 					console.log(err);
