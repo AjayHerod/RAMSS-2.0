@@ -100,11 +100,11 @@ export class AccInfoComponent implements OnInit {
 	
 	optIn(){
 		$.ajax({
-			method: 'POST',
+			method: 'post',
 			url: '/OptIn',
 			data: JSON.stringify({name:this.modalHeader}),
 			contentType: 'application/json',
-			success: function(data) {
+			success:(data) =>{
 				$('#ancModal').modal('hide');
 			}
         })
@@ -114,11 +114,11 @@ export class AccInfoComponent implements OnInit {
 
 	optOut(){
 		$.ajax({
-			method: 'POST',
+			method: 'post',
 			url: '/OptOut',
 			data: JSON.stringify({name:this.modalHeader}),
 			contentType: 'application/json',
-			success: function(data) {
+			success:(data) =>{
 				$('#ancModal').modal('hide');
 			}
         })

@@ -8,7 +8,18 @@
         </button>
       </div>
       <div class="modal-body">
-        ss
+		<table style="width:100%">
+		  <tr>
+			<th>Type</th>
+			<th>Date</th>
+			<th>Status</th>
+		  </tr>
+		  <tr *ngFor="let request of rObjects">
+			<td>{{request.type}}</td>
+			<td>{{request.date}}</td>
+			<td>{{request.reqStatus}}</td>
+		  </tr>
+		</table>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

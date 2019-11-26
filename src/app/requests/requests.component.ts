@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { requestLog } from './requestLog';
 
 @Component({
   selector: 'app-requests',
@@ -12,9 +13,16 @@ export class RequestsComponent implements OnInit {
   public infoFooter: string = "";
   public showButton: boolean = false;
   public cRequest: string = "";
+  public rLog : requestLog;
+  public rObjects = [];
+  public test = "test";
+  
   constructor() { }
-  ngOnInit() {
+  
+  ngOnInit() {  
+	
   }
+
   
   revealButton(){
 	this.showButton = true;
@@ -64,18 +72,7 @@ export class RequestsComponent implements OnInit {
 	this.cRequest = "Transfer Credit Equivalency Letter";
   }
   
-  openRequestModal(){
-	$.ajax({
-		method: 'POST',
-		url: '/loadRequests',
-		data: JSON.stringify({type: this.cRequest}),
-		contentType: 'application/json',
-		success: function(data) {
-			console.log(data);
-		}
-	})
-	$('#reqModal').modal('show'); 
-  }
+
   
   sendRequest(){
 	$.ajax({
@@ -84,8 +81,33 @@ export class RequestsComponent implements OnInit {
 		data: JSON.stringify({type: this.cRequest}),
 		contentType: 'application/json',
 		success: function(data) {
-			console.log("success");
+			if (data == "failure"){
+				alert("Request Failed. You have already requested this document.");
+			}
+			else if(data == "succeed"){
+				alert("Request Completed. You can view its completion in 'View Requests'");
+			}
 		}
 	})
   }
+  
+  openRequestModal(){
+	this.rObjects = [];
+	$.ajax({
+		method: 'post',
+		url: '/loadRequests',
+		contentType: 'application/json',
+		success: (data) =>{
+			for (var i in data){
+				var rLog = new requestLog(data[i].Type, data[i].Date, data[i].Status);
+				this.rObjects.push(rLog);
+				$('#reqModal').modal('show');
+			}
+		},
+		error: function() {
+			console.log("Failed to Retrieve data");
+		}
+	})
+  }
+
 }
