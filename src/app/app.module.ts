@@ -11,6 +11,7 @@ import { GradesComponent } from './grades/grades.component';
 import { AcademicComponent } from './academic/academic.component';
 import { RequestsComponent } from './requests/requests.component';
 import * as $ from 'jquery';
+import * as bootstrap from 'bootstrap';
 import { LoginComponent } from './login/login.component';
 
 @NgModule({

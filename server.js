@@ -3,6 +3,9 @@ const express = require('express');
 const path = require('path');
 const mysql = require('mysql');
 const app = express();
+var bodyParser = require('body-parser');
+
+
 
 //Database Connections
 var con = mysql.createConnection({
@@ -12,6 +15,9 @@ var con = mysql.createConnection({
   database: "cps731db",
   port: "3306"
 });
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 //Handles MySQL connections and timeout which cant reconnect cause fatal error.
 function handleConnection(){
@@ -42,9 +48,12 @@ handleConnection();
 app.use(express.static(__dirname + '/dist/RAMSS2'));
 
 app.get('/*', function(req,res) {
-    
-res.sendFile(path.join(__dirname+'/dist/RAMSS2/index.html'));
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "X-Requested-With");
+	res.sendFile(path.join(__dirname+'/dist/RAMSS2/index.html'));
 });
+
+/*GET COURSE DATA*/
 app.post('/loadCourses', function (headers, res){
 	var query = "SELECT * FROM Courses, Enrolled WHERE (Courses.CourseCode = Enrolled.CourseCode AND StudentNo = '5001112222')";
 	con.query(query, function(err, result){
@@ -52,12 +61,13 @@ app.post('/loadCourses', function (headers, res){
 			console.log(err);
 		}
 		else{
-			console.log(result);
+			//console.log(result);
 			res.send(result)
 		}
 	});
 });
 
+/*GET ACCOUNT INFO*/
 app.post('/loadAccount', function (headers, res){
 	var query = "SELECT Balance, Fees FROM Users WHERE StudentNo = '5001112222'";
 	con.query(query, function(err, result){
@@ -74,6 +84,7 @@ app.post('/loadAccount', function (headers, res){
 	});
 });
 
+/*GET TUITION*/
 app.post('/loadTuition', function (headers, res){
 	var query = "Select Grants, RSU, RAC, Printing, Health from Tuition WHERE StudentNo = '5001112222'";
 	con.query(query, function(err, result){
@@ -92,6 +103,7 @@ app.post('/loadTuition', function (headers, res){
 	});
 });
 
+/*GET ANCILLARY FEES*/
 app.post('/loadAncFees', function (headers, res){
 	var query = "SELECT * FROM AncFees WHERE StudentNo = '5001112222'";
 	var query2 = "SELECT * FROM AncFeesDesc";
@@ -100,7 +112,7 @@ app.post('/loadAncFees', function (headers, res){
 			console.log(err);
 		}
 		else{
-			//console.log(result);
+			console.log(result);
 			con.query(query2, function(err, result2){
 				if (err){
 					console.log(err);
@@ -111,6 +123,66 @@ app.post('/loadAncFees', function (headers, res){
 				}
 			});
 			
+		}
+	});
+});
+
+//Get Payments Made
+app.post('/loadPaymentsMade', function (headers, res){
+	var query = "SELECT * FROM PaymentsMade WHERE StudentNo = '5001112222'";
+	con.query(query, function(err, result){
+		if (err){
+			console.log(err);
+		}
+		else{
+			res.send(result);
+		}
+	});
+});
+
+
+
+
+/*ACCOUNT MANAGEMENT FUNCTIONS*/
+app.post('/OptIn', function (req, res){
+	var query = "UPDATE AncFees SET "+req.body.name+"= 1 WHERE StudentNo = '5001112222'";
+	con.query(query, function(err, result){
+		if (err){
+			console.log(err);
+		}
+		else{
+			var query2 = "UPDATE Users SET Fees = Fees + (SELECT Cost from AncFeesDesc WHERE AncFee = '"+req.body.name+"') WHERE StudentNo = '5001112222'"; 
+			con.query(query2, function(err, result){
+				if (err){
+					console.log(err);
+				}
+				else{
+					res.send("done");
+				}
+			});
+			
+		}
+	});
+});
+
+
+app.post('/OptOut', function (req, res){
+	var query = "UPDATE AncFees SET "+req.body.name+"= 0 WHERE StudentNo = '5001112222'";
+	con.query(query, function(err, result){
+		if (err){
+			console.log(err);
+		}
+		else{
+			var query2 = "UPDATE Users SET Fees = Fees - (SELECT Cost from AncFeesDesc WHERE AncFee = '"+req.body.name+"') WHERE StudentNo = '5001112222'"; 
+			con.query(query2, function(err, result){
+				if (err){
+					console.log(err);
+				}
+				else{			
+					res.send("done");
+				}
+			});
+
 		}
 	});
 });
