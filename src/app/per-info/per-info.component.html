@@ -3,9 +3,12 @@
 
     <form id="personalForm" class="col-sm-9">
         <div class="form-group" *ngFor="let personalInfo of info">
-            <label for="personalInfo.fieldName">{{personalInfo.fieldName}}</label>
-                <input *ngIf=personalInfo.modifiable type="text" class="form-control" id=personaInfo.fieldName value="" placeholder="" required />
-                <input *ngIf=!personalInfo.modifiable type="text" class="form-control" id=personaInfo.fieldName value="Name of user here" placeholder="" required readonly />
+            <label for={{personalInfo}}>{{personalInfo}}</label>
+                <input *ngIf="personalInfo === 'First name' || personalInfo === 'Last name'" type="text" class="form-control" id={{personalInfo}} value="{{personalInfo}} of user here" placeholder="" required readonly />
+                <input *ngIf="personalInfo === 'Address'" type="text" class="form-control" id={{personalInfo}} value="" placeholder="1234 Church St." required />
+                <input *ngIf="personalInfo === 'Phone number'" type="text" class="form-control" id={{personalInfo}} value="" placeholder="416-553-2332" required />
+                <input *ngIf="personalInfo === 'Email'" type="text" class="form-control" id={{personalInfo}} value="" placeholder="student@ryerson.ca" required />
+                <input *ngIf="personalInfo === 'Emergency contact'" type="text" class="form-control" id={{personalInfo.fieldName}} value="" placeholder="Name, Phone #" required />
         </div>
 
         <button type="submit" class="btn btn-primary">Save changes</button>
