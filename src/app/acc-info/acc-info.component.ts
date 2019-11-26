@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {ancillaryFee} from './ancFee';
+import {mandatoryFee} from './manFee';
+import {courseFee} from './courseFee';
 
 @Component({
   selector: 'app-acc-info',
@@ -10,14 +13,20 @@ export class AccInfoComponent implements OnInit {
   public accBalance: string = "";
   public schoolFees: string = "";
   public balanceOwing: string = "";
-  public courseFees: string = "";
+  public courseFees: number;
+  
   public grants: string = "";
+  
   public comFees: string = "";
-  public RSU: string = "";
-  public RAC: string = "";
-  public Printing: string = "";
-  public Health: string = "";
-  public ancFees: string = "";
+  public ancFees: number;
+  
+  public manObjects = [];
+  public ancObjects = [];
+  public courseObjects = [];
+  
+  public courseFee : courseFee; 
+  public ancFee : ancillaryFee; 
+  public manFee : mandatoryFee; 
   constructor() { }
 
   ngOnInit() {
@@ -37,15 +46,70 @@ export class AccInfoComponent implements OnInit {
 	  
 	  $.ajax({
 			method: 'post',
+			url: '/loadCourses',
+			contentType: 'application/json',
+			success: (data) => {
+				for (var i in data){
+					this.courseFee = new courseFee(data[i].CourseCode, data[i].Cost);
+					this.courseObjects.push(this.courseFee);
+				}
+				this.courseFees = 0;
+				for (var i in this.courseObjects){
+					this.courseFees = this.courseFees + this.courseObjects[i].cost;
+				}
+			},
+			error: function() {
+				console.log("Failed to Retrieve data");
+			}
+	  })
+	  
+	  $.ajax({
+			method: 'post',
 			url: '/loadTuition',
 			contentType: 'application/json',
 			success: (data) => {
-				this.grants = "$" + data[0][0].Grants.toString();
-				this.comFees = "$" + data[1].toString();
-				this.RSU = "$" +data[0][0].RSU.toString();
-				this.RAC = "$" +data[0][0].RAC.toString();
-				this.Printing = "$" +data[0][0].Printing.toString();
-				this.Health = "$" +data[0][0].Health.toString();
+				var fees = data[0][0]; //A Student's Mandatory Fees.
+				
+				for (var key in fees) {
+					if(key !="Grants"){
+						this.manFee = new mandatoryFee(key, fees[key]);
+						this.manObjects.push(this.manFee);
+					}
+				}
+				
+				this.grants = data[0][0].Grants.toString();				
+				this.comFees = data[1].toString();
+			},
+			error: function() {
+				console.log("Failed to Retrieve data");
+			}
+	  })
+	  
+	  $.ajax({
+			method: 'post',
+			url: '/loadAncFees',
+			contentType: 'application/json',
+			success: (result) => {
+				var stuAnc = result[0][0]; //A Student's Ancilary Fees.
+				var ancData = result[1]; //The data for all ancilaries in the system.
+				
+				for (var key in stuAnc) {
+					if (key != "StudentNo"){
+						this.ancFee = new ancillaryFee(key, stuAnc[key], "", 0);
+						this.ancObjects.push(this.ancFee); 
+					}
+				}
+				
+				for (var i in ancData){
+					this.ancObjects[i].description = ancData[i].Description;
+					this.ancObjects[i].cost = ancData[i].Cost;
+				}
+		
+				this.ancFees = 0;
+				for (var i in this.ancObjects){
+					this.ancFees = this.ancFees + this.ancObjects[i].cost;
+				}
+		
 			},
 			error: function() {
 				console.log("Failed to Retrieve data");
