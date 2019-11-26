@@ -49,8 +49,8 @@ export class RequestsComponent implements OnInit {
   }
   
   setInfo3(){
-	this.infoHeader = "Confirmation of Graduation Status Letter - Verifies that you have officially graduated including year of graduation, degree/diploma/certificate and program. ";
-	this.infoBody = "-";
+	this.infoHeader = "Confirmation of Graduation Status Letter";
+	this.infoBody = "Verifies that you have officially graduated including year of graduation, degree/diploma/certificate and program. ";
 	this.infoFooter = "Charge per Letter: Free of charge";
 	this.cRequest = "Confirmation of Graduation Status Letter";
   }
@@ -63,8 +63,8 @@ export class RequestsComponent implements OnInit {
   }
   
   setInfo5(){
-	this.infoHeader = "Jury Duty Letter - Current students must login to their Student Center via RAMSS to request a letter verifying student status, for exemption from Jury Duty. "
-	this.infoBody = "-";
+	this.infoHeader = "Jury Duty Letter"
+	this.infoBody = "Current students must login to their Student Center via RAMSS to request a letter verifying student status, for exemption from Jury Duty.";
 	this.infoFooter = "Charge per Letter: Free of charge";
 	this.cRequest = "Jury Duty Letter";
   }
