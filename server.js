@@ -3,11 +3,12 @@ const express = require('express');
 const path = require('path');
 const mysql = require('mysql');
 const app = express();
+//Body Parser required for Angular when sending info w/POST requests.
 var bodyParser = require('body-parser');
 
 var date = new Date();
 var lastYear = date.getFullYear() - 1;
-
+var allowedTerm = "W20";
 
 //Database Connections
 var con = mysql.createConnection({
@@ -21,7 +22,7 @@ var con = mysql.createConnection({
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-//Handles MySQL connections and timeout which cant reconnect cause fatal error.
+//Handles MySQL connections and timeout when it cannot reconnect because of fatal errors.
 function handleConnection(){
 	console.log("Connecting to MySQL.. Please wait for connection response..");
 	con.connect(function(err) {
@@ -43,6 +44,7 @@ function handleConnection(){
 	});
 }
 
+//Makes the MySQL connection.
 handleConnection();
 
 
@@ -55,7 +57,7 @@ app.get('/*', function(req,res) {
 	res.sendFile(path.join(__dirname+'/dist/RAMSS2/index.html'));
 });
 
-/*GET LOGIN*/
+/*Checks client's LOGIN info to match user and pass on db. Returns info for a cookie.*/
 app.post('/loadLogin', function (req, res){
 	var query = "SELECT StudentNo from Logins where Username = '"+req.body.username +"' AND Password = '"+req.body.password+"'";
 	con.query(query, function(err, result){
@@ -68,7 +70,7 @@ app.post('/loadLogin', function (req, res){
 	});
 });
 
-/*GET COURSE DATA*/
+/*GET client's COURSE DATA*/
 app.post('/loadCourses', function (headers, res){
 	var query = "SELECT * FROM Courses, Enrolled WHERE (Courses.CourseCode = Enrolled.CourseCode AND StudentNo = '5001112222')";
 	con.query(query, function(err, result){
@@ -83,7 +85,7 @@ app.post('/loadCourses', function (headers, res){
 });
 
 
-/*GET USER INFO*/
+/*GET USER INFO for client*/
 app.post('/loadUser', function (headers, res){
 	var query = "SELECT * FROM Users WHERE StudentNo = '5001112222'";
 	con.query(query, function(err, result){
@@ -97,7 +99,7 @@ app.post('/loadUser', function (headers, res){
 });
 
 
-/*GET ACCOUNT INFO*/
+/*GET client's ACCOUNT INFO*/
 app.post('/loadAccount', function (headers, res){
 	var query = "SELECT Balance, Fees FROM Users WHERE StudentNo = '5001112222'";
 	con.query(query, function(err, result){
@@ -114,7 +116,7 @@ app.post('/loadAccount', function (headers, res){
 	});
 });
 
-/*GET TUITION*/
+/*GET client's TUITION*/
 app.post('/loadTuition', function (headers, res){
 	var query = "Select Grants, RSU, RAC, Printing, Health from Tuition WHERE StudentNo = '5001112222'";
 	con.query(query, function(err, result){
@@ -133,7 +135,7 @@ app.post('/loadTuition', function (headers, res){
 	});
 });
 
-/*GET ANCILLARY FEES*/
+/*GET client's ANCILLARY FEES*/
 app.post('/loadAncFees', function (headers, res){
 	var query = "SELECT * FROM AncFees WHERE StudentNo = '5001112222'";
 	var query2 = "SELECT * FROM AncFeesDesc";
@@ -157,7 +159,7 @@ app.post('/loadAncFees', function (headers, res){
 	});
 });
 
-//Get Payments Made
+//Get client's Payments Made
 app.post('/loadPaymentsMade', function (headers, res){
 	var query = "SELECT * FROM PaymentsMade WHERE StudentNo = '5001112222'";
 	con.query(query, function(err, result){
@@ -170,7 +172,7 @@ app.post('/loadPaymentsMade', function (headers, res){
 	});
 });
 
-//Get Grades
+//Get client's Grades
 app.post('/loadGrades', function (headers, res){
 	var query = "SELECT * FROM Grades WHERE StudentNo = '5001112222' ORDER BY Year DESC";
 	con.query(query, function(err, result){
@@ -183,7 +185,7 @@ app.post('/loadGrades', function (headers, res){
 	});
 });
 
-//Get Requests
+//Get client's ongoing document requests from db.
 app.post('/loadRequests', function (headers, res){
 	var query = "SELECT * FROM Requests WHERE StudentNo = '5001112222' ORDER BY Date DESC";
 	con.query(query, function(err, result){
@@ -199,6 +201,8 @@ app.post('/loadRequests', function (headers, res){
 
 
 /*ACCOUNT MANAGEMENT FUNCTIONS*/
+
+//Opts into an ancillary fee, provided the name.
 app.post('/OptIn', function (req, res){
 	var query = "UPDATE AncFees SET "+req.body.name+"= 1 WHERE StudentNo = '5001112222'";
 	con.query(query, function(err, result){
@@ -220,7 +224,7 @@ app.post('/OptIn', function (req, res){
 	});
 });
 
-
+//Opts out of an ancillary fee, provided the name.
 app.post('/OptOut', function (req, res){
 	var query = "UPDATE AncFees SET "+req.body.name+"= 0 WHERE StudentNo = '5001112222'";
 	con.query(query, function(err, result){
@@ -242,7 +246,7 @@ app.post('/OptOut', function (req, res){
 	});
 });
 
-/*Requests*/
+/*Inserts a document request to the db.*/
 app.post('/Request', function (req, res){
 	dateString = date.getFullYear() +"/"+(parseInt(date.getMonth())+1).toString()+"/"+date.getDate();
 	var query = "INSERT INTO Requests (StudentNo, Type, Date, Status) VALUES('5001112222', '"+req.body.type+"','"+dateString+"','Pending')";
@@ -258,20 +262,14 @@ app.post('/Request', function (req, res){
 	});
 });
 
-/*query COURSES*/
+/*Query the db for courses that meet the criteria*/
 app.post('/queryCourses', function (req, res){
-	if (req.body.openyn == true){
-		var query = "SELECT * FROM Courses, CourseAvailability WHERE Courses.CourseCode = CourseAvailability.CourseCode\
-		AND Courses.CourseCode = '"+req.body.faculty+req.body.courseNum+"' AND CourseAvailability.SeatsOpen > SeatsTaken\
-		AND Term = '"+req.body.term+"'";
-		console.log(query);
-	}
-	else{
-		var query = "SELECT * FROM Courses, CourseAvailability WHERE Courses.CourseCode = CourseAvailability.CourseCode\
-		AND Courses.CourseCode = '"+req.body.faculty+req.body.courseNum+"' AND Term = '"+req.body.term+"'";
-		console.log(query);
-	}
+	//console.log(req.body.openyn);
+	//console.log(req.body.courseNum);
+	//console.log(req.body.faculty);
+	//console.log(req.body.term);
 	
+	var query = makeQuery(req.body.openyn, req.body.courseNum, req.body.term, req.body.faculty);
 	con.query(query, function(err, result){
 		if (err){
 			console.log(err);
@@ -283,11 +281,34 @@ app.post('/queryCourses', function (req, res){
 	});
 });
 
-
+//Make the query with client selected options.
+function makeQuery(openyn, courseNum, term, faculty){
+	if (openyn == true && courseNum != ""){
+		var query = "SELECT * FROM Courses, CourseAvailability WHERE Courses.CourseCode = CourseAvailability.CourseCode\
+		AND Courses.CourseCode = '"+faculty+courseNum+"' AND CourseAvailability.SeatsOpen > SeatsTaken\
+		AND Term = '"+term+"'";
+		return query;
+	}
+	else if(openyn == false && courseNum != ""){
+		var query = "SELECT * FROM Courses, CourseAvailability WHERE Courses.CourseCode = CourseAvailability.CourseCode\
+		AND Courses.CourseCode = '"+faculty+courseNum+"' AND Term = '"+term+"'";
+		return query;
+	}
+	else if(openyn == true && courseNum == ""){
+		var query = "SELECT * FROM Courses, CourseAvailability WHERE Courses.CourseCode = CourseAvailability.CourseCode\
+		AND Courses.Faculty ='"+faculty+"' AND CourseAvailability.SeatsOpen > SeatsTaken\
+		AND Term = '"+term+"'";
+		return query;
+	}
+	else{
+		var query = "SELECT * FROM Courses, CourseAvailability WHERE Courses.CourseCode = CourseAvailability.CourseCode\
+		AND Courses.Faculty = '"+faculty+"' AND Term = '"+term+"'";
+		return query;
+	}
+}
 
 
 // Start the app by listening on the default Heroku port
 var server = app.listen(process.env.PORT || 8080, function () {
     console.log('Node server is running at localhost:8080 (THIS IS NOT MYSQL, KEEP WAITING)');
-	//console.log(lastYear);
 });
