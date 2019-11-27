@@ -28,7 +28,7 @@ export class ManageCoursesComponent implements OnInit {
   public sYear:number = 20;
   
   //For keeping track of selected items
-  public termSelected:string = "You must select a term to begin.";
+  public termSelected:string = "None. You must select a term to begin.";
   public yearSelected:number;
   
   //For showing and hiding the condition for a term to be selected.
@@ -47,8 +47,7 @@ export class ManageCoursesComponent implements OnInit {
   public dropButton: boolean = true;
   public seats:boolean = true;
   
-  
-  public swap1:string;
+  public swap1;
   
   ngOnInit() {
 	this.fallYear = 2019;
@@ -109,7 +108,7 @@ export class ManageCoursesComponent implements OnInit {
     })
   }
   
-  //Get current courses from DB.
+  //Get current courses from DB, filter the ones that can be swapped and put it into the modal.
   loadmCourses(){
 	$.ajax({
 		method: 'post',
@@ -118,12 +117,14 @@ export class ManageCoursesComponent implements OnInit {
 		success: (data) => {
 			this.mcourseObjects = [];
 			for (var i in data){
-				var cCourse = new curCourse(data[i].CourseCode, data[i].Faculty, data[i].Cost, data[i].Credit, 
-				data[i].Professor, data[i].LectureDates, data[i].LabDates, data[i].ExamDates, data[i].Term);
-				this.mcourseObjects.push(cCourse);
-				$('#swapModal').modal('show');
-				console.log(this.mcourseObjects);
+				if(this.allowedYears.includes(data[i].Term) == true){
+					var cCourse = new curCourse(data[i].CourseCode, data[i].Faculty, data[i].Cost, data[i].Credit, 
+					data[i].Professor, data[i].LectureDates, data[i].LabDates, data[i].ExamDates, data[i].Term);
+					this.mcourseObjects.push(cCourse);
+				}
 			}
+			$('#swapModal').modal('show');
+			console.log(this.mcourseObjects);
 		},
 		error: function() {
 			console.log("Failed to Retrieve data");
@@ -131,6 +132,7 @@ export class ManageCoursesComponent implements OnInit {
     })
   }
   
+  //Loads the terms.
   loadTerms(){
 	 $.ajax({
 		method: 'post',
@@ -185,32 +187,46 @@ export class ManageCoursesComponent implements OnInit {
 	}
   }
   
+  
+  //Requests server to add courses.
   addCourses(index){
-	$.ajax({
-		method: 'post',
-		url: '/addCourses',
-		contentType: 'application/json',
-		data: JSON.stringify({coursecode: this.courseObjects[index].coursecode}),
-		success: (data) => {
-			//console.log(data);
-			this.changeSuccessAlert("Course Successfully Added!");
-		},
-		error: function() {
-			console.log("Failed to Retrieve data");
-		}
-	})  
+	if (this.checkAvailable(this.courseObjects[index]) == true){ 
+		$.ajax({
+			method: 'post',
+			url: '/addCourses',
+			contentType: 'application/json',
+			data: JSON.stringify({coursecode: this.courseObjects[index].coursecode}),
+			success: (data) => {
+				if(data == "success"){
+					this.changeSuccessAlert("Course Successfully Added!");
+				}
+				else if (data == "duplicate entry"){
+					this.changeAlert("You are already enrolled in this course.");
+				}
+			},
+			error: function() {
+				console.log("Failed to Retrieve data");
+			}
+		})  
+	}
+	else {
+		this.changeAlert("This course is full.");
+	}
   }
   
+  
+  //Requests server to drop courses.
   dropCourses(index){
+	var cc = this.courseObjects[index].coursecode;
 	if(this.validateAvailability(index)==true){
 		$.ajax({
 			method: 'post',
 			url: '/dropCourses',
 			contentType: 'application/json',
-			data: JSON.stringify({coursecode: "CPS847"}),
+			data: JSON.stringify({coursecode: cc}),
 			success: (data) => {
-				//console.log(data);
 				this.loadCourses();
+				this.changeSuccessAlert("Course successfully dropped!");
 			},
 			error: function() {
 				console.log("Failed to Retrieve data");
@@ -221,20 +237,56 @@ export class ManageCoursesComponent implements OnInit {
 	}
   }
   
+  
+  //Checks if courses can be swapped.
   displayswapCourses(index){
+	this.hideAlerts();
 	if(this.validateAvailability(index)==true){
-		this.swap1 = this.courseObjects[index].coursecode;
+		this.swap1 = this.courseObjects[index];
 		this.loadmCourses();
 	}else{
 		this.changeAlert("The period for swapping a course in the current term has passed.");
 	}
   }
   
+  
+  //Requests server to swap courses.
   swapCourse(index){
-	console.log(this.swap1);
-	console.log(index);
-	  
+	var codedrop = this.mcourseObjects[index].coursecode;
+	var codeadd = this.swap1.coursecode;
+	var ca = this.checkAvailable(this.swap1);
+	
+	if(codedrop != codeadd && ca == true){
+		$.ajax({
+			method: 'post',
+			url: '/swapCourses',
+			contentType: 'application/json',
+			data: JSON.stringify({codeadd:codeadd, codedrop:codedrop}),
+			success: (data) => {
+				//console.log(data);
+				$('#swapModal').modal('hide');
+				this.changeSuccessAlert("Courses successfully swapped!");
+			},
+			error: function() {
+				console.log("Failed to Retrieve data");
+			}
+		})    
+	}
+	else if (ca == false){
+		$('#swapModal').modal('hide');
+		this.changeAlert("This course is full.");
+	}
+	else{
+		$('#swapModal').modal('hide');
+		this.changeAlert("You are already enrolled in this course.");
+	}
   }
+  
+  
+  
+    
+  
+  //Helper methods
   
   //Returns true if a course is available to be dropped in the current term.
   validateAvailability(index){
@@ -245,7 +297,6 @@ export class ManageCoursesComponent implements OnInit {
 		return false;
 	}
   }
-  
   
   turnOffASD(){
 	this.addButton = false;
@@ -277,12 +328,14 @@ export class ManageCoursesComponent implements OnInit {
    }
 	
 	changeAlert(message){
+		this.hideAlerts();
 		this.failureMsg = message;
 		this.showFailure = true;
 		window.scrollBy(0,-10000);
 	}
 	
 	changeSuccessAlert(message){
+		this.hideAlerts();
 		this.successMsg = message;
 		this.showSuccess = true;
 		window.scrollBy(0,-10000);
@@ -295,6 +348,16 @@ export class ManageCoursesComponent implements OnInit {
 	hideAlerts(){
 		this.showFailure = false;
 		this.showSuccess = false;
+	}
+	
+	checkAvailable(a){
+		if(a.seatsopen - a.seatstaken > 0){
+			return true;
+		}
+		else {
+			return false;
+		}
+		
 	}
 	
 }

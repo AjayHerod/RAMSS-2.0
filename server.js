@@ -281,23 +281,23 @@ app.post('/queryCourses', function (req, res){
 	});
 });
 
+//Transaction to add courses.
 app.post('/addCourses', function (req, res){
 	var cc = req.body.coursecode;
-	console.log(cc);
 	
 	var query = "INSERT INTO Enrolled(CourseCode, StudentNo) VALUES('"+cc+"','5001112222'"+")";
 	var query2 = "UPDATE Users SET Fees = Fees + (SELECT Cost FROM Courses WHERE CourseCode = '"+cc+"') WHERE StudentNo = '5001112222'";
-
-	console.log(query);
+	var query3 = "UPDATE CourseAvailability SET SeatsTaken = (SeatsTaken + 1) WHERE CourseCode = '"+cc+"'";
 
 	con.beginTransaction(function(err) {
 		con.query(query, function(err, result){
 			if (err){
-				console.log(err);
+				console.log(result);
 				con.rollback(function() {
-					//throw err;
+					res.send("duplicate entry");
 				});
-			}			
+			}
+			else{
 			con.query(query2, function(err, result){
 				if (err){
 					console.log(err);
@@ -305,29 +305,41 @@ app.post('/addCourses', function (req, res){
 						//throw err;
 					});
 				}
-				con.commit(function(err) {
-					if (err) { 
-					  console.log(err);
-					  con.rollback(function() {
-						//throw err;
-					  });
+				else{
+				con.query(query3, function(err, result){
+					if (err){
+						console.log(err);
+						con.rollback(function() {
+							//throw err;
+						});
 					}
-					console.log('success!');
-					res.send("success");
+					else{
+					con.commit(function(err) {
+						if (err) { 
+						  console.log(err);
+						  con.rollback(function() {
+							//throw err;
+						  });
+						}
+						console.log('success!');
+						res.send("success");
+					});
+					}
 				});
+				}
 			});
+			}
 		});
 	});
 });
 
+//Transaction to drop courses
 app.post('/dropCourses', function (req, res){
 	var cc = req.body.coursecode;
-	console.log(cc);
 	
 	var query = "DELETE FROM Enrolled WHERE CourseCode = '"+cc+"' AND StudentNo = '5001112222'";
 	var query2 = "UPDATE Users SET Fees = Fees - (SELECT Cost FROM Courses WHERE CourseCode = '"+cc+"') WHERE StudentNo = '5001112222'";
-
-	console.log(query);
+	var query3 = "UPDATE CourseAvailability SET SeatsTaken = (SeatsTaken - 1) WHERE CourseCode = '"+cc+"'";
 
 	con.beginTransaction(function(err) {
 		con.query(query, function(err, result){
@@ -338,7 +350,6 @@ app.post('/dropCourses', function (req, res){
 				});
 			}
 			else{
-			console.log(result.affectedRows);
 			con.query(query2, function(err, result){
 				if (err){
 					console.log(err);
@@ -346,22 +357,118 @@ app.post('/dropCourses', function (req, res){
 						//throw err;
 					});
 				}
-				con.commit(function(err) {
-					if (err) { 
-					  console.log(err);
-					  con.rollback(function() {
+				else{
+				con.query(query3, function(err, result){
+				if (err){
+					console.log(err);
+					con.rollback(function() {
 						//throw err;
-					  });
-					}
-					console.log('success!');
-					res.send("success");
+					});
+				}
+				else{
+					con.commit(function(err) {
+						if (err) { 
+						  console.log(err);
+						  con.rollback(function() {
+							//throw err;
+						  });
+						}
+						console.log('success!');
+						res.send("success");
+					});
+				}
 				});
+				}
 			});
 			}
 		});
 	});
 });
 
+//Transaction to swap courses.
+app.post('/swapCourses', function (req, res){	
+	var cc = req.body.codedrop;
+	var cc2 = req.body.codeadd;
+
+	var query = "DELETE FROM Enrolled WHERE CourseCode = '"+cc+"' AND StudentNo = '5001112222'";
+	var query2 = "UPDATE Users SET Fees = Fees - (SELECT Cost FROM Courses WHERE CourseCode = '"+cc+"') WHERE StudentNo = '5001112222'";
+	var query3 = "INSERT INTO Enrolled(CourseCode, StudentNo) VALUES('"+cc2+"','5001112222'"+")";
+	var query4 = "UPDATE Users SET Fees = Fees + (SELECT Cost FROM Courses WHERE CourseCode = '"+cc2+"') WHERE StudentNo = '5001112222'";
+	var query5 = "UPDATE CourseAvailability SET SeatsTaken = (SeatsTaken - 1) WHERE CourseCode = '"+cc+"'";
+	var query6 = "UPDATE CourseAvailability SET SeatsTaken = (SeatsTaken + 1) WHERE CourseCode = '"+cc2+"'";
+	con.beginTransaction(function(err) {
+		con.query(query, function(err, result){
+			if (err){
+				console.log(err);
+				con.rollback(function() {
+					//throw err;
+				});
+			}
+			else{
+			con.query(query2, function(err, result){
+				if (err){
+					console.log(err);
+					con.rollback(function() {
+						//throw err;
+					});
+				}
+				else{
+				con.query(query3, function(err, result){
+					if (err){
+						console.log(err);
+						con.rollback(function() {
+							//throw err;
+						});
+					}
+					else{
+					con.query(query4, function(err, result){
+						if (err){
+							console.log(err);
+							con.rollback(function() {
+								//throw err;
+							});
+						}
+						else{
+						con.query(query5, function(err, result){
+							if (err){
+								console.log(err);
+								con.rollback(function() {
+									//throw err;
+								});
+							}
+							else{
+							con.query(query6, function(err, result){
+								if (err){
+									console.log(err);
+									con.rollback(function() {
+										//throw err;
+									});
+								}
+								else{
+								con.commit(function(err) {
+									if (err) { 
+									  console.log(err);
+									  con.rollback(function() {
+										//throw err;
+									  });
+									}
+									console.log('success!');
+									res.send("success");
+								});
+								}
+							});
+							}
+						});
+						}
+					});
+					}
+				});
+				}
+			});
+			}
+		});
+	});
+});
 
 
 

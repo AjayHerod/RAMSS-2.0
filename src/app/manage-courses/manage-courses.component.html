@@ -15,10 +15,11 @@
         </button>
       </div>
       <div class="modal-body">
+	  If no courses are showing, you have no courses available to drop.
 		<table class="w-100">
 		  <tr>
-			<th>Term</th>
-			<th>Payment</th>
+			<th>Course</th>
+			<th>Selection</th>
 		  </tr>
 		  <tr *ngFor = "let course of mcourseObjects; let i = index;">
 			<td>{{course.coursecode}} </td>
