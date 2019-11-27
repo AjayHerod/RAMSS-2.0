@@ -14,7 +14,7 @@ import * as $ from 'jquery';
 import * as bootstrap from 'bootstrap';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
-import { ScheduleModule, RecurrenceEditorModule, DayService, WeekService, WorkWeekService, MonthService, MonthAgendaService } from '@syncfusion/ej2-angular-schedule';
+import { ScheduleModule, RecurrenceEditorModule, DayService, WeekService, MonthService } from '@syncfusion/ej2-angular-schedule';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,7 @@ import { ScheduleModule, RecurrenceEditorModule, DayService, WeekService, WorkWe
 	FormsModule,
 	ScheduleModule, RecurrenceEditorModule  
   ],
-  providers: [DayService, WeekService, WorkWeekService, MonthService, MonthAgendaService],
+  providers: [DayService, WeekService, MonthService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

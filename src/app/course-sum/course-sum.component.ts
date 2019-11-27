@@ -1,15 +1,18 @@
 import { Component, OnInit, } from '@angular/core';
-import {} from '@angular/cli';
-import { Schedule } from '@syncfusion/ej2-schedule';
+import { EventSettingsModel, DayService, WeekService, MonthService } from '@syncfusion/ej2-angular-schedule';
 
 @Component({
 	selector: 'app-course-sum',
+	providers: [DayService, WeekService, MonthService], 
   templateUrl: './course-sum.component.html',
   styleUrls: ['./course-sum.component.css']
 })
 export class CourseSumComponent implements OnInit {
 
   constructor() { }
+
+	public scheduleViews = ['Day','Week', 'Month'];
+	public workWeekDays: number[]= [1, 2, 3, 4, 5];
 
   public currentYear = 2019; //default
   public currentSemester = "Fall"; //default
