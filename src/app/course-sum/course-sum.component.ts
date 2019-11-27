@@ -149,6 +149,8 @@ export class CourseSumComponent implements OnInit {
 			success: (data) => {
 				console.log(data);
 				for (var i in data){
+					if(data[i].Term == "F19")
+					{
 					var c = new course(data[i].CourseCode, data[i].Faculty, data[i].Cost, 
 					data[i].Credit, data[i].Professor, data[i].LectureDates, data[i].LabDates, 
 					data[i].ExamDates, data[i].Term, data[i].EnrollID, data[i].StudentNo);
@@ -156,20 +158,8 @@ export class CourseSumComponent implements OnInit {
 					console.log(c);
 					this.courseObjectsCount++;
 					this.pushLectureObjects(data[i].LectureDates, data[i].LabDates, data[i].CourseCode, data[i].Faculty, data[i].Professor);
+					}
 				}
-				if(data[i].Term.substring(0,1) == "F")
-				{
-					this.currentSemester = "Fall";
-				}
-				else if(data[i].Term.substring(0,1) == "W")
-				{
-					this.currentSemester = "Winter";
-				}
-				else 
-				{
-					this.currentSemester = "Summer";
-				}
-				this.currentYear = "20" + data[i].Term.substring(1,3);
 				this.displayLecturesLabs();
 			},
 			error: function() {
