@@ -498,6 +498,26 @@ function makeQuery(openyn, courseNum, term, faculty){
 	}
 }
 
+//Update user profile
+app.post('/updateProfile', function (req, res){
+	var address = req.body.address;
+	var phone = req.body.phonenum;
+	var email = req.body.email;
+	var emergencycontact = req.body.emergencycontact;
+	
+	var query = "UPDATE Users SET "+"Address = '"+address+"'"+",PhoneNumber = '"+phone+"'"+",Email = '"+email+"'"+",EmergencyContact = '"+emergencycontact+"' WHERE StudentNo = '5001112222'";
+	console.log(query);
+	con.query(query, function(err, result){
+		if (err){
+			console.log(err);
+		}
+		else{
+			res.send("success");
+		}
+	});
+});
+
+
 
 app.post('/getTerms', function (req, res){
 	res.send(allowedTerms);
