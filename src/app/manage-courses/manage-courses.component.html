@@ -3,29 +3,29 @@
 		<div class="col-md-3">
 			<button id="fallButton" class="btn btn-warning w-100 mb-10" (click) = "chooseFall()">Fall {{fallYear}}</button>
 			<button id="winterButton" class="btn btn-warning w-100 mb-10" (click) = "chooseWinter()">Winter {{winterYear}}</button>
-			<button id="summerButton" class="btn btn-warning w-100 mb-10" (click) = "chooseSummer()">Summer {{summerYear}}</button>
+			<button id="summerButton" class="btn btn-warning w-100 mb-10" (click) = "chooseSummer()">Spring/Summer {{summerYear}}</button>
 			
 			<div class="input-group input-group-sm mb-3 mu-10">
 			  <div class="input-group-prepend">
-				<span class="input-group-text" id="inputGroup-sizing-sm">Subject</span>
+				<span class="input-group-text" >Subject</span>
 			  </div>
-			  <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+			  <input type="text" class="form-control" id="subject" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
 			</div>
 			<div class="input-group input-group-sm mb-3">
 			  <div class="input-group-prepend">
-				<span class="input-group-text" id="inputGroup-sizing-sm">Course Number</span>
+				<span class="input-group-text" >Course Number</span>
 			  </div>
-			  <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+			  <input type="text" class="form-control" id="courseNum" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
 			</div>
 			
 			<div class="form-check">
-			  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+			  <input class="form-check-input" type="checkbox" id="check1">
 			  <label class="form-check-label" for="defaultCheck1">
 				Open Courses Only
 			  </label>
 			</div>
 			<br/>
-			<button class="btn btn-dark">
+			<button class="btn btn-dark" (click)="queryCourses()">
 				Search
 			</button>
 			
@@ -33,7 +33,27 @@
 		
 		<div class="col-md-9">
 			<div class="card course-container">
-
+				<div class="card" *ngFor= "let course of courseObjects">
+					<div class="card-header bg-blue text-light">
+						{{course.coursecode}}
+					</div>
+					<div class="card-body">
+						<div class="row">
+						<div class="col-md-6">
+							Faculty: {{course.faculty}}<br/>
+							Credit: {{course.credit}}
+						</div>
+						<div class="col-md-6">
+							Professor: {{course.professor}}<br/>
+							Lecture Dates: {{course.lecturedates}}
+						</div>
+						</div>
+					</div>
+					<div class="card-footer">
+						Cost: {{course.cost}}
+					</div>
+				</div>
+				
 			
 			</div>
 		</div>
