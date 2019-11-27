@@ -260,14 +260,16 @@ app.post('/Request', function (req, res){
 
 /*query COURSES*/
 app.post('/queryCourses', function (req, res){
-	console.log(req.body.faculty);
-	console.log(req.body.courseNum);
 	if (req.body.openyn == true){
 		var query = "SELECT * FROM Courses, CourseAvailability WHERE Courses.CourseCode = CourseAvailability.CourseCode\
-		AND Courses.CourseCode = '"+req.body.faculty+req.body.courseNum+"' AND CourseAvailability.SeatsOpen > SeatsTaken";
+		AND Courses.CourseCode = '"+req.body.faculty+req.body.courseNum+"' AND CourseAvailability.SeatsOpen > SeatsTaken\
+		AND Term = '"+req.body.term+"'";
+		console.log(query);
 	}
 	else{
-		
+		var query = "SELECT * FROM Courses, CourseAvailability WHERE Courses.CourseCode = CourseAvailability.CourseCode\
+		AND Courses.CourseCode = '"+req.body.faculty+req.body.courseNum+"' AND Term = '"+req.body.term+"'";
+		console.log(query);
 	}
 	
 	con.query(query, function(err, result){

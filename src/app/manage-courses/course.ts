@@ -10,6 +10,7 @@ constructor(
 	public labdates: string,
 	public examdates: string,
 	public seatstaken: number,
-	public seatsopen: number
+	public seatsopen: number,
+	public term: string
 	){};
 }
