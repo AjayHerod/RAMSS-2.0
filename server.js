@@ -6,6 +6,8 @@ const app = express();
 //Body Parser required for Angular when sending info w/POST requests.
 var bodyParser = require('body-parser');
 
+//ALTER TABLE Enrolled ADD PRIMARY KEY(CourseCode, StudentNo)
+
 var date = new Date();
 var lastYear = date.getFullYear() - 1;
 var allowedTerm = "W20";
@@ -263,23 +265,102 @@ app.post('/Request', function (req, res){
 });
 
 /*Query the db for courses that meet the criteria*/
-app.post('/queryCourses', function (req, res){
-	//console.log(req.body.openyn);
-	//console.log(req.body.courseNum);
-	//console.log(req.body.faculty);
-	//console.log(req.body.term);
-	
+app.post('/queryCourses', function (req, res){	
 	var query = makeQuery(req.body.openyn, req.body.courseNum, req.body.term, req.body.faculty);
 	con.query(query, function(err, result){
 		if (err){
 			console.log(err);
 		}
 		else{
-			console.log(result);
+			//console.log(result);
 			res.send(result)
 		}
 	});
 });
+
+app.post('/addCourses', function (req, res){
+	var cc = req.body.coursecode;
+	console.log(cc);
+	
+	var query = "INSERT INTO Enrolled(CourseCode, StudentNo) VALUES('"+cc+"','5001112222'"+")";
+	var query2 = "UPDATE Users SET Fees = Fees + (SELECT Cost FROM Courses WHERE CourseCode = '"+cc+"') WHERE StudentNo = '5001112222'";
+
+	console.log(query);
+
+	con.beginTransaction(function(err) {
+		con.query(query, function(err, result){
+			if (err){
+				console.log(err);
+				con.rollback(function() {
+					//throw err;
+				});
+			}			
+			con.query(query2, function(err, result){
+				if (err){
+					console.log(err);
+					con.rollback(function() {
+						//throw err;
+					});
+				}
+				con.commit(function(err) {
+					if (err) { 
+					  console.log(err);
+					  con.rollback(function() {
+						//throw err;
+					  });
+					}
+					console.log('success!');
+					res.send("success");
+				});
+			});
+		});
+	});
+});
+
+app.post('/dropCourses', function (req, res){
+	var cc = req.body.coursecode;
+	console.log(cc);
+	
+	var query = "DELETE FROM Enrolled WHERE CourseCode = '"+cc+"' AND StudentNo = '5001112222'";
+	var query2 = "UPDATE Users SET Fees = Fees - (SELECT Cost FROM Courses WHERE CourseCode = '"+cc+"') WHERE StudentNo = '5001112222'";
+
+	console.log(query);
+
+	con.beginTransaction(function(err) {
+		con.query(query, function(err, result){
+			if (err || result.affectedRows == 0){
+				console.log(err);
+				con.rollback(function() {
+					//throw err;
+				});
+			}
+			else{
+			console.log(result.affectedRows);
+			con.query(query2, function(err, result){
+				if (err){
+					console.log(err);
+					con.rollback(function() {
+						//throw err;
+					});
+				}
+				con.commit(function(err) {
+					if (err) { 
+					  console.log(err);
+					  con.rollback(function() {
+						//throw err;
+					  });
+					}
+					console.log('success!');
+					res.send("success");
+				});
+			});
+			}
+		});
+	});
+});
+
+
+
 
 //Make the query with client selected options.
 function makeQuery(openyn, courseNum, term, faculty){

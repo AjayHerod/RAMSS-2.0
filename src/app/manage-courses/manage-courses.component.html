@@ -1,8 +1,8 @@
 <div class="alert alert-danger mu-10" *ngIf = "showFailure" role="alert">
   {{failureMsg}}
 </div>
-
-<div class="container-fluid mu-25">
+<button (click) = "dropCourses()">drop cps847(temp)</button>
+<div class="container-fluid mu-25 mb-25">
 	<div class="row">
 		<div class="col-md-3">
 			<h5 class="mb-10">
@@ -32,19 +32,21 @@
 			  </label>
 			</div>
 			<br/>
-			<button class="btn btn-dark" (click)="queryCourses()" *ngIf = "queryButton">
+			<button class="btn btn-success" (click)="queryCourses()" *ngIf = "queryButton">
 				Search
 			</button>
-			<button class="btn btn-dark disabled" *ngIf = "queryButton == false">
+			<button class="btn btn-success disabled" *ngIf = "queryButton == false">
 				Search
 			</button>
-			
+			<button class="btn btn-primary" (click)="loadCourses()">
+				View my Courses
+			</button>
 		</div>
 		
 		<div class="col-md-9">
 			<div class="card course-container">
 				{{queryMsg}}
-				<div class="card mb-10" *ngFor= "let course of courseObjects">
+				<div class="card mb-10" *ngFor= "let course of courseObjects; let i = index ">
 					<h4 class="card-header bg-blue text-light">
 						{{course.coursecode}}
 					</h4>
@@ -67,13 +69,16 @@
 					<div class="card-footer bg-dark text-light">
 					<div class="row">
 						<div class="col-md-8 mu-5">
-							<h5>Seats: {{course.seatstaken}}/{{course.seatsopen}} </h5>
+							<h5 *ngIf = "seats">Seats: {{course.seatstaken}}/{{course.seatsopen}} </h5>
 						</div>
-						<div class="col-md-2 float-right">
-							<button class=" w-100 btn btn-success">Add</button>
+						<div class="col-md-2 float-right" *ngIf = "addButton">
+							<button class=" w-100 btn btn-success" (click) = "addCourses(i)">Add</button>
 						</div>
-						<div class="col-md-2 float-right">
+						<div class="col-md-2 float-right" *ngIf = "swapButton">
 							<button class="w-100 btn btn-success">Swap</button>
+						</div>
+						<div class="col-md-2 float-right" *ngIf = "dropButton">
+							<button class="w-100 btn btn-success">Drop</button>
 						</div>
 					</div>
 					</div>
