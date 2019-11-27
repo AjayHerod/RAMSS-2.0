@@ -14,6 +14,7 @@ import * as $ from 'jquery';
 import * as bootstrap from 'bootstrap';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
+import { ScheduleModule, RecurrenceEditorModule } from '@syncfusion/ej2-angular-schedule';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
 	HttpClientModule,
     AppRoutingModule,
-	FormsModule  
+	FormsModule,
+	ScheduleModule, RecurrenceEditorModule  
   ],
   providers: [],
   bootstrap: [AppComponent]
