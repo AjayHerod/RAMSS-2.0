@@ -1,8 +1,9 @@
 import { Component, OnInit, } from '@angular/core';
 import {} from '@angular/cli';
+import { Schedule } from '@syncfusion/ej2-schedule';
 
 @Component({
-  selector: 'app-course-sum',
+	selector: 'app-course-sum',
   templateUrl: './course-sum.component.html',
   styleUrls: ['./course-sum.component.css']
 })
