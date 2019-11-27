@@ -2,13 +2,14 @@
 <div class="row mt-4">
 
     <form id="personalForm" class="col-sm-9">
-        <div class="form-group" *ngFor="let personalInfo of info">
-            <label for={{personalInfo}}>{{personalInfo}}</label>
-                <input *ngIf="personalInfo === 'First name' || personalInfo === 'Last name'" type="text" class="form-control" id={{personalInfo}} value="{{personalInfo}} of user here" placeholder="" required readonly />
-                <input *ngIf="personalInfo === 'Address'" type="text" class="form-control" id={{personalInfo}} value="" placeholder="1234 Church St." required />
-                <input *ngIf="personalInfo === 'Phone number'" type="text" class="form-control" id={{personalInfo}} value="" placeholder="416-553-2332" required />
-                <input *ngIf="personalInfo === 'Email'" type="text" class="form-control" id={{personalInfo}} value="" placeholder="student@ryerson.ca" required />
-                <input *ngIf="personalInfo === 'Emergency contact'" type="text" class="form-control" id={{personalInfo.fieldName}} value="" placeholder="Name, Phone #" required />
+        <div class="form-group" *ngFor="let fieldName of formFields">
+            <label for={{fieldName}}>{{fieldName}}</label>
+                <input *ngIf="fieldName === 'First name'" type="text" class="form-control" id={{fieldName}} value="{{firstName}}" required readonly />
+                <input *ngIf="fieldName === 'Last name'" type="text" class="form-control" id={{fieldName}} value="{{lastName}}" required readonly />
+                <input *ngIf="fieldName === 'Address'" type="text" class="form-control" id={{fieldName}} value="{{address}}" required />
+                <input *ngIf="fieldName === 'Phone number'" type="text" class="form-control" id={{fieldName}} value="{{phoneNum}}" required />
+                <input *ngIf="fieldName === 'Email'" type="text" class="form-control" id={{fieldName}} value="{{email}}" required />
+                <input *ngIf="fieldName === 'Emergency contact'" type="text" class="form-control" id={{fieldName}} value="{{emergencyContact}}" required />
         </div>
 
         <button type="submit" class="btn btn-primary">Save changes</button>

@@ -39,7 +39,23 @@
 <div class = "container-fluid mu-25">
 	<h3 class="inline">Do you want to request a..</h3><button class="float-right btn btn-success mobile-mu-10" (click) = "openRequestModal()">View Requests</button>
 	<br/>
-	<div class = "mu-25 mobile-mu-75 row">
+	
+	<div class="card mu-25 mobile-mu-75">
+	<div class="card-header text-light bg-blue">
+		{{infoHeader}}
+	</div>
+	<div class="card-body">
+		{{infoBody}} 
+	<div>
+		<button *ngIf = "showButton" class="mu-10 btn btn-success" (click) = "sendRequest()" >Begin Request</button>
+	</div>
+	</div>
+	<div class="card-footer text-light bg-dark">
+		{{infoFooter}} 
+	</div>
+	</div>
+
+	<div class = "mu-25  row">
 		<div class = "col-md-4 mb-10">
 			<div class="card">
 				<h5 class="card-header bg-blue text-light">Official Transcript <br/>
@@ -99,23 +115,7 @@
 				</div>
 			</div>
 		</div>
-		
-		
-</div>
-<div class="card mu-25">
-	<div class="card-header text-light bg-blue">
-		{{infoHeader}}
 	</div>
-	<div class="card-body">
-		{{infoBody}} 
-	<div>
-		<button *ngIf = "showButton" class="mu-10 btn btn-success" (click) = "sendRequest()" >Begin Request</button>
-	</div>
-	</div>
-	<div class="card-footer text-light bg-dark">
-		{{infoFooter}} 
-	</div>
-</div>
 
 <div class="mu-25 mb-50">
 	You are required to have an address attached to your account.

@@ -82,6 +82,7 @@ app.post('/loadCourses', function (headers, res){
 	});
 });
 
+
 /*GET USER INFO*/
 app.post('/loadUser', function (headers, res){
 	var query = "SELECT * FROM Users WHERE StudentNo = '5001112222'";
@@ -256,6 +257,30 @@ app.post('/Request', function (req, res){
 		}
 	});
 });
+
+/*query COURSES*/
+app.post('/queryCourses', function (req, res){
+	console.log(req.body.faculty);
+	console.log(req.body.courseNum);
+	if (req.body.openyn == true){
+		var query = "SELECT * FROM Courses, CourseAvailability WHERE Courses.CourseCode = CourseAvailability.CourseCode\
+		AND Courses.CourseCode = '"+req.body.faculty+req.body.courseNum+"' AND CourseAvailability.SeatsOpen > SeatsTaken";
+	}
+	else{
+		
+	}
+	
+	con.query(query, function(err, result){
+		if (err){
+			console.log(err);
+		}
+		else{
+			console.log(result);
+			res.send(result)
+		}
+	});
+});
+
 
 
 

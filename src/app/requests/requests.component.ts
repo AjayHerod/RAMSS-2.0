@@ -94,7 +94,7 @@ export class RequestsComponent implements OnInit {
 					contentType: 'application/json',
 					success: (data) => {
 						if (data == "failure"){
-							this.failureMsg = "You have a request pending for this document.";
+							this.failureMsg = "You already have a request pending for this document.";
 							this.showFailure=true;
 							window.scrollBy(0,-1000);
 						}

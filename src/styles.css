@@ -1,14 +1,22 @@
 @import '../node_modules/@syncfusion/ej2-material-theme/styles/material.css';
 /* You can add global styles to this file, and also import other style files */
+
+html, body{
+    min-height: 100% !important;
+    height: 100%;
+}
+
 body{
 	font-family: Calibri;
-	height:100%;
 }
 
 .bg-blue{
 	background-color:rgb(0, 76, 155);
 }
 
+.btn{
+	border-radius:0px;
+}
 
 .curChange { 
 	cursor: pointer; 
