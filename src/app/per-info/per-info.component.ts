@@ -47,4 +47,9 @@ export class PerInfoComponent implements OnInit {
 	})
   }
 
+  // Update personal info in database after form submission.
+  submitUserInfo() {
+	  // send data using ajax
+  }
+
 }
