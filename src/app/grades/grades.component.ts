@@ -94,7 +94,7 @@ export class GradesComponent implements OnInit {
   
   calculatecGPA(){
 	var counter = 0;
-	console.log(this.gradeObjects);
+	//console.log(this.gradeObjects);
 	if (this.gradeObjects.length > 0){
 		for (var i in this.gradeObjects){
 			this.cGPA = this.cGPA + this.convertGPA(this.gradeObjects[i].Grade); 

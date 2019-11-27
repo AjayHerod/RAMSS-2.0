@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from '../app.component';
-import { ScheduleModule, RecurrenceEditorModule, DayService, WeekService, WorkWeekService, MonthService, MonthAgendaService } from '@syncfusion/ej2-angular-schedule';
+import { ScheduleModule, DayService, WeekService, MonthService } from '@syncfusion/ej2-angular-schedule';
 
 @NgModule({
     declarations: [
@@ -10,9 +10,9 @@ import { ScheduleModule, RecurrenceEditorModule, DayService, WeekService, WorkWe
 ],
 imports: [
     BrowserModule,
-	ScheduleModule, RecurrenceEditorModule  
+	ScheduleModule  
   ],
-  providers: [DayService, WeekService, WorkWeekService, MonthService, MonthAgendaService],
+  providers: [DayService, WeekService, MonthService],
   bootstrap: [AppComponent]
 })
 

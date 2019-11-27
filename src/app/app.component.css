@@ -1,7 +1,8 @@
 .nav-width{
 	width:100%;
-	min-height:115%;
+	min-height:100%;
 	position:relative;
+	padding-bottom:20px;
 }
 
 .ryerson-logo{
