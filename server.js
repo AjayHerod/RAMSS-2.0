@@ -10,7 +10,7 @@ var bodyParser = require('body-parser');
 
 var date = new Date();
 var lastYear = date.getFullYear() - 1;
-var allowedTerm = "W20";
+var allowedTerms = "W20, S20";
 
 //Database Connections
 var con = mysql.createConnection({
@@ -74,7 +74,7 @@ app.post('/loadLogin', function (req, res){
 
 /*GET client's COURSE DATA*/
 app.post('/loadCourses', function (headers, res){
-	var query = "SELECT * FROM Courses, Enrolled WHERE (Courses.CourseCode = Enrolled.CourseCode AND StudentNo = '5001112222')";
+	var query = "SELECT * FROM Courses, Enrolled WHERE (Courses.CourseCode = Enrolled.CourseCode AND StudentNo = '5001112222') ORDER BY Term";
 	con.query(query, function(err, result){
 		if (err){
 			console.log(err);
@@ -117,6 +117,9 @@ app.post('/loadAccount', function (headers, res){
 		}
 	});
 });
+
+
+
 
 /*GET client's TUITION*/
 app.post('/loadTuition', function (headers, res){
@@ -387,6 +390,11 @@ function makeQuery(openyn, courseNum, term, faculty){
 		return query;
 	}
 }
+
+
+app.post('/getTerms', function (req, res){
+	res.send(allowedTerms);
+});
 
 
 // Start the app by listening on the default Heroku port

@@ -13,7 +13,9 @@ export class ManageCoursesComponent implements OnInit {
   
   //For Bootstrap alert messages
   public failureMsg:string = "";
+  public successMsg:string = "";
   public showFailure:boolean = false;
+  public showSuccess:boolean = false;
   
   //For showing the school year
   public fallYear:number;
@@ -35,19 +37,24 @@ export class ManageCoursesComponent implements OnInit {
   
   //For holding the course objects.
   public courseObjects = [];
+  public mcourseObjects = [];
 
   //To lock course selection.
-  public allowedYears:string = "W20, S20";
+  public allowedYears:string;
   
   public addButton: boolean = true;
   public swapButton: boolean = true;
   public dropButton: boolean = true;
   public seats:boolean = true;
   
+  
+  public swap1:string;
+  
   ngOnInit() {
 	this.fallYear = 2019;
 	this.winterYear = 2020;
 	this.summerYear = 2020;
+	this.loadTerms();
   }
 
   //If fall term is selected
@@ -78,20 +85,22 @@ export class ManageCoursesComponent implements OnInit {
 	
   }
   
+  //Get current courses from DB.
   loadCourses(){
 	this.seats = false;
-	this.courseObjects = [];
-	this.showFailure = false;
+	this.hideAlerts();
 	$.ajax({
 		method: 'post',
 		url: '/loadCourses',
 		contentType: 'application/json',
 		success: (data) => {
+			this.courseObjects = [];
 			for (var i in data){
 				var cCourse = new curCourse(data[i].CourseCode, data[i].Faculty, data[i].Cost, data[i].Credit, 
 				data[i].Professor, data[i].LectureDates, data[i].LabDates, data[i].ExamDates, data[i].Term);
 				this.courseObjects.push(cCourse);
 				this.turnOnSDoffA();
+				this.changeQueryMsg("Query: Current Courses");
 			}
 		},
 		error: function() {
@@ -100,11 +109,48 @@ export class ManageCoursesComponent implements OnInit {
     })
   }
   
+  //Get current courses from DB.
+  loadmCourses(){
+	$.ajax({
+		method: 'post',
+		url: '/loadCourses',
+		contentType: 'application/json',
+		success: (data) => {
+			this.mcourseObjects = [];
+			for (var i in data){
+				var cCourse = new curCourse(data[i].CourseCode, data[i].Faculty, data[i].Cost, data[i].Credit, 
+				data[i].Professor, data[i].LectureDates, data[i].LabDates, data[i].ExamDates, data[i].Term);
+				this.mcourseObjects.push(cCourse);
+				$('#swapModal').modal('show');
+				console.log(this.mcourseObjects);
+			}
+		},
+		error: function() {
+			console.log("Failed to Retrieve data");
+		}
+    })
+  }
+  
+  loadTerms(){
+	 $.ajax({
+		method: 'post',
+		url: '/getTerms',
+		contentType: 'application/json',
+		success: (data) => {
+			this.allowedYears = data;
+		},
+		error: function() {
+			console.log("Failed to connect to server");
+		}
+	 }) 
+	}
+  
+  
 
   //Queries DB for courses
   queryCourses(){
 	this.courseObjects = [];
-	this.showFailure = false;
+	this.hideAlerts();
 	var fac = (<HTMLInputElement>document.getElementById("subject")).value;
 	var cn = (<HTMLInputElement>document.getElementById("courseNum")).value;
 	var openyn = (<HTMLInputElement>document.getElementById("check1")).checked;
@@ -130,17 +176,13 @@ export class ManageCoursesComponent implements OnInit {
 					data[i].ExamDates, data[i].SeatsTaken, data[i].SeatsOpen, data[i].Term);
 					this.courseObjects.push(c);
 				}
-				this.queryMsg = "Results: "+data.length+" Found | Query: Term: "+qTerm+", Faculty: "+fac+", Course Number: "+cn+", Open Only?: "+openyn;
-				
+				this.changeQueryMsg("Results: "+data.length+" Found | Query: Term: "+qTerm+", Faculty: "+fac+", Course Number: "+cn+", Open Only?: "+openyn);
 			},
 			error: function() {
 				console.log("Failed to Retrieve data");
 			}
 		})
 	}
-  }
-  work(i){
-	 console.log(i); 
   }
   
   addCourses(index){
@@ -150,7 +192,8 @@ export class ManageCoursesComponent implements OnInit {
 		contentType: 'application/json',
 		data: JSON.stringify({coursecode: this.courseObjects[index].coursecode}),
 		success: (data) => {
-			console.log(data);
+			//console.log(data);
+			this.changeSuccessAlert("Course Successfully Added!");
 		},
 		error: function() {
 			console.log("Failed to Retrieve data");
@@ -158,20 +201,51 @@ export class ManageCoursesComponent implements OnInit {
 	})  
   }
   
-  dropCourses(){
-	$.ajax({
-		method: 'post',
-		url: '/dropCourses',
-		contentType: 'application/json',
-		data: JSON.stringify({coursecode: "CPS847"}),
-		success: (data) => {
-			console.log(data);
-		},
-		error: function() {
-			console.log("Failed to Retrieve data");
-		}
-	})  
+  dropCourses(index){
+	if(this.validateAvailability(index)==true){
+		$.ajax({
+			method: 'post',
+			url: '/dropCourses',
+			contentType: 'application/json',
+			data: JSON.stringify({coursecode: "CPS847"}),
+			success: (data) => {
+				//console.log(data);
+				this.loadCourses();
+			},
+			error: function() {
+				console.log("Failed to Retrieve data");
+			}
+		})  
+	}else{
+		this.changeAlert("The period for dropping a course in the current term has passed.");
+	}
   }
+  
+  displayswapCourses(index){
+	if(this.validateAvailability(index)==true){
+		this.swap1 = this.courseObjects[index].coursecode;
+		this.loadmCourses();
+	}else{
+		this.changeAlert("The period for swapping a course in the current term has passed.");
+	}
+  }
+  
+  swapCourse(index){
+	console.log(this.swap1);
+	console.log(index);
+	  
+  }
+  
+  //Returns true if a course is available to be dropped in the current term.
+  validateAvailability(index){
+	if(this.allowedYears.includes(this.courseObjects[index].term)){
+		return true;
+	}
+	else {
+		return false;
+	}
+  }
+  
   
   turnOffASD(){
 	this.addButton = false;
@@ -187,7 +261,7 @@ export class ManageCoursesComponent implements OnInit {
   
   turnOnSDoffA(){
 	this.addButton = false;
-	this.swapButton = true;
+	this.swapButton = false;
 	this.dropButton = true;
   }
   
@@ -200,11 +274,27 @@ export class ManageCoursesComponent implements OnInit {
 		this.turnOffASD();
 		this.changeAlert("The course selection period for this term has already passed.");
 	}
-  }
+   }
 	
 	changeAlert(message){
 		this.failureMsg = message;
-		this.showFailure=true;
+		this.showFailure = true;
+		window.scrollBy(0,-10000);
+	}
+	
+	changeSuccessAlert(message){
+		this.successMsg = message;
+		this.showSuccess = true;
+		window.scrollBy(0,-10000);
+	}
+	
+	changeQueryMsg(message){
+		this.queryMsg = message;
+	}
+	
+	hideAlerts(){
+		this.showFailure = false;
+		this.showSuccess = false;
 	}
 	
 }
