@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from '../app.component';
-import { ScheduleModule, DayService, WeekService, MonthService } from '@syncfusion/ej2-angular-schedule';
+import { EventSettingsModel, ScheduleModule, DayService, WeekService, WorkWeekService, MonthService} from '@syncfusion/ej2-angular-schedule';
 
 @NgModule({
     declarations: [
@@ -12,7 +12,7 @@ imports: [
     BrowserModule,
 	ScheduleModule  
   ],
-  providers: [DayService, WeekService, MonthService],
+  providers: [DayService, WeekService, WorkWeekService, MonthService ],
   bootstrap: [AppComponent]
 })
 
