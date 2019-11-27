@@ -1,4 +1,4 @@
-export class course{
+export class curCourse{
 
 constructor(
 	public coursecode: string,
@@ -9,8 +9,6 @@ constructor(
 	public lecturedates: string,
 	public labdates: string,
 	public examdates: string,
-	public seatstaken: number,
-	public seatsopen: number,
 	public term: string
 	){};
 }

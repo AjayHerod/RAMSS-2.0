@@ -1,4 +1,10 @@
 .course-container{
 	height:800px;	
 	padding:10px;
+	border-radius:0px;
+	overflow-y: scroll;
+}
+
+.mu-5{
+	margin-top:5px;
 }

@@ -1,6 +1,46 @@
-<div class="container-fluid mu-25">
+<div class="alert alert-danger mu-10" *ngIf = "showFailure" role="alert">
+  {{failureMsg}}
+</div>
+<div class="alert alert-success mu-10" *ngIf = "showSuccess" role="alert">
+  {{successMsg}}
+</div>
+
+<div class="modal" id="swapModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-blue ">
+        <h5 class="modal-title text-light">Select a course to swap.</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  If no courses are showing, you have no courses available to drop.
+		<table class="w-100">
+		  <tr>
+			<th>Course</th>
+			<th>Selection</th>
+		  </tr>
+		  <tr *ngFor = "let course of mcourseObjects; let i = index;">
+			<td>{{course.coursecode}} </td>
+			<td><button class="btn btn-warning" (click) = "swapCourse(i)">Swap Course</button></td>
+		  </tr>
+		</table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container-fluid mu-25 mb-25">
 	<div class="row">
 		<div class="col-md-3">
+			<h5 class="mb-10">
+			Selected: {{termSelected}}{{yearSelected}}
+			</h5>
 			<button id="fallButton" class="btn btn-warning w-100 mb-10" (click) = "chooseFall()">Fall {{fallYear}}</button>
 			<button id="winterButton" class="btn btn-warning w-100 mb-10" (click) = "chooseWinter()">Winter {{winterYear}}</button>
 			<button id="summerButton" class="btn btn-warning w-100 mb-10" (click) = "chooseSummer()">Spring/Summer {{summerYear}}</button>
@@ -9,13 +49,13 @@
 			  <div class="input-group-prepend">
 				<span class="input-group-text" >Subject</span>
 			  </div>
-			  <input type="text" class="form-control" id="subject" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+			  <input type="text" class="form-control" maxlength="3" id="subject" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
 			</div>
 			<div class="input-group input-group-sm mb-3">
 			  <div class="input-group-prepend">
 				<span class="input-group-text" >Course Number</span>
 			  </div>
-			  <input type="text" class="form-control" id="courseNum" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+			  <input type="text" class="form-control" maxlength="3" id="courseNum" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
 			</div>
 			
 			<div class="form-check">
@@ -25,32 +65,55 @@
 			  </label>
 			</div>
 			<br/>
-			<button class="btn btn-dark" (click)="queryCourses()">
+			<button class="btn btn-success w-100 mb-10" (click)="queryCourses()" *ngIf = "queryButton">
 				Search
 			</button>
-			
+			<button class="btn btn-success w-100 disabled mb-10" *ngIf = "queryButton == false">
+				Search
+			</button>
+			<button class="btn btn-primary w-100 mb-20" (click)="loadCourses()">
+				View my Courses
+			</button>
 		</div>
 		
 		<div class="col-md-9">
 			<div class="card course-container">
-				<div class="card" *ngFor= "let course of courseObjects">
-					<div class="card-header bg-blue text-light">
+				{{queryMsg}}
+				<div class="card mb-10" *ngFor= "let course of courseObjects; let i = index ">
+					<h4 class="card-header bg-blue text-light">
 						{{course.coursecode}}
-					</div>
+					</h4>
 					<div class="card-body">
 						<div class="row">
 						<div class="col-md-6">
-							Faculty: {{course.faculty}}<br/>
-							Credit: {{course.credit}}
+							<span class="font-weight-bold">Professor:</span> {{course.professor}}<br/>
+							<span class="font-weight-bold">Lecture Dates:</span> {{course.lecturedates}}<br/>
+							<span class="font-weight-bold">Lab Dates:</span> {{course.labdates}}<br/>
+							<span class="font-weight-bold">Exam Dates:</span> {{course.examdates}}<br/>
 						</div>
 						<div class="col-md-6">
-							Professor: {{course.professor}}<br/>
-							Lecture Dates: {{course.lecturedates}}
+							<span class="font-weight-bold">Faculty:</span>  {{course.faculty}}<br/>
+							<span class="font-weight-bold">Credit:</span>  {{course.credit}}<br/>
+							<span class="font-weight-bold">Cost:</span>  ${{course.cost}}<br/>
+							<span class="font-weight-bold">Term:</span> {{course.term}}<br/>
 						</div>
 						</div>
 					</div>
-					<div class="card-footer">
-						Cost: {{course.cost}}
+					<div class="card-footer bg-dark text-light">
+					<div class="row">
+						<div class="col-md-8 mu-5">
+							<h5 *ngIf = "seats">Seats: {{course.seatstaken}}/{{course.seatsopen}} </h5>
+						</div>
+						<div class="col-md-2 float-right" *ngIf = "addButton">
+							<button class="w-100 btn btn-success" (click) = "addCourses(i)">Add</button>
+						</div>
+						<div class="col-md-2 float-right" *ngIf = "swapButton">
+							<button class="w-100 btn btn-success" (click) = "displayswapCourses(i)">Swap</button>
+						</div>
+						<div class="col-md-4 float-right" *ngIf = "dropButton">
+							<button class="w-100 btn btn-success" (click) = "dropCourses(i)">Drop</button>
+						</div>
+					</div>
 					</div>
 				</div>
 				

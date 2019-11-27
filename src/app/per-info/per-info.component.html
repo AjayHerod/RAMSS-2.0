@@ -1,31 +1,33 @@
+<div class="alert alert-success mu-10" *ngIf = "showSuccess" role="alert">
+  {{successMsg}}
+</div>
 
 <div class="row mt-4">
-
-    <form id="personalForm" class="col-sm-9">
-        <div class="form-group" *ngFor="let fieldName of formFields">
+    <form id="personalForm" class="col-sm-9" method="POST" (submit)="submitUserInfo()">
+        <div class="form-group" *ngFor="let fieldName of formFields; let i = index">
             <label for={{fieldName}}>{{fieldName}}</label>
                 <input *ngIf="fieldName === 'First name'" type="text" class="form-control" id={{fieldName}} value="{{firstName}}" required readonly />
                 <input *ngIf="fieldName === 'Last name'" type="text" class="form-control" id={{fieldName}} value="{{lastName}}" required readonly />
-                <input *ngIf="fieldName === 'Address'" type="text" class="form-control" id={{fieldName}} value="{{address}}" required />
-                <input *ngIf="fieldName === 'Phone number'" type="text" class="form-control" id={{fieldName}} value="{{phoneNum}}" required />
-                <input *ngIf="fieldName === 'Email'" type="text" class="form-control" id={{fieldName}} value="{{email}}" required />
-                <input *ngIf="fieldName === 'Emergency contact'" type="text" class="form-control" id={{fieldName}} value="{{emergencyContact}}" required />
+                <input *ngIf="fieldName === 'Address'" type="text" class="form-control" id="address" value="{{address}}" required />
+                <input *ngIf="fieldName === 'Phone number'" type="text" class="form-control" id="phonenum" value="{{phoneNum}}" required />
+                <input *ngIf="fieldName === 'Email'" type="text" class="form-control" id="email" value="{{email}}" required />
+                <input *ngIf="fieldName === 'Emergency contact'" type="text" class="form-control" id="ec" value="{{emergencyContact}}" required />
         </div>
 
         <button type="submit" class="btn btn-primary">Save changes</button>
-        <button type="button" class="btn btn-light">Cancel</button>
+        <button type="button" class="btn btn-light" (click) = "loadUserInfo()">Cancel</button>
     </form>
 
     <div class="questionnaire col-sm-3">
 
-        <div class="card">
+        <div class="card mb-50">
             <div class="card-header bg-blue text-white">
                 <h5>Available Questionnaires</h5>
             </div>
             <ul class="list-group">
-                <button class="list-group-item bg-danger text-white">Student Diversity Self-ID</button>
-                <button class="list-group-item bg-danger text-white">Student Self-Assessment</button>
-                <button class="list-group-item bg-danger text-white">Faculty/Course Survey</button>
+                <a class="btn btn-danger bg-danger text-white" href="https://www.ryerson.ca/diversity-self-id/" target="_blank">Student Diversity Self-ID</a>
+                <a class="list-group-item btn btn-danger bg-danger text-white" href="https://www.ryerson.ca/content/dam/arts/documents/Academic-Success/ArtsStudentSelf-AssessmentQuestionnaire.pdf" target="_blank">Student Self-Assessment</a>
+                <a class="list-group-item btn btn-danger bg-danger text-white" href="https://www.ryerson.ca/faculty-affairs/faculty-course-survey/" target="_blank">Faculty/Course Survey</a>
             </ul>
         </div>
 

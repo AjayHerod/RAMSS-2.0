@@ -3,27 +3,33 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+	"postinstall": "ng build --aot -prod"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "~8.2.13",
+	"@angular/cli": "~8.3.18",
     "@angular/common": "~8.2.13",
     "@angular/compiler": "~8.2.13",
+	"@angular/compiler-cli": "~8.2.13",
     "@angular/core": "~8.2.13",
     "@angular/forms": "~8.2.13",
     "@angular/platform-browser": "~8.2.13",
     "@angular/platform-browser-dynamic": "~8.2.13",
     "@angular/router": "~8.2.13",
     "@syncfusion/ej2-angular-schedule": "^17.3.28",
+    "@syncfusion/ej2-material-theme": "~17.3.27",
+    "body-parser": "^1.19.0",
+	"express": "^4.17.1",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
-    "zone.js": "~0.9.1",
-    "@syncfusion/ej2-material-theme": "~17.3.27"
+	"typescript": "~3.5.3",
+    "zone.js": "~0.9.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.18",
@@ -36,6 +42,7 @@
     "@types/jquery": "^3.3.31",
     "@types/node": "~8.9.4",
     "codelyzer": "^5.0.0",
+    "express": "^4.17.1",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
     "jquery": "^3.4.1",
@@ -49,5 +56,9 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
     "typescript": "~3.5.3"
+  },
+  "engines": {
+    "node": "12.13.0",
+    "npm": "6.13.1"
   }
 }
