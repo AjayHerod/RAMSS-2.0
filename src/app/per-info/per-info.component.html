@@ -6,8 +6,8 @@
     <form id="personalForm" class="col-sm-9" method="POST" (submit)="submitUserInfo()">
         <div class="form-group" *ngFor="let fieldName of formFields; let i = index">
             <label for={{fieldName}}>{{fieldName}}</label>
-                <input *ngIf="fieldName === 'First name'" type="text" class="form-control" id={{fieldName}} value="{{firstName}}" required readonly />
-                <input *ngIf="fieldName === 'Last name'" type="text" class="form-control" id={{fieldName}} value="{{lastName}}" required readonly />
+                <input *ngIf="fieldName === 'First name'" type="text" class="form-control" id="First name" value="{{firstName}}" required readonly />
+                <input *ngIf="fieldName === 'Last name'" type="text" class="form-control" id="Last name" value="{{lastName}}" required readonly />
                 <input *ngIf="fieldName === 'Address'" type="text" class="form-control" id="address" value="{{address}}" required />
                 <input *ngIf="fieldName === 'Phone number'" type="text" class="form-control" id="phonenum" value="{{phoneNum}}" required />
                 <input *ngIf="fieldName === 'Email'" type="text" class="form-control" id="email" value="{{email}}" required />
@@ -15,7 +15,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Save changes</button>
-        <button type="button" class="btn btn-light" (click) = "loadUserInfo()">Cancel</button>
+        <button type="button" class="btn btn-light" (click) = "discardChanges()">Cancel</button>
     </form>
 
     <div class="questionnaire col-sm-3">
