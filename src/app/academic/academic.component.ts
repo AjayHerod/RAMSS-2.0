@@ -15,7 +15,7 @@ export class AcademicComponent implements OnInit {
 	public oeCourses: [string, string][] = new Array();
 	public laCourses: [string, string][] = new Array();
 	public lbCourses: [string, string][] = new Array();
-	public otherCourses: [string, string][] = new Array(); 
+	//public otherCourses: [string, string][] = new Array(); 
 
 	ngOnInit() {
 		this.loadSchedule();
@@ -47,13 +47,10 @@ export class AcademicComponent implements OnInit {
 						case "OE":
 							this.oeCourses.push([course.Course, course.Grade]);
 							break;
-		
-						case "P":
-							this.prCourses.push([course.Course, course.Grade]);
-							break;
 						
 						case "A":
-							this.otherCourses.push([course.Course, course.Grade]);
+						case "P":
+							this.prCourses.push([course.Course, course.Grade]);
 							break;
 						
 						case "P, OE":
