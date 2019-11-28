@@ -10,6 +10,34 @@ export class AcademicComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  }
+	$.ajax({
+		method: 'post',
+		url: '/loadCalendar',
+		contentType: 'application/json',
+		success: (data) => {
+			console.log(data);
+		},
+		error: function() {
+			console.log("Failed to connect to server");
+		}
+	 }) 
+	
+	$.ajax({
+		method: 'post',
+		url: '/loadGrades',
+		contentType: 'application/json',
+		success: (data) => {
+			console.log(data);
+		},
+		error: function() {
+			console.log("Failed to Retrieve data");
+		}
+    })
 
+  
+  
+  
+  
+  }
 }
+

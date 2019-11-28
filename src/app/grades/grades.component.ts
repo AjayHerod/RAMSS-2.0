@@ -41,7 +41,6 @@ export class GradesComponent implements OnInit {
 		contentType: 'application/json',
 		success: (data) => {
 			for (var i in data){
-				//console.log(data[i]);
 				this.years.push(data[i].Year);
 				this.gradeObjects.push(data[i]);
 			}				

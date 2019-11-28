@@ -267,6 +267,20 @@ app.post('/Request', function (req, res){
 	});
 });
 
+
+//Get the courses for CPS.
+app.post('/loadCalendar', function (req, res){
+	var query = "SELECT * FROM Calendar WHERE Faculty = 'CPS'";
+	con.query(query, function(err, result){
+		if (err){
+			console.log(err);
+		}
+		else{
+			res.send(result);
+		}
+	});
+});
+
 /*Query the db for courses that meet the criteria*/
 app.post('/queryCourses', function (req, res){	
 	var query = makeQuery(req.body.openyn, req.body.courseNum, req.body.term, req.body.faculty);
@@ -275,8 +289,7 @@ app.post('/queryCourses', function (req, res){
 			console.log(err);
 		}
 		else{
-			//console.log(result);
-			res.send(result)
+			res.send(result);
 		}
 	});
 });
