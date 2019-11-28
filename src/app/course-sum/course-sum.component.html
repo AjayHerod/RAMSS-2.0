@@ -3,7 +3,7 @@
         <div class="col-md-3">
             <div class="card">
                 <div class = "card-header bg-blue text-light">
-                    <h5>Enrolled Courses: <span class="font-weight-bold">{{currentYear}} {{currentSemester}}</span></h5>
+                    <h5><span class="font-weight-bold">{{currentYear}} {{currentSemester}}</span> Enrolled Courses</h5>
                 </div>
                     <div class = "card-body">
                         <table style="width:100%">
@@ -11,8 +11,8 @@
                               <th>Course</th>
                               <th>Drop</th>
                             </tr>
-                            <tr *ngFor = "let course of currentCourses">
-                                <td width="90%">{{course}}</td>
+                            <tr *ngFor = "let course of courseObjects">
+                                <td width="90%">{{course.coursecode}}, {{course.professor}}<br>Lecture: {{course.lecturedates}}<br>Labs: {{course.labdates}}</td>
                                 <td width="10%"><button (click)="dropCourse()" class="btn btn-danger mu-25 w-100">Drop</button></td>
                               </tr>
                         </table>
@@ -25,11 +25,43 @@
                     <h5>Weekly Schedule</h5>
                 </div>
                 <div class = "card-body">
-                    <ejs-schedule startHour="08:00 AM" endHour="18:00 PM" readonly="true" allowVirtualScrolling="false">
-                        
+                    <ejs-schedule startHour="08:00 AM" endHour="21:00 PM" readonly="true" 
+                                    [eventSettings]="eventScheduler" workDays={{workWeekDays}}>
+                        <e-views>
+                            <e-view option='Day'></e-view>
+                            <e-view option='Week'></e-view>
+                            <e-view option='WorkWeek'></e-view>
+                            <e-view option='Month' [readonly]="isReadOnly"></e-view>
+                        </e-views>
                     </ejs-schedule>
                 </div>
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class = "card-header bg-blue text-light">
+                    <h5>Exam Dates for <span class="font-weight-bold">{{currentYear}} {{currentSemester}}</span></h5>
+                </div>
+                <div class = "card-body">
+                    <table style="width:100%">
+                            <tr>
+                              <th width="40%">Course</th>
+                              <th>Date</th>
+                              <th>Location</th>
+                              <th>Time</th>
+                            </tr>
+                            <tr *ngFor = "let course of courseObjects">
+                                <td width="40%">{{course.coursecode}}, {{course.professor}}<td>
+                                <td width="20%">{{course.examdates}}</td>
+                                <td width="20%">{{course.examdates}}</td>
+                                <td width="20%">{{course.examdates}}</td>
+                            </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
