@@ -99,30 +99,31 @@ export class AccInfoComponent implements OnInit {
 	}
 	
 	optIn(){
+		$('#ancModal').modal('hide');
 		$.ajax({
 			method: 'post',
 			url: '/OptIn',
 			data: JSON.stringify({name:this.modalHeader}),
 			contentType: 'application/json',
 			success:(data) =>{
-				$('#ancModal').modal('hide');
+				this.loadAncFees();
 			}
         })
-		this.loadAncFees();
 	}
 	
 
 	optOut(){
+		$('#ancModal').modal('hide');
 		$.ajax({
 			method: 'post',
 			url: '/OptOut',
 			data: JSON.stringify({name:this.modalHeader}),
 			contentType: 'application/json',
 			success:(data) =>{
-				$('#ancModal').modal('hide');
+				this.loadAncFees();
 			}
         })
-		this.loadAncFees();
+
 		
 	}
 	
