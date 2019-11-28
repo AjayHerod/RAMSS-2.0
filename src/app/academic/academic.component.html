@@ -8,8 +8,9 @@
 				<th>Course</th>
 				<th>Grade</th>
 			  </tr>
-			  <tr>
-				
+			  <tr *ngFor="let course of cCourses">
+				  <td>{{course[0]}}</td>
+				  <td>{{course[1]}}</td>
 			  </tr>
 			</table>
 			</div>
