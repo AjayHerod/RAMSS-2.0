@@ -127,14 +127,14 @@ export class AccInfoComponent implements OnInit {
 	}
 	
 	loadAccount(){
-		this.accBalance = "";
-		this.schoolFees = "";
-		this.balanceOwing = "";
 	  $.ajax({
 		method: 'post',
 		url: '/loadAccount',
 		contentType: 'application/json',
 		success: (data) => {
+			this.accBalance = "";
+			this.schoolFees = "";
+			this.balanceOwing = "";
 			this.accBalance = "$"+ data[0][0].Balance.toString();
 			this.schoolFees = "$"+ data[0][0].Fees.toString();
 			this.balanceOwing = "$"+ data[1].toString();
@@ -148,12 +148,12 @@ export class AccInfoComponent implements OnInit {
 	
 	
 	loadAncFees(){
-		this.ancObjects = [];
 		$.ajax({
 			method: 'post',
 			url: '/loadAncFees',
 			contentType: 'application/json',
 			success: (result) => {
+				this.ancObjects = [];
 				var stuAnc = result[0][0]; //A Student's Ancilary Fees.
 				var ancData = result[1]; //The data for all ancilaries in the system.
 				

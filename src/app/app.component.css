@@ -52,6 +52,22 @@
 	margin-top:25px;
 }
 
+.row{
+	padding:0px;
+	margin-left:0px;
+	margin-right:0px;
+}
+
+.container-fluid{
+	padding-left:0px;
+	padding-right:0px;
+}
+
+.col-lg-10{
+	padding-left:0px;
+	padding-right:0px !important;
+}
+
 @media screen and (min-width: 990px) {
     .rm-margin{
 	  margin:0px;
@@ -72,12 +88,10 @@
 	.mobile-mu-25{
 		margin-top:0px;
 	}
-	.mobile-rm{
-		margin-left:0px;
-		margin-right:0px;
-		padding-left:0px;
-		padding-right:0px;
+	.col-80{
+		width:100%;
 	}
+
 }
 
 @media screen and (max-width: 550px) {
