@@ -15,8 +15,8 @@
                 <input *ngIf="fieldName === 'Emergency contact'" type="text" class="form-control" id="ec" value="{{emergencyContact}}" required />
         </div>
 
-        <button type="submit" class="btn btn-primary">Save changes</button>
-        <button type="button" class="btn btn-light" (click) = "discardChanges()">Cancel</button>
+        <button type="submit" class="btn btn-success">Save changes</button>
+        <button type="button" class="btn btn-secondary" (click) = "discardChanges()">Cancel</button>
     </form>
 
     <div class="questionnaire col-sm-3">
@@ -26,9 +26,9 @@
                 <h5>Available Questionnaires</h5>
             </div>
             <ul class="list-group">
-                <a class="btn btn-danger bg-danger text-white" href="https://www.ryerson.ca/diversity-self-id/" target="_blank">Student Diversity Self-ID</a>
-                <a class="list-group-item btn btn-danger bg-danger text-white" href="https://www.ryerson.ca/content/dam/arts/documents/Academic-Success/ArtsStudentSelf-AssessmentQuestionnaire.pdf" target="_blank">Student Self-Assessment</a>
-                <a class="list-group-item btn btn-danger bg-danger text-white" href="https://www.ryerson.ca/faculty-affairs/faculty-course-survey/" target="_blank">Faculty/Course Survey</a>
+                <a class="btn btn-warning bg-warning" href="https://www.ryerson.ca/diversity-self-id/" target="_blank">Student Diversity Self-ID</a>
+                <a class="btn btn-warning bg-warning" href="https://www.ryerson.ca/content/dam/arts/documents/Academic-Success/ArtsStudentSelf-AssessmentQuestionnaire.pdf" target="_blank">Student Self-Assessment</a>
+                <a class="btn btn-warning bg-warning" href="https://www.ryerson.ca/faculty-affairs/faculty-course-survey/" target="_blank">Faculty/Course Survey</a>
             </ul>
         </div>
 
