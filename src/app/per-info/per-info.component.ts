@@ -72,44 +72,44 @@ export class PerInfoComponent implements OnInit {
 	})
   
   }
+  // Reset values of the form fields to the most recent updated personal info.
+	discardChanges() {
+		this.loadUserInfo();
+		this.formFields.forEach(fieldName => {
+			switch(fieldName) {
+				case "First name":
+					(<HTMLInputElement>document.getElementById("First name")).value = this.firstName;
+					break;
+				case "Last name":
+					(<HTMLInputElement>document.getElementById("Last name")).value = this.lastName;
+					break;
+				case "Address":
+					(<HTMLInputElement>document.getElementById("address")).value = this.address;
+					break;
+				case "Phone number":
+					(<HTMLInputElement>document.getElementById("phonenum")).value = this.phoneNum;
+					break;
+				case "Email":
+					(<HTMLInputElement>document.getElementById("email")).value = this.email;
+					break;
+				case "Emergency contact":
+					(<HTMLInputElement>document.getElementById("ec")).value = this.emergencyContact;
+					break;
+			}
+		});
+	}
+
+
+
+	changeSuccessAlert(message){
+		this.hideAlerts();
+		this.successMsg = message;
+		this.showSuccess = true;
+		window.scrollBy(0,-10000);
+	}
   
-discardChanges() {
-	this.loadUserInfo();
-	this.formFields.forEach(fieldName => {
-		switch(fieldName) {
-			case "First name":
-				(<HTMLInputElement>document.getElementById("First name")).value = this.firstName;
-				break;
-			case "Last name":
-				(<HTMLInputElement>document.getElementById("Last name")).value = this.lastName;
-				break;
-			case "Address":
-				(<HTMLInputElement>document.getElementById("address")).value = this.address;
-				break;
-			case "Phone number":
-				(<HTMLInputElement>document.getElementById("phonenum")).value = this.phoneNum;
-				break;
-			case "Email":
-				(<HTMLInputElement>document.getElementById("email")).value = this.email;
-				break;
-			case "Emergency contact":
-				(<HTMLInputElement>document.getElementById("ec")).value = this.emergencyContact;
-				break;
-		}
-	});
-}
+	hideAlerts(){
+		this.showSuccess = false;
+	}
 
-
-
-changeSuccessAlert(message){
-	this.hideAlerts();
-	this.successMsg = message;
-	this.showSuccess = true;
-	window.scrollBy(0,-10000);
-}
-  
-  hideAlerts(){
-	this.showSuccess = false;
-  }
-
-}
+	}
