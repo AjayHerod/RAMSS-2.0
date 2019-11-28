@@ -1,6 +1,6 @@
 <div class = "mu-25">
     <div class = "row">
-        <div class="col-md-3">
+        <div class="col-md-6">
             <div class="card">
                 <div class = "card-header bg-blue text-light">
                     <h5><span class="font-weight-bold">{{currentYear}} {{currentSemester}}</span> Enrolled Courses</h5>
@@ -9,17 +9,40 @@
                         <table style="width:100%">
                             <tr>
                               <th>Course</th>
-                              <th>Drop</th>
                             </tr>
                             <tr *ngFor = "let course of courseObjects">
-                                <td width="90%">{{course.coursecode}}, {{course.professor}}<br>Lecture: {{course.lecturedates}}<br>Labs: {{course.labdates}}</td>
-                                <td width="10%"><button (click)="dropCourse()" class="btn btn-danger mu-25 w-100">Drop</button></td>
+                                <td>{{course.coursecode}}, {{course.professor}}<br>Lecture: {{course.lecturedates}}<br>Labs: {{course.labdates}}<br><br></td>
                               </tr>
                         </table>
                     </div>
             </div> 
         </div>
-        <div class = "col-md-9">
+        <div class="col-md-6">
+            <div class="card">
+                <div class = "card-header bg-blue text-light">
+                    <h5>Exam Dates for <span class="font-weight-bold">{{currentYear}} {{currentSemester}}</span></h5>
+                </div>
+                <div class = "card-body">
+                    <table style="width:100%">
+                            <tr>
+                              <th>Course</th>
+                              <th>Date</th>
+                              <th>Location</th>
+                              <th>Time</th>
+                            </tr>
+                            <tr *ngFor = "let exam of courseExamObjects">
+                                <td width="25%">{{exam.coursecode}}<br><br></td>
+                                <td width="25%">{{exam.date}}<br><br></td>
+                                <td width="25%">{{exam.location}}<br><br></td>
+                                <td width="25%">{{exam.time}}<br><br></td>
+                            </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class = "row">
+        <div class = "col-md-12">
             <div class = "card">
                 <div class = "card-header bg-blue text-light">
                     <h5>Weekly Schedule</h5>
@@ -38,30 +61,4 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card">
-                <div class = "card-header bg-blue text-light">
-                    <h5>Exam Dates for <span class="font-weight-bold">{{currentYear}} {{currentSemester}}</span></h5>
-                </div>
-                <div class = "card-body">
-                    <table style="width:100%">
-                            <tr>
-                              <th width="40%">Course</th>
-                              <th>Date</th>
-                              <th>Location</th>
-                              <th>Time</th>
-                            </tr>
-                            <tr *ngFor = "let course of courseObjects">
-                                <td width="40%">{{course.coursecode}}, {{course.professor}}<td>
-                                <td width="20%">{{course.examdates}}</td>
-                                <td width="20%">{{course.examdates}}</td>
-                                <td width="20%">{{course.examdates}}</td>
-                            </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
 </div>

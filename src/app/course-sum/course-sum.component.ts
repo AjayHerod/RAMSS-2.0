@@ -3,6 +3,7 @@ import { EventSettingsModel, DayService, WeekService, WorkWeekService, MonthServ
 import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
 import {course} from './course';
 import {lecture} from './lecture';
+import {examC} from './exam';
 import { EventSettings } from '@syncfusion/ej2-schedule/src/schedule/models/event-settings';
 
 @Component({
@@ -28,6 +29,7 @@ export class CourseSumComponent implements OnInit {
 
 	public courseObjects = [];
 	public courseObjectsCount = 0;
+	public courseExamObjects = [];
 
 	public lectureObjects: Object[];
 	public eventScheduler: EventSettingsModel;
@@ -158,6 +160,7 @@ export class CourseSumComponent implements OnInit {
 					console.log(c);
 					this.courseObjectsCount++;
 					this.pushLectureObjects(data[i].LectureDates, data[i].LabDates, data[i].CourseCode, data[i].Faculty, data[i].Professor);
+					this.pushExamObjects(data[i].CourseCode, data[i].ExamDates);
 					}
 				}
 				this.displayLecturesLabs();
@@ -167,6 +170,16 @@ export class CourseSumComponent implements OnInit {
 			}
 		})
 	}
+
+	pushExamObjects(code, examDate)
+	{
+		var split = examDate.split(",")
+		var date = split[0];
+		var loc = split[1];
+		var time = split[2];
+		var c = new examC(code, date, loc, time);
+		this.courseExamObjects.push(c);
+	}	
 
 	pushLectureObjects(lec, lab, code, faculty, prof)
 	{
