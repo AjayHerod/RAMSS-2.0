@@ -12,6 +12,29 @@ body{
 	font-family: Calibri;
 }
 
+/*Overwrite*/
+.card{
+	border-radius:0px;
+}
+
+.card-header{
+	border-radius:0px;
+}
+
+.card-header:first-child{
+	border-radius:0px;
+}
+
+.card-footer{
+	border-radius:0px;
+}
+
+.card-footer:last-child{
+	border-radius:0px;
+}
+
+
+
 .no-bullet{
 	list-style-type:none;
 }

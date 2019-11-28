@@ -2,6 +2,7 @@
   {{successMsg}}
 </div>
 
+<div class="container-fluid">
 <div class="row mt-4">
     <form id="personalForm" class="col-sm-9" method="POST" (submit)="submitUserInfo()">
         <div class="form-group" *ngFor="let fieldName of formFields; let i = index">
@@ -32,5 +33,5 @@
         </div>
 
     </div>
-
+</div>
 </div>
