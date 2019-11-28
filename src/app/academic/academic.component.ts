@@ -9,13 +9,13 @@ import { course } from '../course-sum/course';
 export class AcademicComponent implements OnInit {
 	constructor() { }
 
-				/* Course code, grade */
+					/* Course code, grade */
 	public cCourses: [string, string][] = new Array();
 	public prCourses: [string, string][] = new Array();
 	public oeCourses: [string, string][] = new Array();
 	public laCourses: [string, string][] = new Array();
 	public lbCourses: [string, string][] = new Array();
-
+	public otherCourses: [string, string][] = new Array(); 
 
 	ngOnInit() {
 		this.loadSchedule();
@@ -50,6 +50,16 @@ export class AcademicComponent implements OnInit {
 		
 						case "P":
 							this.prCourses.push([course.Course, course.Grade]);
+							break;
+						
+						case "A":
+							this.otherCourses.push([course.Course, course.Grade]);
+							break;
+						
+						case "P, OE":
+						case "OE, P":
+							this.prCourses.push([course.Course, course.Grade]);
+							this.oeCourses.push([course.Course, course.Grade]);
 							break;
 					}
 

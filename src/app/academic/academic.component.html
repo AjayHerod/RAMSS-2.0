@@ -23,9 +23,10 @@
 				<th>Course</th>
 				<th>Grade</th>
 			  </tr>
-			  <tr>
-				
-			  </tr>
+			  <tr *ngFor="let course of prCourses">
+					<td>{{course[0]}}</td>
+					<td>{{course[1]}}</td>
+				</tr>
 			</table>
 			</div>
 		</div>
@@ -37,9 +38,10 @@
 				<th>Course</th>
 				<th>Grade</th>
 			  </tr>
-			  <tr>
-				
-			  </tr>
+			  <tr *ngFor="let course of oeCourses">
+					<td>{{course[0]}}</td>
+					<td>{{course[1]}}</td>
+				</tr>
 			</table>
 			</div>
 		</div>
@@ -53,9 +55,10 @@
 				<th>Course</th>
 				<th>Grade</th>
 			  </tr>
-			  <tr>
-				
-			  </tr>
+			  <tr *ngFor="let course of laCourses">
+					<td>{{course[0]}}</td>
+					<td>{{course[1]}}</td>
+				</tr>
 			</table>
 			</div>
 		</div>
@@ -67,23 +70,25 @@
 				<th>Course</th>
 				<th>Grade</th>
 			  </tr>
-			  <tr>
-				
-			  </tr>
+			  <tr *ngFor="let course of lbCourses">
+					<td>{{course[0]}}</td>
+					<td>{{course[1]}}</td>
+				</tr>
 			</table>
 			</div>
 		</div>
 		<div class="col-md-4">
 		<div class="card">	
-			<h5 class="card-header text-center bg-blue text-light"></h5>
+			<h5 class="card-header text-center bg-blue text-light">Other</h5>
 			<table class="w-100">
 			  <tr>
 				<th>Course</th>
 				<th>Grade</th>
 			  </tr>
-			  <tr>
-				
-			  </tr>
+			  <tr *ngFor="let course of otherCourses">
+					<td>{{course[0]}}</td>
+					<td>{{course[1]}}</td>
+				</tr>
 			</table>
 			</div>
 		</div>
