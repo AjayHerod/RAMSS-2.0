@@ -92,61 +92,12 @@ export class GradesComponent implements OnInit {
   }
   
   calculatecGPA(){
-	var counter = 0;
-	//console.log(this.gradeObjects);
 	if (this.gradeObjects.length > 0){
-		for (var i in this.gradeObjects){
-			this.cGPA = this.cGPA + this.convertGPA(this.gradeObjects[i].Grade); 
-			counter = counter + 1;
-		}
-		this.cGPA = Number((this.cGPA/counter).toFixed(2));
+		var gpa = new gpaCalc();
+		this.cGPA = gpa.getGPA(this.cGPA, this.gradeObjects);
 	}
 	else{
 		this.cGPA = 0;
 	}
-  }
-  
-  
-  convertGPA(grade){
-	if (grade == "A+"){
-		return 4.33;
-	}
-	else if (grade == "A"){
-		return 4;
-	}
-	else if (grade == "A-"){
-		return 3.67;
-	}
-	else if (grade == "B+"){
-		return 3.33;
-	}
-	else if (grade == "B"){
-		return 3;
-	}
-	else if (grade == "B-"){
-		return 2.67;
-	}
-	else if (grade == "C+"){
-		return 2.33;
-	}
-	else if (grade == "C"){
-		return 2;
-	}
-	else if (grade == "C-"){
-		return 1.67;
-	}
-	else if (grade == "D+"){
-		return 1.33;
-	}
-	else if (grade == "D"){
-		return 1.33;
-	}
-	else if (grade == "D-"){
-		return 1;
-	}
-	else if (grade == "F"){
-		return 0;
-	}
-	
   }
 }
