@@ -80,14 +80,14 @@
 		<div class="col-md-4">
 		<div class="card">	
 			<h5 class="card-header text-center bg-warning text-dark">Advisement Report</h5>
-			<table class="w-100">
+			<table class="w-100 bg-dark text-light">
 			  <tr>
-				<th>Category</th>
-				<th>Progress</th>
+				<th class="text-center">Category</th>
+				<th class="text-center">Progress</th>
 			  </tr>
 			  <tr *ngFor="let category of advisementReport">
-				  <td>{{category[0]}}</td>
-				  <td>{{category[1]}}</td>
+				  <td class="text-center">{{category[0]}}</td>
+				  <td class="text-center">{{category[1]}}</td>
 				</tr>
 			</table>
 			</div>

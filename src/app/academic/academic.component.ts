@@ -20,7 +20,7 @@ export class AcademicComponent implements OnInit {
 	
 	public busCourses: [string, string][] = new Array();
 	public mthCourses: [string, string][] = new Array();
-	public cpsCourses: [string, string][] = new Array();
+	public conCourses: [string, string][] = new Array();
 
 
 	public cProgress: string;
@@ -30,7 +30,7 @@ export class AcademicComponent implements OnInit {
 	public lbProgress: string;
 
 	public mthProgress: string;
-	public cpsProgress: string;
+	public conProgress: string;
 	public busProgress: string;
 
 							/* category, progress */
@@ -52,7 +52,6 @@ export class AcademicComponent implements OnInit {
 			url: '/loadGrades',
 			contentType: 'application/json',
 			success: (data) => {
-				console.log(data);
 				data.forEach(course => {
 					this.allCourses.push(course.Course);
 
@@ -98,20 +97,13 @@ export class AcademicComponent implements OnInit {
 							break;
 						
 						case "CPS":
-							this.cpsCourses.push([course.Course, course.grade]);
+							if (course.Type == 'P') {
+								this.conCourses.push([course.Course, course.grade]);
+							}
 							break;
 					}
 
 				});
-				/*console.log(this.cCourses);
-				console.log(this.prCourses);
-				console.log(this.laCourses);
-				console.log(this.lbCourses);
-				console.log(this.oeCourses);
-				console.log(this.bCourses);*/
-				//console.log(this.mthCourses);
-				console.log(this.busCourses);
-				//console.log(this.cpsCourses);
 
 			},
 			error: function() {
@@ -128,17 +120,21 @@ export class AcademicComponent implements OnInit {
 			contentType: 'application/json',
 			success: (data) => {
 				let requiredAmount = data[0];
+
 				this.laProgress = this.evaluateProgress(requiredAmount.LiberalA, requiredAmount.LiberalA, this.laCourses);
 				this.lbProgress = this.evaluateProgress(requiredAmount.LiberalB, requiredAmount.LiberalB, this.lbCourses);
 				this.oeProgress = this.evaluateProgress(requiredAmount.Open, requiredAmount.Open, this.oeCourses);
 				this.prProgress = this.evaluateProgress(5, 7, this.prCourses);
-				this.cProgress = this.evaluateProgress(requiredAmount.Required.length, requiredAmount.Required.length, this.cCourses);
-				// do the rest here: mth, cps, bus, etc.
+
+				let mandatoryCoursesAmount = requiredAmount.Required.split(",").length;
+				this.cProgress = this.evaluateProgress(mandatoryCoursesAmount, mandatoryCoursesAmount, this.cCourses);
+
 				this.mthProgress = this.evaluateProgress(1, 3, this.mthCourses);
-				this.cpsProgress = this.evaluateProgress(requiredAmount.ConNum, requiredAmount.ConNum, this.cpsCourses);
+				this.conProgress = this.evaluateProgress(requiredAmount.ConNum, requiredAmount.ConNum, this.conCourses);
 				this.busProgress = this.evaluateProgress(1, 3, this.busCourses);
 
-				this.advisementReport = [['Compulsory', this.cProgress], ['Liberal A', this.laProgress], ['Liberal B', this.lbProgress], ['Open Elective', this.oeProgress], ['Professional Related', this.prProgress], ['Business', this.busProgress], ['Computer Science', this.cpsProgress], ['Math', this.mthProgress]];
+				// create final advisement report
+				this.advisementReport = [['Compulsory', this.cProgress], ['Liberal A', this.laProgress], ['Liberal B', this.lbProgress], ['Open Elective', this.oeProgress], ['Professional Related', this.prProgress], ['Business', this.busProgress], ['Computer Science', this.conProgress], ['Math', this.mthProgress]];
 			},
 			error: function() {
 				console.log("Failed to connect to server");
