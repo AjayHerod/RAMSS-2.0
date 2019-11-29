@@ -28,8 +28,13 @@ export class AcademicComponent implements OnInit {
 	public oeProgress: string;
 	public laProgress: string;
 	public lbProgress: string;
-	public bProgress: string;
+
 	public mthProgress: string;
+	public cpsProgress: string;
+	public busProgress: string;
+
+							/* category, progress */
+	public advisementReport: [string, string][] = new Array();
 
 
 	constructor() { }
@@ -47,6 +52,7 @@ export class AcademicComponent implements OnInit {
 			url: '/loadGrades',
 			contentType: 'application/json',
 			success: (data) => {
+				console.log(data);
 				data.forEach(course => {
 					this.allCourses.push(course.Course);
 
@@ -68,6 +74,7 @@ export class AcademicComponent implements OnInit {
 							this.oeCourses.push([course.Course, course.Grade]);
 							break;
 						
+						case "B":
 						case "A":
 						case "P":
 							this.prCourses.push([course.Course, course.Grade]);
@@ -102,9 +109,9 @@ export class AcademicComponent implements OnInit {
 				console.log(this.lbCourses);
 				console.log(this.oeCourses);
 				console.log(this.bCourses);*/
-				console.log(this.mthCourses);
+				//console.log(this.mthCourses);
 				console.log(this.busCourses);
-				console.log(this.cpsCourses);
+				//console.log(this.cpsCourses);
 
 			},
 			error: function() {
@@ -120,17 +127,18 @@ export class AcademicComponent implements OnInit {
 			url: '/loadCalendar',
 			contentType: 'application/json',
 			success: (data) => {
-				console.log(data);
 				let requiredAmount = data[0];
-				this.bProgress = this.evaluateProgress(1, 3, this.busCourses);
 				this.laProgress = this.evaluateProgress(requiredAmount.LiberalA, requiredAmount.LiberalA, this.laCourses);
 				this.lbProgress = this.evaluateProgress(requiredAmount.LiberalB, requiredAmount.LiberalB, this.lbCourses);
 				this.oeProgress = this.evaluateProgress(requiredAmount.Open, requiredAmount.Open, this.oeCourses);
 				this.prProgress = this.evaluateProgress(5, 7, this.prCourses);
 				this.cProgress = this.evaluateProgress(requiredAmount.Required.length, requiredAmount.Required.length, this.cCourses);
 				// do the rest here: mth, cps, bus, etc.
-				
+				this.mthProgress = this.evaluateProgress(1, 3, this.mthCourses);
+				this.cpsProgress = this.evaluateProgress(requiredAmount.ConNum, requiredAmount.ConNum, this.cpsCourses);
+				this.busProgress = this.evaluateProgress(1, 3, this.busCourses);
 
+				this.advisementReport = [['Compulsory', this.cProgress], ['Liberal A', this.laProgress], ['Liberal B', this.lbProgress], ['Open Elective', this.oeProgress], ['Professional Related', this.prProgress], ['Business', this.busProgress], ['Computer Science', this.cpsProgress], ['Math', this.mthProgress]];
 			},
 			error: function() {
 				console.log("Failed to connect to server");
@@ -140,13 +148,13 @@ export class AcademicComponent implements OnInit {
 
 	evaluateProgress(min: number, max: number, coursesTaken: [string, string][]) {
 		if (coursesTaken.length < min) {
-			return min + " required, " + (min-coursesTaken.length) + " needed";
+			return min + " required, " + (min-coursesTaken.length) + " needed, " + + coursesTaken.length + " taken";
 		}
 		else if (coursesTaken.length > max) {
-			return "You have exceeded the maximum number";	
+			return "Exceeded";	
 		}
 		else {
-			return min + "required, " + coursesTaken.length + " completed";
+			return min + " required, " + coursesTaken.length + " completed";
 		}
 	}
   

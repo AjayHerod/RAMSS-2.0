@@ -79,14 +79,15 @@
 		</div>
 		<div class="col-md-4">
 		<div class="card">	
-			<h5 class="card-header text-center bg-blue text-light">Advisement Report</h5>
+			<h5 class="card-header text-center bg-warning text-dark">Advisement Report</h5>
 			<table class="w-100">
 			  <tr>
 				<th>Category</th>
 				<th>Progress</th>
 			  </tr>
-			  <tr>
-				  <!-- not yet finished -->
+			  <tr *ngFor="let category of advisementReport">
+				  <td>{{category[0]}}</td>
+				  <td>{{category[1]}}</td>
 				</tr>
 			</table>
 			</div>
