@@ -173,6 +173,14 @@ export class AcademicComponent implements OnInit {
 			return coursesTaken.length+"/1 courses, " +needed +" needed";
 		}
 	}
-  
+	
+	graduate(){
+		if (this.clear == "NOT CLEAR"){
+			alert("You have not met all requirements.");
+		}
+		else{
+			alert("Request made.");
+		}
+	}
 }
 
