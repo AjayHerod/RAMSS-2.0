@@ -1,0 +1,64 @@
+<! –– User Story #6 This is the styling sheet for academic requirments page and transcript page. ––>
+.ryerson-logo{
+  margin-top:5px;
+  margin-bottom:11px;
+  position:relative;
+  margin-left:10px;
+}
+
+h1 {
+  font-family: arial;
+  color: #0066cc;
+  padding: 5px 0 5px 20;
+  margin: 0;
+  font-size: 12;
+}
+
+p {
+  font-family: arial;
+  text-align: center;
+  color: #707070;
+  font-weight: normal;
+  font-size: 6;
+}
+
+h3 {
+  font-family: arial;
+  color: #707070;
+  padding: 5px 0 15px 0;
+
+  font-size: 8;
+}
+
+h4 {
+  font-family: arial;
+  color: #000000;
+  padding: 0 0 15px 0;
+  font-weight: normal;
+  font-size: 8;
+}
+
+h5 {
+  font-family: arial;
+  text-align: center;
+  font-size: 8;
+  text-decoration: underline;
+}
+
+h6 {
+  font-family: Verdana;
+  text-align: center;
+  padding: 0 0 5px 0;
+  color: #000000;
+  font-weight: bold;
+  font-size: 8;
+}
+
+.wrapper {
+    text-align: center;
+}
+
+.button {
+    position: absolute;
+    top: 50%;
+}
