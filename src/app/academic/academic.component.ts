@@ -49,7 +49,7 @@ export class AcademicComponent implements OnInit {
 	loadGrades() {
 		$.ajax({
 			method: 'post',
-			url: '/loadGrades',
+			url: '/loadGradesSort',
 			contentType: 'application/json',
 			success: (data) => {
 				data.forEach(course => {
@@ -124,7 +124,7 @@ export class AcademicComponent implements OnInit {
 				this.laProgress = this.evaluateProgress(requiredAmount.LiberalA, requiredAmount.LiberalA, this.laCourses);
 				this.lbProgress = this.evaluateProgress(requiredAmount.LiberalB, requiredAmount.LiberalB, this.lbCourses);
 				this.oeProgress = this.evaluateProgress(requiredAmount.Open, requiredAmount.Open, this.oeCourses);
-				this.prProgress = this.evaluateProgress(5, 7, this.prCourses);
+				this.prProgress = this.evaluateProgress(9, 9, this.prCourses);
 
 				let mandatoryCoursesAmount = requiredAmount.Required.split(",").length;
 				this.cProgress = this.evaluateProgress(mandatoryCoursesAmount, mandatoryCoursesAmount, this.cCourses);
@@ -144,7 +144,7 @@ export class AcademicComponent implements OnInit {
 
 	evaluateProgress(min: number, max: number, coursesTaken: [string, string][]) {
 		if (coursesTaken.length < min) {
-			return min + " required, " + (min-coursesTaken.length) + " needed, " + + coursesTaken.length + " taken";
+			return min + " required, " + coursesTaken.length + " taken" + (min-coursesTaken.length) + " needed, " ;
 		}
 		else if (coursesTaken.length > max) {
 			return "Exceeded";	

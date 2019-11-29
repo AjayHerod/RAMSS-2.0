@@ -266,6 +266,19 @@ app.post('/Request', function (req, res){
 		}
 	});
 });
+//Get client's Grades
+app.post('/loadGradesSort', function (headers, res){
+	var query = "SELECT * FROM Grades WHERE StudentNo = '5001112222' ORDER BY Course ASC";
+	con.query(query, function(err, result){
+		if (err){
+			console.log(err);
+		}
+		else{
+			//console.log(result);
+			res.send(result);
+		}
+	});
+});
 
 
 //Get the courses for CPS.

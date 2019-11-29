@@ -1,4 +1,7 @@
-<div class = "container-fluid mobile-rm" *ngIf = "loggedIn == true">
+<div class = "container-fluid mobile-rm" *ngIf = "loggedIn == false">
+<div class="alert alert-danger mu-10" *ngIf = "showFailure" role="alert">
+  {{failureMsg}}
+</div>
  <div class="row justify-content-center">
     <div class="col-md-4 loginScreen bg-light pad-50 mobile-mu-25">
 		<div class="text-center mu-20">
@@ -28,7 +31,7 @@
 </div>
 
 
-<div class="container-fluid" *ngIf = "loggedIn == false">
+<div class="container-fluid" *ngIf = "loggedIn == true">
 	<div class="row">
 		<div class="col-lg-2 rm-margin">
 		<div class="nav-width bg-dark d-none d-lg-block">

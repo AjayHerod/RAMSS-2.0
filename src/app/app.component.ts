@@ -20,6 +20,9 @@ export class AppComponent {
   public username: string="";
   public password: string="";
   
+  public failureMsg="";
+  public showFailure =false;
+  
   title = 'RAMSS2.0';
   
   ngOnInit() {  
@@ -57,8 +60,13 @@ export class AppComponent {
 		contentType: 'application/json',
 		data: JSON.stringify({username: this.username, password:this.password}),
 		success: (data) =>{
-			document.cookie = "studentNo="+data[0].StudentNo;
-			this.checkLogin();
+			try{
+				document.cookie = "studentNo="+data[0].StudentNo;
+				this.checkLogin();
+			}
+			catch{
+				this.changeAlert("Invalid credentials");
+			}
 		},
 		error: function() {
 			console.log("Failed to Retrieve data");
@@ -94,5 +102,11 @@ export class AppComponent {
 	  this.requests = false;
   }
   
+  	changeAlert(message){
+		this.failureMsg = message;
+		this.showFailure = true;
+		window.scrollBy(0,-10000);
+	}
+	
   
 }
