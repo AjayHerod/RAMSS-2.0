@@ -77,8 +77,8 @@ export class AppComponent {
   checkLogin(){
 	if (document.cookie.length>10){
 		this.loggedIn=true;
-		console.log(document.cookie);
-		console.log((document.cookie.split(";")[0]).split("=")[1]);
+		//console.log(document.cookie);
+		//console.log((document.cookie.split(";")[0]).split("=")[1]);
 		this.studentNo = document.cookie.split(";")[0].split("=")[1];
 	}
 	else{

@@ -22,6 +22,8 @@ export class AcademicComponent implements OnInit {
 	public mthCourses: [string, string][] = new Array();
 	public conCourses: [string, string][] = new Array();
 
+	public faculty = "";
+	public clear = "";
 
 	public cProgress: string;
 	public prProgress: string;
@@ -54,7 +56,7 @@ export class AcademicComponent implements OnInit {
 			success: (data) => {
 				data.forEach(course => {
 					this.allCourses.push(course.Course);
-
+					this.faculty = "CPS"
 					// based on course type
 					switch(course.Type) {
 						case "R":
@@ -128,6 +130,16 @@ export class AcademicComponent implements OnInit {
 
 				let mandatoryCoursesAmount = requiredAmount.Required.split(",").length;
 				this.cProgress = this.evaluateProgress(mandatoryCoursesAmount, mandatoryCoursesAmount, this.cCourses);
+				
+				//console.log(mandatoryCoursesAmount);
+				//console.log(this.cCourses);
+				
+				if(mandatoryCoursesAmount>this.cCourses.length){
+					this.clear = "NOT CLEAR";
+				}
+				else{
+					this.clear = "CLEAR";
+				}
 
 				this.mthProgress = this.evaluateProgress(1, 3, this.mthCourses);
 				this.conProgress = this.evaluateProgress(requiredAmount.ConNum, requiredAmount.ConNum, this.conCourses);
