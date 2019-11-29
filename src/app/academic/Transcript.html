@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <! –– User Story #6 This is the second page and last page for  requesting a transcript. ––>
+    <title>Request Offical Transcript</title>
+    <link rel="stylesheet" href="styles.css">
+    <h1>Request Offical Transcript</h1>
+    <hr>
+  </head>
+  <body>
+
+    <! –– This section of the page displays the information of the user such as their name, student number mailing address and fax number for delivery. ––>
+
+    <h1>Person Information</h1>
+    <hr>
+    <h3>Name: </h3>
+    <h3>Student Number: </h3>
+    <h1>Transcript Request Information</h1>
+    <hr>
+
+    <! –– This section of the page displays the transcript option such as delivery option and number of copies ––>
+
+    <h3>Transcript Delivery Options: </h3>
+    <select>
+        <option value="Fax">Fax</option>
+        <option value="Mail">Mail</option>
+        <option value="Pick Up">Pick Up</option>
+    </select>
+    <h3>Number of Transcripts in Sealed Envelopes: </h3>
+    <select>
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+    </select>
+    
+    <! –– This button sends the user to the home page and submits the transcript request (For now allow it to download download unofficial transcript––>
+
+   <div class="mb-20">
+            <button class="btn btn-warning w-100" onclick="window.location.href = 'https://github.com/AjayHerod/cps731_group9/blob/master/src/index.html';">Download Unofficial Transcript</button>
+            <button onclick="window.location.href = '/Transcript2.html';">Continue</button>
+            <a href="https://raw.githubusercontent.com/AjayHerod/cps731_group9/master/src/assets/images/unofficial4.jpg" target="_blank" class="btn btn-warning w-100">Download Unofficial Transcript</a>
+        </div>
+    <hr>
+  </body>
+</html>
