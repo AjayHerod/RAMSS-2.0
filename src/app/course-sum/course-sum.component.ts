@@ -1,5 +1,5 @@
 import { Component, OnInit, } from '@angular/core';
-import { EventSettingsModel, DayService, WeekService, WorkWeekService, MonthService, View} from '@syncfusion/ej2-angular-schedule';
+import { EventSettingsModel, DayService, WeekService, WorkWeekService, MonthService, View, EventRenderedArgs} from '@syncfusion/ej2-angular-schedule';
 import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
 import {course} from './course';
 import {lecture} from './lecture';
@@ -39,6 +39,14 @@ export class CourseSumComponent implements OnInit {
   ngOnInit() {
 		
   }
+
+  applyCategoryColor(args: EventRenderedArgs): void {
+	let categoryColor: string = args.data.CategoryColor as string;
+	if (!args.element || !categoryColor) {
+		return;
+	}
+	args.element.style.backgroundColor = categoryColor;
+	}
 
   //dropCourse() {
     //drop course code
@@ -92,10 +100,10 @@ export class CourseSumComponent implements OnInit {
 			}
 			rec = this.returnRecurrenceDay(this.lectureWeek[i].lecture1Day);
 			c.push({
-				Subject: this.lectureWeek[i].coursecode + "- Lecture \n" + this.lectureWeek[i].lecture1Location,
+				Subject: this.lectureWeek[i].coursecode + " - Lecture \n" + this.lectureWeek[i].lecture1Location,
 				StartTime: new Date(+this.currentYear, this.lectureStartMonth, this.lectureStartDate, timeModStart, 0),
 				EndTime: new Date(+this.currentYear, this.lectureStartMonth, this.lectureStartDate, timeModEnd, 0),
-				RecurrenceRule: recurrenceString + rec });
+				RecurrenceRule: recurrenceString + rec,  });
 
 				console.log(recurrenceString + rec);
 			//Second Lecture
@@ -139,6 +147,23 @@ export class CourseSumComponent implements OnInit {
 			}
 			console.log(recurrenceString + rec);
 		}
+		for(var i in this.courseExamObjects)
+		{
+			timeModStart = this.courseExamObjects[i].examStartTime, timeModEnd=this.courseExamObjects[i].examEndTime;
+				if(this.courseExamObjects[i].examStartAcr == "PM")
+				{
+					timeModStart = this.courseExamObjects[i].examStartTime + 12;
+				}
+				if(this.courseExamObjects[i].examEndAcr == "PM")
+				{
+					timeModEnd = this.courseExamObjects[i].examEndTime + 12;
+				}
+				c.push({
+					Subject: this.courseExamObjects[i].coursecode + " - EXAM! <br>" + this.courseExamObjects[i].examLocation,
+					StartTime: new Date(+this.currentYear, 11, this.courseExamObjects[i].examDate, timeModStart, 0),
+					EndTime: new Date(+this.currentYear, 11, this.courseExamObjects[i].examDate, timeModEnd, 0),
+					CategoryColor: '#FF0000' })
+		}
 		this.lectureObjects = c;
 		this.eventScheduler = {dataSource: this.lectureObjects};
 	}
@@ -175,9 +200,11 @@ export class CourseSumComponent implements OnInit {
 	{
 		var split = examDate.split(",")
 		var date = split[0];
+		var dateSplit = date.split(" ");
 		var loc = split[1];
 		var time = split[2];
-		var c = new examC(code, date, loc, time);
+		var splitTime = this.splitTimes(time);
+		var c = new examC(code, +dateSplit[1], dateSplit[0], +splitTime[0], splitTime[1], +splitTime[2],splitTime[3], loc);
 		this.courseExamObjects.push(c);
 	}	
 

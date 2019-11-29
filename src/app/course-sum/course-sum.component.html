@@ -32,9 +32,9 @@
                             </tr>
                             <tr *ngFor = "let exam of courseExamObjects">
                                 <td width="25%">{{exam.coursecode}}<br><br></td>
-                                <td width="25%">{{exam.date}}<br><br></td>
-                                <td width="25%">{{exam.location}}<br><br></td>
-                                <td width="25%">{{exam.time}}<br><br></td>
+                                <td width="25%">{{exam.examMonth}} {{exam.examDate}}<br><br></td>
+                                <td width="25%">{{exam.examLocation}}<br><br></td>
+                                <td width="25%">{{exam.examStartTime}} {{exam.examStartAcr}} to {{exam.examEndTime}} {{exam.examEndAcr}}<br><br></td>
                             </tr>
                     </table>
                 </div>
@@ -49,7 +49,8 @@
                 </div>
                 <div class = "card-body">
                     <ejs-schedule startHour="08:00 AM" endHour="21:00 PM" readonly="true" 
-                                    [eventSettings]="eventScheduler" workDays={{workWeekDays}}>
+                                    [eventSettings]="eventScheduler" workDays={{workWeekDays}}
+                                    (eventRendered)="applyCategoryColor($event)">
                         <e-views>
                             <e-view option='Day'></e-view>
                             <e-view option='Week'></e-view>

@@ -2,8 +2,12 @@ export class examC{
 
     constructor(
         public coursecode: string,
-        public date: string,
-        public location: string,
-        public time: string,
+        public examDate: number,
+        public examMonth: string,
+        public examStartTime: number,
+        public examStartAcr: string,
+        public examEndTime: number,
+        public examEndAcr: string,
+        public examLocation: string,
         ){};
     }
