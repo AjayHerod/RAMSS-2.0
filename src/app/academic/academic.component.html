@@ -1,22 +1,23 @@
 <div class="container-fluid mu-25">
-	<div class="row">
-		<div class="col-md-4">
+	<div class="row mb-20">
+		<div class="col-md-8">
 			<div class="card">	
-			<h5 class="card-header text-center bg-blue text-light">Compulsory</h5>
-			<table class="w-100">
+			<h5 class="card-header text-center bg-warning text-dark">Advisement Report</h5>
+			<table class="w-100 bg-dark text-light">
 			  <tr>
-				<th>Course</th>
-				<th>Grade</th>
+				<th class="text-center">Category</th>
+				<th class="text-center">Progress</th>
 			  </tr>
-			  <tr *ngFor="let course of cCourses">
-				  <td>{{course[0]}}</td>
-				  <td>{{course[1]}}</td>
-			  </tr>
+			  <tr *ngFor="let category of advisementReport">
+				  <td class="text-center">{{category[0]}}</td>
+				  <td class="text-center">{{category[1]}}</td>
+				</tr>
 			</table>
 			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="card">	
+			
+		<div class="row ">
+		<div class="col-md-6 mu-20">
+			<div class="card text-center">	
 			<h5 class="card-header text-center bg-blue text-light">Professional Related</h5>
 			<table class="w-100">
 			  <tr>
@@ -30,8 +31,8 @@
 			</table>
 			</div>
 		</div>
-		<div class="col-md-4">
-		<div class="card">	
+		<div class="col-md-6 mu-20">
+		<div class="card text-center">	
 			<h5 class="card-header text-center bg-blue text-light">Open Electives</h5>
 			<table class="w-100">
 			  <tr>
@@ -45,10 +46,11 @@
 			</table>
 			</div>
 		</div>
-	</div>
-		<div class="row mt-4">
-		<div class="col-md-4">
-			<div class="card">	
+		</div>
+		
+		<div class="row mt-4 mb-50">
+		<div class="col-md-6 mu-20 h-100">
+			<div class="card text-center">	
 			<h5 class="card-header text-center bg-blue text-light">Liberal A</h5>
 			<table class="w-100">
 			  <tr>
@@ -62,8 +64,8 @@
 			</table>
 			</div>
 		</div>
-		<div class="col-md-4">
-			<div class="card">	
+		<div class="col-md-6 mu-20 h-100">
+			<div class="card text-center">	
 			<h5 class="card-header text-center bg-blue text-light">Liberal B</h5>
 			<table class="w-100">
 			  <tr>
@@ -77,20 +79,33 @@
 			</table>
 			</div>
 		</div>
+
+	</div>
+		
+		</div>
+				
 		<div class="col-md-4">
-		<div class="card">	
-			<h5 class="card-header text-center bg-warning text-dark">Advisement Report</h5>
-			<table class="w-100 bg-dark text-light">
+			<h4>Program: {{faculty}}</h4>
+			<br/>
+			<h3>Status: {{clear}}</h3>
+			<br/>
+			<button class="w-100 btn btn-warning" (click) = "graduate()">Apply to Graduate</button>
+			<div class="card text-center mu-20">	
+			<h5 class="card-header text-center bg-blue text-light">Compulsory</h5>
+			<table class="w-100">
 			  <tr>
-				<th class="text-center">Category</th>
-				<th class="text-center">Progress</th>
+				<th>Course</th>
+				<th>Grade</th>
 			  </tr>
-			  <tr *ngFor="let category of advisementReport">
-				  <td class="text-center">{{category[0]}}</td>
-				  <td class="text-center">{{category[1]}}</td>
-				</tr>
+			  <tr *ngFor="let course of cCourses">
+				  <td>{{course[0]}}</td>
+				  <td>{{course[1]}}</td>
+			  </tr>
 			</table>
 			</div>
 		</div>
 	</div>
+
+
+
 </div>

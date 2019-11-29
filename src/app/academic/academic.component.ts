@@ -22,6 +22,8 @@ export class AcademicComponent implements OnInit {
 	public mthCourses: [string, string][] = new Array();
 	public conCourses: [string, string][] = new Array();
 
+	public faculty = "";
+	public clear = "";
 
 	public cProgress: string;
 	public prProgress: string;
@@ -54,7 +56,7 @@ export class AcademicComponent implements OnInit {
 			success: (data) => {
 				data.forEach(course => {
 					this.allCourses.push(course.Course);
-
+					this.faculty = "CPS"
 					// based on course type
 					switch(course.Type) {
 						case "R":
@@ -89,7 +91,7 @@ export class AcademicComponent implements OnInit {
 					// specific types of courses (subset of the professionally-related)
 					switch (course.Course.substring(0, 3)) {
 						case "MTH":
-							this.mthCourses.push([course.Course, course.Grade]);
+							this.mthCourses=[];
 							break;
 						
 						case "ACC":
@@ -128,10 +130,20 @@ export class AcademicComponent implements OnInit {
 
 				let mandatoryCoursesAmount = requiredAmount.Required.split(",").length;
 				this.cProgress = this.evaluateProgress(mandatoryCoursesAmount, mandatoryCoursesAmount, this.cCourses);
+				
+				//console.log(mandatoryCoursesAmount);
+				//console.log(this.cCourses);
+				
+				if(mandatoryCoursesAmount>this.cCourses.length){
+					this.clear = "NOT CLEAR";
+				}
+				else{
+					this.clear = "CLEAR";
+				}
 
 				this.mthProgress = this.evaluateProgress(1, 3, this.mthCourses);
 				this.conProgress = this.evaluateProgress(requiredAmount.ConNum, requiredAmount.ConNum, this.conCourses);
-				this.busProgress = this.evaluateProgress(1, 3, this.busCourses);
+				this.busProgress = this.evaluateProgress(1, 2, this.busCourses);
 
 				// create final advisement report
 				this.advisementReport = [['Compulsory', this.cProgress], ['Liberal A', this.laProgress], ['Liberal B', this.lbProgress], ['Open Elective', this.oeProgress], ['Professional Related', this.prProgress], ['Business', this.busProgress], ['Computer Science', this.conProgress], ['Math', this.mthProgress]];
@@ -144,15 +156,31 @@ export class AcademicComponent implements OnInit {
 
 	evaluateProgress(min: number, max: number, coursesTaken: [string, string][]) {
 		if (coursesTaken.length < min) {
-			return min + " required, " + coursesTaken.length + " taken" + (min-coursesTaken.length) + " needed, " ;
+			var needed = (min-coursesTaken.length);
+			if (needed < 0){
+				needed = 0;
+			}
+			return coursesTaken.length + "/"+ min + " courses, "  + needed + " needed" ;
 		}
 		else if (coursesTaken.length > max) {
 			return "Exceeded";	
 		}
 		else {
-			return min + " required, " + coursesTaken.length + " completed";
+			var needed = (min-coursesTaken.length);
+			if (needed < 0){
+				needed = 0;
+			}
+			return coursesTaken.length+"/1 courses, " +needed +" needed";
 		}
 	}
-  
+	
+	graduate(){
+		if (this.clear == "NOT CLEAR"){
+			alert("You have not met all requirements.");
+		}
+		else{
+			alert("Request made.");
+		}
+	}
 }
 
